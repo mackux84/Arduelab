@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+       a:link{
+           color: white;
+       }
+       a:hover{
+           color: blue;
+       }
+       a:active{
+           color: green;
+       }
+
 body
 {
-    background: #767676;
-    color: lime;
-    font-family: "PT Sans", Arial;
+    background: #45c7ed;
+    color: black;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     margin: 0;
 }
@@ -12,9 +24,23 @@ body
 }
 .formsL{
     flex: 1;
+    text-align: center;
+}
+
+.formsI{
+    width: 100%;
+    height: 100%;
+    
 }
 .formsR{
     flex: 1;
+}
+
+#botonindex{
+    background-color: cornflowerblue;
+    margin: 10px;
+    padding: 6.5px 40px 9px 40px;
+    text-decoration: none;
 }
 
 td, tr {
@@ -26,11 +52,32 @@ table {
     border: solid cadetblue;
 }
 
+.logo{
+    
+    padding-left: 20px;
+    padding-top: 30px;
+    align-content: center;
+    
+}
+
+.logo > img {
+            width: 20%;
+            height: auto;
+        }
+
 
 
  /* Bordered form */
 form {
-    border: 3px solid #f1f1f1;
+    border: 20px solid #f1f1f1;
+    background-color: azure;
+    
+}
+
+.banner{
+    width: 100%;
+    background-color: cadetblue;
+    text-align: right;
 }
 
 /* Full-width inputs */
@@ -70,7 +117,6 @@ button {
 /* Avatar image */
 img.avatar {
     width: 40%;
-    border-radius: 50%;
 }
 
 /* Add padding to containers */
