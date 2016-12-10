@@ -86,7 +86,6 @@
     "onchange": "^2.5.0",
     "postcss-cli": "^2.5.2",
     "run-sequence": "^1.2.2",
-    "standard": "^8.6.0",
     "svg-sprite-generator": "0.0.7",
     "svgo": "^0.6.6",
     "uglify-js-harmony": "^2.6.2",
