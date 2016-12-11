@@ -116,7 +116,7 @@ gulp.task('browserSync', function () {
       target: 'localhost:5000', // original port
       ws: true // enables websockets
     },
-    browser: ['chrome', 'firefox'],
+    browser: ['firefox'],
     files: ['client/static/**/*','client/templates/**/*'], // watch files to trigger browserSync.reload
   })
 })
