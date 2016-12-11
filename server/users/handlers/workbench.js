@@ -9,8 +9,6 @@ const key = require('../../config/auth').key
 
 module.exports = function (request, reply) {
   let privateKey = require('../../config/auth').key.privateKey
-  reply.redirect('http://181.131.75.129:8081/workspace.html')
-        return
   Jwt.verify(request.params.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {

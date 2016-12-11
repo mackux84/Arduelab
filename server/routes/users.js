@@ -18,6 +18,7 @@ const patchReservaHandler            = require('../users/handlers/patchReserva')
 const createExpHandler               = require('../users/handlers/createExp')
 const experimentsAdminHandler        = require('../users/handlers/experimentsAdmin')
 const patchExperimentHandler         = require('../users/handlers/patchExperiment')
+const workbenchCheckHandler          = require('../users/handlers/workbenchCheck')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -38,6 +39,7 @@ const patchReservaConfig             = require('../users/config/patchReserva')
 const createExpConfig                = require('../users/config/createExp')
 const experimentsAdminConfig         = require('../users/config/experimentsAdmin')
 const patchExperimentConfig          = require('../users/config/patchExperiment')
+const workbenchCheckConfig           = require('../users/config/workbenchCheck')
 
 
 module.exports = [
@@ -91,12 +93,12 @@ module.exports = [
       reply(request.pre.user)
     }
   },
-  {
+  /*{
     method:  'GET',
     path:    '/users/workbench/{token}',
     config:  workbenchConfig,
     handler: workbenchHandler
-  },
+  },*/
   {
     method:  'GET',
     path:    '/users/account/{token}',
@@ -151,4 +153,10 @@ module.exports = [
     config:  patchExperimentConfig,
     handler: patchExperimentHandler
   }, 
+  {
+    method: 'POST',
+    path: '/users/workbenchCheck/{id}',
+    config: workbenchCheckConfig,
+    handler: workbenchCheckHandler
+  },
 ]

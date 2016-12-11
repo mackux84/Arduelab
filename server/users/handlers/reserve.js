@@ -40,7 +40,7 @@ module.exports = function (request, reply) {
       if (mestemp<10) {
         mestemp = '0'+mestemp //JS ISO format month must be 2 digits (leading zero)
       }
-      var hourtemp = parseInt(request.payload.hora)+5 //Time Zone, JS date os UTC
+      var hourtemp = parseInt(request.payload.hora) //Time Zone, JS date os UTC
       if (hourtemp<10) {
         hourtemp = '0'+hourtemp //JS ISO format hour must be 2 digits (leading zero)
       }
@@ -51,10 +51,9 @@ module.exports = function (request, reply) {
         hora: hourtemp,
         experimento: request.payload.experimento
       }
-      var datestr = tokenData.anio + '-' + tokenData.mes + '-' + tokenData.dia + 'T' + tokenData.hora + ':00:00'
-      var testdate = new Date(datestr)
+      var datetest = new Date(Date.UTC(tokenData.anio, tokenData.mes-1, tokenData.dia, tokenData.hora+5, 0, 0))
       var today = new Date()
-      if (testdate < today) {
+      if (datetest < today) {
         reply(Boom.badRequest('Invalid submited Date'))
         return
       }
@@ -78,8 +77,13 @@ module.exports = function (request, reply) {
           }
           reply(res).code(201)
         } else {
-          console.log(error)
-          reply(Boom.forbidden(error)) 
+          if (11000 === error.code || 11001 === error.code) {
+            console.log(error)
+            reply(Boom.forbidden('Time already reserved'))
+          } else {
+            console.log(error)
+            reply(Boom.forbidden(error))
+          }
         }
       })
     }
