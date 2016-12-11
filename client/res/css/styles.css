@@ -42,6 +42,7 @@ img{
     margin-top: 2%;
     margin-left: 10%;
     width :20%;
+    border-radius: 5px;
 
 }
 
@@ -96,6 +97,11 @@ img{
 @keyframes animatezoom {
     from {transform: scale(0)} 
     to {transform: scale(1)}
+}
+.info{
+    overflow: scroll;
+    height: 10%;
+    width: 100%;
 }
 
 .forms{
