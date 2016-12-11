@@ -3,8 +3,8 @@
 const Joi = require('joi')
 
 const authenticateUserSchema = Joi.object({
-  email:    Joi.string().email().required().description('A valid Email (confirmation email will be sent)').example('andresvega@email.com'),
-  password: Joi.string().required().description('A secure password is recommended').example('AV1578sj')
-}).label('Authenticate Email & password')
+  email:    Joi.string().email().required().description('Correo electornico valido (Recuerda que aqui te llegara el link de activacion)').example('ijimenez@email.com'),
+  password: Joi.string().required().description('Se recomienda una contraseña segura').example('T04d9!0¡')
+}).label('Verifique correo electronio o contraseña')
 
 module.exports = authenticateUserSchema
