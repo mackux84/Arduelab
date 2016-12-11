@@ -8,17 +8,17 @@ module.exports = {
   validate: {
     params: Joi.object({ token: Joi.string().required().description('JWT').default('hbGciOiJIUzI1NiIsInR5cCI6kpVCJ9eyJoYXNoIjoiNGI4OZiZDZlMzM5YTcyMJOWIxZjhjMzM0ODIxNzI1OGZOD1N2FmN2Y3MzQxMzgzYjEyMzYzNNjZjNDBlNDNmZmQ2YmY4NTZhZjY2OTBjMmU1MWI1N2YyIiwiaWF0IjocyNTk2NTE3LCJleHAOjE0NzI2MDxMTd9HL7yOlzW4KJz5qMhMs9lKAlOyavRXdlk6uXQ')}).label('JWT')
   },
-  description: 'Users account',
-  notes: 'Users Account with JWT',
+  description: 'Cuenta de usuario',
+  notes: 'Cuentas de usuario con JWT',
   tags: ['api', 'users'],
   plugins: {
     'hapi-swagger': {
       responses: {
         '200': {
-          'description': 'User Account',
+          'description': 'Cuenta de usuario',
           'schema': Joi.object({
-            message: Joi.string().required().description('message').default('User Account')
-          }).label('User Account')
+            message: Joi.string().required().description('message').default('Cuenta de usuario')
+          }).label('Cuenta de usuario')
         },
         '400': errors.e400,
         '403': errors.e403,
