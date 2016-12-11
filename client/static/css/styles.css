@@ -35,6 +35,16 @@ img{
 
 }
 
+#timebox{
+    background-color: aliceblue;
+    border-style: inset;
+    border-color: #000;
+    margin-top: 2%;
+    margin-left: 10%;
+    width :20%;
+
+}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
