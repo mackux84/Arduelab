@@ -22,7 +22,7 @@ module.exports = {
     payload: authenticateUserSchema
   },
   description: 'Authenticate (Log-in) a User',
-  notes: 'Authenticate a user, Email & Password required',
+  notes: 'Se requiere un usuario y contraseña validos',
   tags: ['api', 'users'],
   plugins: {
     'hapi-swagger': {
