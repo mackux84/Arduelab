@@ -92,7 +92,7 @@ img{
     margin-left: 10%;
     margin-right: 10%;
     width: 80%;
-    display:flex;
+    display: flex;
 }
 .formsL{
     width: 70%;
@@ -212,3 +212,24 @@ span.psw {
         width: 100%;
     }
 }
+
+  @media screen and (max-width: 800px) {
+
+      .forms{
+  display: block;
+ 
+    width: 100%;
+    }
+
+    .formsL{
+    width: 100%;
+
+    }
+
+    .formsR{
+    margin-top: 0px;
+
+    width: 100%;
+ 
+    }
+    }
