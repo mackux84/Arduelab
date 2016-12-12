@@ -25,7 +25,7 @@ exports.encrypt = function (password) {
 
 exports.sentMailVerificationLink = function (user, token,callback) {
   const from = auth.email.accountName + ' Team<' + auth.email.username + '>'
-  const mailbody = '<p>Thanks for Registering on ' + auth.email.accountName + ' </p><p>Please verify your email by clicking on the verification link below.<br/><a href="http://' + auth.server.host + ':' + auth.server.port + '/' + auth.email.verifyEmailUrl + '/' + token + '">Verification Link</a></p>'
+  const mailbody = '<p>Thanks for Registering on ' + auth.email.accountName + ' </p><p>Please verify your email by clicking on the verification link below.<br/><a href="http://' + auth.server.external + ':' + auth.server.port + '/' + auth.email.verifyEmailUrl + '/' + token + '">Verification Link</a></p>'
   mail(from, user.email , 'Account Verification', mailbody,callback)
 }
 
