@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
@@ -62,4 +63,75 @@
     <script type="text/javascript" src="/js/main.min.js"></script>
     <a href="/">Salir</a>
   </body>
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div id="timebox">TIEMPO ANTES DE CULMINAR SESION : <div id="Timer">
+
+ <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+    </div>
+    
+     
+    </div>
+    <center><h1>PAGINA DE ADMINISTRACION</h1></center>
+    
+    <div class="forms">
+      <dif class="formsL">
+        <input type="checkbox" id="pastReserves" > Mostrar reservas vencidas
+        <br>
+        <input type="checkbox" id="selectAll" > Seleccionar todos
+        <br>
+        <button id="filtrar">Filtrar</button>
+        <br>
+        <div id="userList" class="info"></div>
+      </dif>
+      <div class="formC">
+        <div id="reservaHistAll" class="info"></div>
+      </div>
+      <div class="formR">
+        <p>Crear Experimentos:</p>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td><input type="text" id="crearExpNombre"></td>
+          </tr>
+          <tr>
+            <td>Universidad: </td>
+            <td><input type="text" id="crearExpUniversidad"></td>
+          </tr>
+          <tr>
+            <td>URL: </td>
+            <td><input type="text" id="crearExpUrl"></td>
+          </tr>
+          <tr>
+            <td>Horas validas: </td>
+            <td><input type="text" id="crearExpSchedule" value="[]"></td>
+          </tr>
+          <tr>
+            <td>Duraciones permitidas: </td>
+            <td><input type="text" id="crearExpDuration" value="[]"></td>
+          </tr>
+          <tr>
+            <td>Enabled</td>
+            <td><input type="checkbox" id="crearExpEnabled" checked></td>
+          </tr>
+          <tr>
+            <td>Crear </td>
+            <td><button id="crearExp">Guardar</button></td>
+          </tr>
+        </table>
+        <div id="experimentsAll" class="info"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/main.min.js"></script>
+    <a href="/">Salir</a>
+  </body>
+>>>>>>> 200bb431688009a07abb3a906c0e7c2c3f4e4129
 </html>
