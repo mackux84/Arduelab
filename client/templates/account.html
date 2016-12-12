@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel = "stylesheet" href = "/css/styles.css">
         <script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/skin1.min.css">
         <link rel="stylesheet" href="/css/fullcalendar.css">
@@ -33,7 +33,39 @@
         </dif>
             <div class="formR">
                 <div id="reservaResponse"></div>
-                <div id="reservaHist"></div>
+                <div id="reservaHist">
+
+
+ <table>
+           <tr>
+           <td>Token No: </td>
+           <td>  Number(index  1)  </td>
+           </tr>
+           <tr>
+           <td>Fecha de creación: </td>
+           <td>  new Date(element.created_At)  </td>
+           </tr>
+           <tr>
+           <td>Fecha Reservada: </td>
+           <td>  new Date(element.initialDate)  </td>
+           </tr>
+           <tr>
+           <td>Duración: </td>
+           <td>  new Date(element.duration).getUTCHours()   Hora(s)</td>
+           </tr>
+           <tr>
+           <td>Usado: </td>
+           <td>  element.used  </td>
+           </tr>
+           <tr>
+           <td>Ir al workbench: </td>
+           <td><a href="/users/workbench/  element.token  ">Click Here</a></td>
+           </tr>
+           </table >
+
+
+
+                </div>
             </div>
         </div>
         <script type="text/javascript" src="/js/main.min.js"></script>

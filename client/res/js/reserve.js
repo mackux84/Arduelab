@@ -1,7 +1,7 @@
 'use strict'
 var $ = require('jquery')
 require('fullCalendar')
-require('moment')
+var moment = require('moment')
 
 $('#reservaForm').on('submit', function (e) {
   e.preventDefault()
@@ -125,7 +125,7 @@ function getExperimentos() {
         var schedule = element.schedule
         var duration = element.duration
         var university = element.university
-        $('#experimentsSelector').append('<option value="'+id+'">'+name+'</option>')
+        $('#experimentsSelector').append('<option value="' + id + '">' + name + '</option>')
       }
     },
     error: function (json) {
@@ -149,9 +149,116 @@ if (experimentsSelector) {
 
 var calendarDiv = document.getElementById('calendarDiv')
 if (calendarDiv) {
-  reservaHistory()
-}
+  var json = {
+    selectable:true,
+    maxResTime: 7200000,
+    events:[
+      {
+        title: 'All Day Event',
+        start: '2014-06-01'
+      },
+      {
+        title: 'Long Event',
+        start: '2014-06-07',
+        end: '2014-06-10'
+      },
+      {
+        id: 999,
+        title: 'Repeating Event',
+        start: '2014-06-09T16:00:00'
+      },
+      {
+        id: 999,
+        title: 'Repeating Event',
+        start: '2014-06-16T16:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2014-06-12T10:30:00',
+        end: '2014-06-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2014-06-12T12:00:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2014-06-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2014-06-28'
+      }
+    ],
+    selectConstraint: {
+      start: '10:00', // a start time (10am in this example)
+      end: '18:00', // an end time (6pm in this example)
 
-$('#calendarDiv').fullCalendar({
-    // put your options and callbacks here
-})
+      dow: [1, 2, 3, 4, 5, 6]
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      // (Monday-Thursday in this example)
+    },
+    businessHours: [
+      {
+        dow: [1, 2, 3, 4, 5, 6],
+        start: '10:00',
+        end: '18:00'
+      },
+    ]
+  }
+  calendarDivF(json)
+}
+function calendarDivF(json) {
+
+  $('#calendarDiv').fullCalendar({
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    weekNumbers: true,
+    weekNumbersWithinDays: true,
+    allDaySlot: false,
+    navLinks: true, // can click day/week names to navigate views
+    selectable: json.selectable,
+    selectHelper: true,
+    selectOverlap: false,
+    eventBackgroundColor: '#008006',
+    eventBorderColor: 'red',
+    eventTextColor: '#000056',
+    eventColor: '#378006',
+    defaultView: 'agendaWeek',
+    editable: false,
+    defaultDate: '2014-06-11',
+
+    selectAllow: function (selectInfo) {
+      var start = moment(selectInfo.start)
+      var end = moment(selectInfo.end)
+      var diff = end.diff(start)
+      if (diff <= json.maxResTime) {
+        return true
+      } else {
+        return false
+      }
+    },
+    select: function (start, end) {
+      var title = prompt('Event Title:')
+      var eventData
+      if (title) {
+        //TODO: AJAX HERE!!!
+        eventData = {
+          title: title,
+          start: start,
+          end: end
+        }
+        $('#calendarDiv').fullCalendar('renderEvent', eventData, true) // stick? = true
+        $('#calendarDiv').fullCalendar('option', 'selectable', false)
+      }
+      $('#calendarDiv').fullCalendar('unselect')
+    },
+    events: json.events,
+    selectConstraint: json.selectConstraint,
+    businessHours: json.businessHours
+  })
+}

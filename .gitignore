@@ -2,6 +2,10 @@
 auth.js
 .vscode
 static/
+static
+client/static
+client/static/
+client/static/**
 jsconfig.json
 ### Node ###
 # Logs

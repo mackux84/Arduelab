@@ -32,18 +32,23 @@ body
 img{
     height: auto;
     width: 100%;
-
+}
+h1, h2, h3, h4, h5{
+    margin: 10px 0px;
+    float: left;
+    text-align: center;
+    width: 100%;
 }
 
 #timebox{
     background-color: aliceblue;
     border-style: inset;
     border-color: #000;
-    margin-top: 2%;
     margin-left: 10%;
+    margin-right: 10px;
     width :20%;
     border-radius: 5px;
-
+    float: left;
 }
 
 .modal {
@@ -105,9 +110,9 @@ img{
 }
 
 .forms{
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
     display: flex;
 }
 .formsL{
@@ -116,7 +121,7 @@ img{
 }
 
 .formsR{
-    margin-top: 70px;
+    /*margin-top: 70px;*/
     display: block;
     width: 30%;
     min-width: 350px;
@@ -130,10 +135,13 @@ img{
     cursor: pointer;
 }
 
-td, tr {
+#reservaHist>table>*>tr>td {
     border: solid darkgrey;
 }
-table {
+#reservaHist>table>*>tr {
+    border: solid darkgrey;
+}
+#reservaHist>table {
     margin: 5px;
     padding: 10px;
     border: solid cadetblue;
@@ -141,14 +149,17 @@ table {
 
 .logo{
     
-    padding-left: 10%;
-    padding-top: 30px;
+    /*padding-left: 10%;*/
+    /*padding-top: 30px;*/
     align-content: center;
+    float: left;
+    height: 50px;
+    padding: 5px;
 }
 
 .logo > img {
-    width: 20%;
-    height: auto;
+    width: auto;
+    height: 100%;
 }
  /* Bordered form */
 form {
@@ -159,6 +170,7 @@ form {
     width: 100%;
     background-color: cadetblue;
     text-align: right;
+    height: 60px;
 }
 
 /* Full-width inputs */
@@ -172,7 +184,7 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 /* Set a style for all buttons */
-button {
+form>*>button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -187,7 +199,10 @@ button {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
+    color: white;
     margin: 8px;
+    border: none;
+    cursor: pointer;
 }
 
 /* Center the avatar image inside this container */

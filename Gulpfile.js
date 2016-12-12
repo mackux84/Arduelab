@@ -59,7 +59,7 @@ gulp.task('scripts2', () => {
   //   preserveComments: 'license'
   // }
   browserify({
-    entries: ['client/res/js/ws.js','client/res/js/login.js','client/res/js/reserve.js','client/res/js/createAcc.js','client/res/js/timer.js','client/res/js/admin.js'],
+    entries: ['client/res/js/ws.js','client/res/js/login.js','client/res/js/reserve.js','client/res/js/createAcc.js','client/res/js/timer.js','client/res/js/admin.js','client/res/js/es.js'],
     debug: false
   })
   .transform(babelify)
