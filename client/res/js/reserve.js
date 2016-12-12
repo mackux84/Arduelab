@@ -146,69 +146,62 @@ if (experimentsSelector) {
 
 
 /////////////////////////testing area/////////////////////
+$(document).ready(function () {
+  var calendarDiv = document.getElementById('calendarDiv')
+  if (calendarDiv) {
+    var json = {
+      selectable: true,
+      maxResTime: 7200000,
+      experimentID: '526584523602541252301524',
+      events: [
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2014-06-09T16:00:00'
+        },
+        {
+          id: 999,
+          title: 'Repeating Event',
+          start: '2014-06-16T16:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2014-06-12T10:30:00',
+          end: '2014-06-12T12:30:00',
+          backgroundColor: '#ffff00',
+          borderColor: '#00ff00',
+          textColor: '#6666ff'
+        },
+        {
+          title: 'Lunch',
+          start: '2014-06-12T12:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          url: 'http://google.com/',
+          start: '2014-06-13T07:00:00'
+        },
+      ],
+      selectConstraint: {
+        start: '10:00', // a start time (10am in this example)
+        end: '18:00', // an end time (6pm in this example)
 
-var calendarDiv = document.getElementById('calendarDiv')
-if (calendarDiv) {
-  var json = {
-    selectable:true,
-    maxResTime: 7200000,
-    events:[
-      {
-        title: 'All Day Event',
-        start: '2014-06-01'
+        dow: [1, 2, 3, 4, 5, 6]
+        // days of week. an array of zero-based day of week integers (0=Sunday)
+        // (Monday-Thursday in this example)
       },
-      {
-        title: 'Long Event',
-        start: '2014-06-07',
-        end: '2014-06-10'
-      },
-      {
-        id: 999,
-        title: 'Repeating Event',
-        start: '2014-06-09T16:00:00'
-      },
-      {
-        id: 999,
-        title: 'Repeating Event',
-        start: '2014-06-16T16:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2014-06-12T10:30:00',
-        end: '2014-06-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2014-06-12T12:00:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2014-06-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: '2014-06-28'
-      }
-    ],
-    selectConstraint: {
-      start: '10:00', // a start time (10am in this example)
-      end: '18:00', // an end time (6pm in this example)
-
-      dow: [1, 2, 3, 4, 5, 6]
-      // days of week. an array of zero-based day of week integers (0=Sunday)
-      // (Monday-Thursday in this example)
-    },
-    businessHours: [
-      {
-        dow: [1, 2, 3, 4, 5, 6],
-        start: '10:00',
-        end: '18:00'
-      },
-    ]
+      businessHours: [
+        {
+          dow: [1, 2, 3, 4, 5, 6],
+          start: '10:00',
+          end: '18:00'
+        },
+      ]
+    }
+    calendarDivF(json)
   }
-  calendarDivF(json)
-}
+})
+
 function calendarDivF(json) {
 
   $('#calendarDiv').fullCalendar({
@@ -224,10 +217,14 @@ function calendarDivF(json) {
     selectable: json.selectable,
     selectHelper: true,
     selectOverlap: false,
-    eventBackgroundColor: '#008006',
-    eventBorderColor: 'red',
+    eventLimit: true,
+    eventLimitClick: 'week',
+    scrollTime: '08:00:00',
+    snapDuration: '00:30:00',
+    slotDuration: '00:30:00',
+    eventBackgroundColor: '#500006',
+    eventBorderColor: '#ff0000',
     eventTextColor: '#000056',
-    eventColor: '#378006',
     defaultView: 'agendaWeek',
     editable: false,
     defaultDate: '2014-06-11',
@@ -243,19 +240,78 @@ function calendarDivF(json) {
       }
     },
     select: function (start, end) {
-      var title = prompt('Event Title:')
-      var eventData
-      if (title) {
-        //TODO: AJAX HERE!!!
-        eventData = {
-          title: title,
+      var startF = start.format('dddd d [de] MMMM YYYY, hh:mm a')
+      var endF = end.format('dddd d [de] MMMM YYYY, hh:mm a')
+      var dur = moment.duration(end.diff(start)).asMinutes()
+      var r = confirm(
+        'Esta seguro de realizar esta reserva?'
+        + '\nInicio: ' + startF
+        + '\nFin: ' + endF
+        + '\nDuración: ' + dur + ' minutos'
+      )
+      if (r == true) {
+        ////////////////////////**///////////
+        var jsonData = {
           start: start,
-          end: end
+          duration: dur,
+          experiment: json.experimentID
         }
-        $('#calendarDiv').fullCalendar('renderEvent', eventData, true) // stick? = true
-        $('#calendarDiv').fullCalendar('option', 'selectable', false)
+        var jsonData2 = JSON.stringify(jsonData)
+        $.ajax({
+          url: '/users/reserve',
+          cache: false,
+          type: 'POST',
+          headers: {
+            'Authorization': window.location.pathname.split('/')[3]
+          },
+          data: jsonData2,
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (json) {
+            alert(
+              '<p>Reserva realizada para:</p>'
+              + '<p>Hora Inicial: ' + new Date(json.date) + '</p>'
+              + '<p>Hora Final: ' + new Date(Date.parse(json.date) + json.duration) + '</p>'
+            )
+            var eventData = {
+              title: 'Reservado',
+              start: start,
+              end: end,
+              backgroundColor: '#ffff00',
+              borderColor: '#00ff00',
+              textColor: '#6666ff'
+            }
+            $('#calendarDiv').fullCalendar('renderEvent', eventData, true) // stick? = true
+            $('#calendarDiv').fullCalendar('option', 'selectable', false)
+            reservaHistory()
+          },
+          error: function (json) {
+                        var eventData = {
+              title: 'Reservado',
+              start: start,
+              end: end,
+              backgroundColor: '#ffff00',
+              borderColor: '#00ff00',
+              textColor: '#6666ff'
+            }
+            $('#calendarDiv').fullCalendar('renderEvent', eventData, true) 
+            $('#calendarDiv').fullCalendar('unselect')
+            if (json.responseJSON.statusCode === 401) {
+              alert(
+                '<p>Login expiro</p>'
+              )
+            } else {
+              alert(
+                '<p>Error ' + json.responseJSON.message + '</p>'
+              )
+            }
+          }
+        })
+        ///////////////////////**////////////
+
+      } else {
+        $('#calendarDiv').fullCalendar('unselect')
       }
-      $('#calendarDiv').fullCalendar('unselect')
     },
     events: json.events,
     selectConstraint: json.selectConstraint,

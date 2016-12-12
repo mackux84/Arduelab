@@ -60,7 +60,7 @@ module.exports = function (request, reply) {
         }
         if (request.headers.accept) {
           if (request.headers.accept.indexOf('application/json') === -1) {
-            reply.view('login.html')
+            reply.redirect('/')
             return
           }
         }

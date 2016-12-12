@@ -130,7 +130,7 @@ gulp.task('watch', function () {
   // Watch font files
   gulp.watch('client/res/fonts/**/*', ['font'])
   // Watch server js
-  gulp.watch(['./server.js', './server/**/*.js','client/templates/**/*'], ['lint:server', 'server'])
+  // gulp.watch(['./server.js', './server/**/*.js','client/templates/**/*'], ['lint:server', 'server'])
 })
 gulp.task('build', function (callback) {
   runSequence('clean', 'styles', 'scripts2', 'images', 'fonts', callback)

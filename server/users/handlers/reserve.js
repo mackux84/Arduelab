@@ -32,6 +32,7 @@ module.exports = function (request, reply) {
     } else {
       //If header (user) token is valid, create reservation token and add it to reservation DB
       decoded = decyptToken(decoded)
+      
       var diatemp = request.payload.dia
       if (diatemp<10) {
         diatemp = '0'+diatemp //JS ISO format days must be 2 digits (leading zero)

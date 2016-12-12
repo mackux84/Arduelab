@@ -77,7 +77,7 @@ server.ext('onPreResponse', (request, reply) => {
         const errMessage = err.output.payload.message
         const statusCode = err.output.payload.statusCode
         if (statusCode === 401) {
-          return reply.redirect('/login')
+          return reply.redirect('/')
         }
         return reply.view('error', {
           statusCode: statusCode,

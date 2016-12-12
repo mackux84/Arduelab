@@ -8,6 +8,8 @@ const Moment      = require('moment')
 const key         = require('../../config/auth').key
 
 module.exports = function (request, reply) {
+  reply.view('account.html')
+        return
   let privateKey = require('../../config/auth').key.privateKey
   Jwt.verify(request.params.token, privateKey, function (error, decoded) {
     if (error) {
