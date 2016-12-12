@@ -1,12 +1,12 @@
 # Created by https://www.gitignore.io/api/node
 auth.js
 .vscode
-client/static
+static/
 jsonconfig.json
 ### Node ###
 # Logs
 logs
-*.log
+*.lo
 npm-debug.log*
 awesome_log
 

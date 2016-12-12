@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <link rel="stylesheet" href="/css/styles.css">
         <script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
-        
         <link rel="stylesheet" type="text/css" href="/css/skin1.min.css">
+        <link rel="stylesheet" href="/css/fullcalendar.css">
     </head>
-
     <body>
         <div id="Timer">
             <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
@@ -18,19 +16,17 @@
         <h1>Reservar</h1>
         <p>Se le asignara 1 Hora a partir de la fecha escogida</p>
         <div class="forms">
-            <dif class="formL">
+            <dif class="formsL">
                 <form id="reservaForm">
-                    <div class="imgcontainer">
-                        <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
-                    </div>
                     <div class="container">
-                        <div id="calendar">
+                        <!--<div id="calendar">
                             <input id='date' name="mydate" class="date" type="date" value="0">
                         </div>
                         <label><b>Hora</b></label>
                         <input type="number" name="hora: " min="0" max="23" required>
-                        <br>
+                        <br>-->
                         <select id="experimentsSelector"></select>
+                        <div id="calendarDiv">   </div>
                     <button type="submit">Reservar</button>
                 </div>
             </form>
@@ -56,5 +52,3 @@
         </script>
         <a href="/">Salir</a>
     </body>
-
-</html>

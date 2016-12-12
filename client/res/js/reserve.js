@@ -1,5 +1,7 @@
 'use strict'
 var $ = require('jquery')
+require('fullCalendar')
+require('moment')
 
 $('#reservaForm').on('submit', function (e) {
   e.preventDefault()
@@ -136,3 +138,20 @@ var experimentsSelector = document.getElementById('experimentsSelector')
 if (experimentsSelector) {
   getExperimentos()
 }
+
+
+
+
+
+
+
+/////////////////////////testing area/////////////////////
+
+var calendarDiv = document.getElementById('calendarDiv')
+if (calendarDiv) {
+  reservaHistory()
+}
+
+$('#calendarDiv').fullCalendar({
+    // put your options and callbacks here
+})
