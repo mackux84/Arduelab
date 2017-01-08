@@ -32,33 +32,27 @@ module.exports = function (request, reply) {
     } else {
       //If header (user) token is valid, create reservation token and add it to reservation DB
       decoded = decyptToken(decoded)
-      
-      var diatemp = request.payload.dia
-      if (diatemp<10) {
-        diatemp = '0'+diatemp //JS ISO format days must be 2 digits (leading zero)
-      }
-      var mestemp = parseInt(request.payload.mes) //JS month date starts at 0
-      if (mestemp<10) {
-        mestemp = '0'+mestemp //JS ISO format month must be 2 digits (leading zero)
-      }
-      var hourtemp = parseInt(request.payload.hora) //Time Zone, JS date os UTC
-      if (hourtemp<10) {
-        hourtemp = '0'+hourtemp //JS ISO format hour must be 2 digits (leading zero)
-      }
-      var tokenData = {
-        dia: diatemp,
-        mes: mestemp,
-        anio: request.payload.anio,
-        hora: hourtemp,
-        experimento: request.payload.experimento
-      }
-      var datetest = new Date(Date.UTC(tokenData.anio, tokenData.mes-1, tokenData.dia, tokenData.hora+5, 0, 0))
+      var datetest= new Date(request.payload.start)
       var today = new Date()
       if (datetest < today) {
         reply(Boom.badRequest('Invalid submited Date'))
         return
       }
+      var tokenData = {
+        minuto: datetest.getUTCMinutes(),
+        hora: datetest.getUTCHours(),
+        dia: datetest.getUTCDate(),
+        mes: datetest.getUTCMonth(),
+        anio: datetest.getUTCFullYear(),
+        duracion: request.payload.duration,
+        experimento: request.payload.experiment
+      }
 
+
+      //TODO: check experiment avaliable and allowed time
+
+
+      
       var token = createToken2(tokenData)
 
       let reserve = new Reserve()
