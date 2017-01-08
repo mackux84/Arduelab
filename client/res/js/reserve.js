@@ -269,9 +269,9 @@ function calendarDivF(json) {
           contentType: 'application/json',
           success: function (json) {
             alert(
-              '<p>Reserva realizada para:</p>'
-              + '<p>Hora Inicial: ' + new Date(json.date) + '</p>'
-              + '<p>Hora Final: ' + new Date(Date.parse(json.date) + json.duration) + '</p>'
+              'Reserva realizada para:'
+              + 'Hora Inicial: ' + new Date(json.date)
+              + 'Hora Final: ' + new Date(Date.parse(json.date) + json.duration)
             )
             var eventData = {
               title: 'Reservado',
@@ -286,23 +286,15 @@ function calendarDivF(json) {
             reservaHistory()
           },
           error: function (json) {
-                        var eventData = {
-              title: 'Reservado',
-              start: start,
-              end: end,
-              backgroundColor: '#ffff00',
-              borderColor: '#00ff00',
-              textColor: '#6666ff'
-            }
-            $('#calendarDiv').fullCalendar('renderEvent', eventData, true) 
+           
             $('#calendarDiv').fullCalendar('unselect')
             if (json.responseJSON.statusCode === 401) {
               alert(
-                '<p>Login expiro</p>'
+                'Login expiro'
               )
             } else {
               alert(
-                '<p>Error ' + json.responseJSON.message + '</p>'
+                'Error: ' + json.responseJSON.message
               )
             }
           }
