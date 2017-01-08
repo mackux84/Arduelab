@@ -118,16 +118,19 @@ function createToken2 (tokenData) {
   let Jwt = require('jsonwebtoken')
   let moment = require('moment')
   let key = require('../../config/auth').key
-  let a = Common.encrypt('' + tokenData.dia)
-  let b = Common.encrypt('' + tokenData.mes)
-  let c = Common.encrypt('' + tokenData.anio)
-  let d = Common.encrypt('' + tokenData.hora)
-  let dd = Common.encrypt(''+tokenData.experimento)
-  let e = a + ';' + b + ';' + c + ';' + d+';'+dd
-  let f = Common.encrypt('' + e)
-  var initial = moment(tokenData.hora+':00:00 '+tokenData.dia+'-'+tokenData.mes+'-'+tokenData.anio, 'HH:mm:ss DD-MM-YYYY').unix()
-  let g = { hash: f, type:'workbench' , iat:initial }
-  return Jwt.sign(g, key.privateKey, { algorithm: 'HS256', expiresIn: key.tokenExpiry })
+  let a = Common.encrypt('' + tokenData.minuto)
+  let b = Common.encrypt('' + tokenData.hora)
+  let c = Common.encrypt('' + tokenData.dia)
+  let d = Common.encrypt('' + tokenData.mes)
+  let e = Common.encrypt('' + tokenData.anio)
+  let f = Common.encrypt('' + tokenData.duracion)
+  let g = Common.encrypt('' + tokenData.experimento)
+  let h = a + ';' + b + ';' + c + ';' + d + ';' + e + ';' + f + ';' + g
+  let i = Common.encrypt('' + h)
+  var initial = moment(tokenData.hora + ':' + tokenData.minuto + ':00 '+tokenData.dia+'-'+tokenData.mes+'-'+tokenData.anio, 'HH:mm:ss DD-MM-YYYY').unix()
+  let j = { hash: i, type: 'workbench', iat: initial }
+  let expires= tokenData.duracion * 60 * 1000 //minutos*segundos*miliseg
+  return Jwt.sign(j, key.privateKey, { algorithm: 'HS256', expiresIn: expires })
 }
 function decyptToken (token) {
   let hash = token.hash
@@ -150,17 +153,21 @@ function decyptToken2 (token) {
   let hash = token.hash
   let a = Common.decrypt(hash)
   let b = a.split(';')
-  let dia = Common.decrypt(b[0])
-  let mes = Common.decrypt(b[1])
-  let anio = Common.decrypt(b[2])
-  let hora = Common.decrypt(b[3])
-  let idExp = Common.decrypt(b[4])
+  let minuto = Common.decrypt(b[0])
+  let hora = Common.decrypt(b[1])
+  let dia = Common.decrypt(b[2])
+  let mes = Common.decrypt(b[3])
+  let anio = Common.decrypt(b[4])
+  let duracion = Common.decrypt(b[5])
+  let idExp = Common.decrypt(b[6])
 
   let decoded = {
+    minuto: minuto,
+    hora: hora,
     dia: dia,
     mes: mes,
     anio: anio,
-    hora: hora,
+    duracion: duracion,
     experimento:idExp,
     iat: token.iat,
     exp: token.exp,
