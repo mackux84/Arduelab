@@ -3,55 +3,6 @@ var $ = require('jquery')
 require('fullCalendar')
 var moment = require('moment')
 
-$('#reservaForm').on('submit', function (e) {
-  e.preventDefault()
-  var formData = $('#reservaForm').serializeArray()
-  var jsonData = {
-    dia: formData[0].value.split('-')[0],
-    mes: formData[0].value.split('-')[1],
-    anio: formData[0].value.split('-')[2],
-    hora: formData[1].value,
-    experimento: $('#experimentsSelector').val(),
-  }
-  var jsonData2 = JSON.stringify(jsonData)
-  $.ajax({
-    url: '/users/reserve',
-    cache: false,
-    type: 'POST',
-    headers: {
-      'Authorization': window.location.pathname.split('/')[3]
-    },
-    data: jsonData2,
-    dataType: 'json',
-    contentType: 'application/json',
-    success: function (json) {
-      $('#reservaResponse').html(
-        '<p>Reserva realizada para:</p>'
-        + '<p>Hora Inicial: ' + new Date(json.date) + '</p>'
-        + '<p>Hora Final: ' + new Date(Date.parse(json.date) + json.duration) + '</p>'
-        /*+ '<p>Día: ' + json.dia + '</p>'
-        + '<p>Mes: ' + json.mes + '</p>'
-        + '<p>Año: ' + json.anio + '</p>'
-        + '<p>Hora inicial: ' + json.hora + '</p>'
-        + '<p>Hora final: ' + parseInt(parseInt(json.hora) + 2) + '</p>'*/
-      )
-      reservaHistory()
-    },
-    error: function (json) {
-      if (json.responseJSON.statusCode === 401) {
-        $('#reservaResponse').html(
-          '<p>Login expiro</p>'
-        )
-      } else {
-        $('#reservaResponse').html(
-          '<p>Error ' + json.responseJSON.message + '</p>'
-        )
-      }
-    }
-  })
-})
-
-
 function reservaHistory() {
   $.ajax({
     type: 'POST',
@@ -119,7 +70,6 @@ function getExperimentos() {
       var arra = json
       for (var index = 0; index < arra.length; index++) {
         var element = arra[index]
-
         var id = element._id
         var name = element.name
         var schedule = element.schedule
