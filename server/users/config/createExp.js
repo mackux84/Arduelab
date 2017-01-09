@@ -26,7 +26,8 @@ module.exports = {
       days: Joi.array().items(Joi.number().min(0).max(6)).required().description('The experiment Allowed Days in UTC format, Sunday is 0, Monday is 1, and so on.').example('[1,2,3,4]'),
       schedule: Joi.array().items(Joi.number().min(0).max(23)).required().description('The experiment Allowed initial Hours').example('[8,9,10,11,14,15,16,17,18]'),
       duration: Joi.array().items(Joi.number().multiple(30)).required().description('The experiment Allowed durations in Minutes (must be multiples of 30)').example('[30,60,90,120]'),
-      enabled: Joi.boolean().required().description('Wheter the Experiment is enabled to registration').example(true)
+      enabled: Joi.boolean().required().description('Wheter the Experiment is enabled to registration').example(true),
+      description: Joi.string().description('Experiment Description').example('Program an RGB LED with Arduino!!')
     })
   },
   description: 'Create Experiment',
@@ -39,7 +40,7 @@ module.exports = {
           'description': 'Experiment created',
           'schema': Joi.object({
             message: Joi.string().required().description('Experiment created').default('Experiment created'),
-          }).label('Reserved')
+          }).label('Experiment Created')
         },
         '400': errors.e400,
         '403': errors.e403,

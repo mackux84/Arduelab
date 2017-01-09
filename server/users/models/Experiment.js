@@ -31,6 +31,9 @@ const experimentsModel = new Schema({
   enabled: {
     type: Boolean,
     required: true
+  },
+  description: {
+    type: String
   }
 },
   {

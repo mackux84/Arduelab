@@ -12,6 +12,7 @@ module.exports = function (request, reply) {
   experiment.schedule = request.payload.schedule
   experiment.duration = request.payload.duration
   experiment.enabled = request.payload.enabled
+  experiment.description= request.payload.description
 
   experiment.save((error, experiment) => {
     if (!error) {
