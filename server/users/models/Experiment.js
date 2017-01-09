@@ -16,6 +16,10 @@ const experimentsModel = new Schema({
     type: String,
     required: true
   },
+  days: {
+    type: [Number],
+    required: true
+  },
   schedule: {
     type: [Number],
     required: true
