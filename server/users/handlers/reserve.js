@@ -50,7 +50,7 @@ module.exports = function (request, reply) {
       }
 
       Experiment
-      .find({_id: tokenData.experimento})
+      .findOne({_id: tokenData.experimento})
       // Deselect fields
       //.select('-__v -updated_At')
       .exec((error, experiment) => {
@@ -58,20 +58,20 @@ module.exports = function (request, reply) {
           reply(Boom.badRequest(error))
           return
         }
-        if (!experiment.length) {
+        if (experiment == null) {
           reply(Boom.notFound('No experiments with that ID found!'))
           return
         }
         
         if (experiment.enabled) {
-          if (experiment.day.includes(tokenData.dia)) {
-            if (experiment.schedule.includes(tokenData.hora)) {
-              if (experiment.duration.includes(tokenData.duracion)) {
+          if (experiment.days.indexOf(datetest.getUTCDay())!=-1) {
+            if (experiment.schedule.indexOf(tokenData.hora)!=-1) {
+              if (experiment.duration.indexOf(tokenData.duracion)!=-1) {
                 var token = createToken2(tokenData)
                 let reserve = new Reserve()
                 reserve.email = decoded.email
                 reserve.initialDate = datetest
-                reserve.duration = tokenData.duration
+                reserve.duration = tokenData.duracion
                 reserve.token = token
                 reserve.used = false
                 reserve.enabled = true
@@ -90,16 +90,24 @@ module.exports = function (request, reply) {
                   } else {
                     if (11000 === error.code || 11001 === error.code) {
                       console.log(error)
-                      reply(Boom.forbidden('Time already reserved'))
+                      reply(Boom.badRequest('Time already reserved'))
                     } else {
                       console.log(error)
-                      reply(Boom.forbidden(error))
+                      reply(Boom.badRequest(error))
                     }
                   }
                 })
+              } else {
+                reply(Boom.badRequest('Requested Duration not Allowed'))
               }
+            } else {
+              reply(Boom.badRequest('Requested Initial Time not Allowed'))
             }
+          } else {
+            reply(Boom.badRequest('Requested Day not Allowed'))
           }
+        } else {
+          reply(Boom.badRequest('Requested Experiment not Enabled'))
         }
       })
     }

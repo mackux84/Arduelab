@@ -127,7 +127,7 @@ function createToken2 (tokenData) {
   let g = Common.encrypt('' + tokenData.experimento)
   let h = a + ';' + b + ';' + c + ';' + d + ';' + e + ';' + f + ';' + g
   let i = Common.encrypt('' + h)
-  var initial = moment(tokenData.hora + ':' + tokenData.minuto + ':00 '+tokenData.dia+'-'+tokenData.mes+'-'+tokenData.anio, 'HH:mm:ss DD-MM-YYYY').unix()
+  var initial = moment(tokenData.hora + ':' + tokenData.minuto + ':00 '+tokenData.dia+'-'+tokenData.mes+1+'-'+tokenData.anio, 'HH:mm:ss DD-MM-YYYY').unix()
   let j = { hash: i, type: 'workbench', iat: initial }
   let expires= tokenData.duracion * 60 * 1000 //minutos*segundos*miliseg
   return Jwt.sign(j, key.privateKey, { algorithm: 'HS256', expiresIn: expires })
