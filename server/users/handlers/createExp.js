@@ -8,6 +8,7 @@ module.exports = function (request, reply) {
   experiment.name = request.payload.name
   experiment.university = request.payload.university
   experiment.url = request.payload.url
+  experiment.days = request.payload.days
   experiment.schedule = request.payload.schedule
   experiment.duration = request.payload.duration
   experiment.enabled = request.payload.enabled
