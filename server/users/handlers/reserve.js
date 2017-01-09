@@ -3,6 +3,7 @@
 const Boom = require('boom')
 const createToken2 = require('../util/userFunctions').createToken2
 const Reserve = require('../models/Reserve')
+const Experiment = require('../models/Experiment')
 const Jwt = require('jsonwebtoken')
 const Moment = require('moment')
 const key = require('../../config/auth').key
@@ -48,36 +49,56 @@ module.exports = function (request, reply) {
         experimento: request.payload.experiment
       }
 
-
-      //TODO: check experiment avaliable and allowed time
-
-
-      
-      var token = createToken2(tokenData)
-
-      let reserve = new Reserve()
-      reserve.email = decoded.email
-      reserve.initialDate = new Date(tokenData.anio + '-' + tokenData.mes + '-' + tokenData.dia + 'T' + tokenData.hora + ':00:00')
-      reserve.duration = key.tokenExpiry
-      reserve.token = token
-      reserve.used = false
-      reserve.enabled = true
-      reserve.scope = decoded.scope
-      reserve.idExp= request.payload.experimento
-      reserve.save((error, reserve) => {
-        if (!error) {
-          var res = {
-            date: reserve.initialDate,
-            duration: reserve.duration
-          }
-          reply(res).code(201)
-        } else {
-          if (11000 === error.code || 11001 === error.code) {
-            console.log(error)
-            reply(Boom.forbidden('Time already reserved'))
-          } else {
-            console.log(error)
-            reply(Boom.forbidden(error))
+      Experiment
+      .find({_id: tokenData.experimento})
+      // Deselect fields
+      //.select('-__v -updated_At')
+      .exec((error, experiment) => {
+        if (error) {
+          reply(Boom.badRequest(error))
+          return
+        }
+        if (!experiment.length) {
+          reply(Boom.notFound('No experiments with that ID found!'))
+          return
+        }
+        
+        if (experiment.enabled) {
+          if (experiment.day.includes(tokenData.dia)) {
+            if (experiment.schedule.includes(tokenData.hora)) {
+              if (experiment.duration.includes(tokenData.duracion)) {
+                var token = createToken2(tokenData)
+                let reserve = new Reserve()
+                reserve.email = decoded.email
+                reserve.initialDate = datetest
+                reserve.duration = tokenData.duration
+                reserve.token = token
+                reserve.used = false
+                reserve.enabled = true
+                reserve.scope = decoded.scope
+                reserve.idExp= request.payload.experiment
+                reserve.save((error, reserve) => {
+                  if (!error) {
+                    var res = {
+                      date: reserve.initialDate,
+                      duration: reserve.duration,
+                      name: experiment.name,
+                      university: experiment.university,
+                      url: experiment.url
+                    }
+                    reply(res).code(201)
+                  } else {
+                    if (11000 === error.code || 11001 === error.code) {
+                      console.log(error)
+                      reply(Boom.forbidden('Time already reserved'))
+                    } else {
+                      console.log(error)
+                      reply(Boom.forbidden(error))
+                    }
+                  }
+                })
+              }
+            }
           }
         }
       })
