@@ -6,9 +6,9 @@ module.exports = {
   e400:            {
     'description': 'Bad Request',
     'schema':      Joi.object({
-      statusCode:  Joi.number().required().description('Error Status Code').default(400),
-      error:       Joi.string().required().description('Error type').default('Bad Request'),
-      message:     Joi.string().required().description('Error message')
+      statusCode:  Joi.number().required().description('CODIGO DE ERROR').default(400),
+      error:       Joi.string().required().description('TIPO DE ERROR').default('Bad Request'),
+      message:     Joi.string().required().description('MENSAJE DE ERROR')
     }).label('Bad Request')
   },
   e401:            {
