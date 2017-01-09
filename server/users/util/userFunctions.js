@@ -19,34 +19,12 @@ function verifyUniqueUser (request, reply) {
         return
       }
     }
-    // If everything checks out, send the payload through
-    // to the route handler
+    // If everything checks out, send the payload through to the route handler
     reply(request.payload)
   })
 }
 function verifyUniqueReserve (request, reply) {
-  // Find an entry from the database that matches the email
-  var diatemp = request.payload.dia
-  if (diatemp<10) {
-    diatemp = '0'+diatemp //JS ISO format days must be 2 digits (leading zero)
-  }
-  var mestemp = parseInt(request.payload.mes) //JS month date starts at 0
-  if (mestemp<10) {
-    mestemp = '0'+mestemp //JS ISO format month must be 2 digits (leading zero)
-  }
-  var hourtemp = parseInt(request.payload.hora)+5 //Time Zone, JS date os UTC
-  if (hourtemp<10) {
-    hourtemp = '0'+hourtemp //JS ISO format hour must be 2 digits (leading zero)
-  }
-  var temp = {
-    dia: diatemp,
-    mes: mestemp,
-    anio: request.payload.anio,
-    hora: hourtemp
-  }
-  var datestr = temp.anio + '-' + temp.mes + '-' + temp.dia + 'T' + temp.hora + ':00:00'
-  //var d = new Date('2015-03-25T12:00:00')
-  var date = new Date(datestr)
+  var date = new Date(request.payload.start)
   Reserve.findOne({
     initialDate: date
   }, (err, reserve) => {
@@ -55,8 +33,7 @@ function verifyUniqueReserve (request, reply) {
       reply(Boom.badRequest('A reserve for that time already exists'))
       return
     }
-    // If everything checks out, send the payload through
-    // to the route handler
+    // If everything checks out, send the payload through to the route handler
     reply(request.payload)
   })
 }
