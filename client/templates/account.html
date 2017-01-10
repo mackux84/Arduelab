@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="/css/fullcalendar.css">
     </head>
     <body>
+        <a id="botonindex" onclick="document.getElementById('id01').style.display='block'">RESERVAR</a>
         <div id="Timer">
             <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
         </div>
@@ -17,13 +18,7 @@
         <p>Se le asignara 1 Hora a partir de la fecha escogida</p>
         <div class="forms">
             <dif class="formsL">
-                <form id="reservaForm">
-                    <div class="container">
-                        <select id="experimentsSelector"></select>
-                        <div id="calendarDiv">   </div>
-                   <!-- <button type="submit">Reservar</button>-->
-                </div>
-            </form>
+    
         </dif>
             <div class="formR">
                 <div id="reservaResponse"></div>
@@ -77,4 +72,29 @@
             }).data("dateinput").setValue(0).show();
         </script>
         <a href="/">Salir</a>
+
+        <div id="id01" class="modal">
+                        <form id="reservaForm" class="modal-content modal-content2 animate">
+                                       <div class="container">
+                        <select id="experimentsSelector"></select>
+                                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close      Modal">&times;</span>
+                            <div id="calendarDiv">
+                            </div>
+                </div>
+                    
+            </form>
+ 
+   
+        </div>
+
     </body>
+    <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>

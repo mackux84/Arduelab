@@ -14,9 +14,9 @@ module.exports = {
   e401:            {
     'description': 'Unauthorized',
     'schema':      Joi.object({
-      statusCode:  Joi.number().required().description('Error Status Code').default(401),
-      error:       Joi.string().required().description('Error type').default('Unauthorized'),
-      message:     Joi.string().required().description('Error message').default('Invalid token')
+      statusCode:  Joi.number().required().description('CODIGO DE ERROR').default(401),
+      error:       Joi.string().required().description('TIPO DE ERROR').default('Unauthorized'),
+      message:     Joi.string().required().description('MENSAJE DE ERROR').default('TOKEN INVALIDO')
     }).label('Unauthorized')
   },
   e403:            {

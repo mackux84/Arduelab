@@ -72,6 +72,12 @@ h1, h2, h3, h4, h5{
     width: 30%; /* Could be more or less, depending on screen size */
 }
 
+.modal-content2 {
+width: 40%; 
+}
+
+
+
 /* The Close Button (x) */
 .close {
     position: relative;
