@@ -74,7 +74,8 @@ h1, h2, h3, h4, h5{
 }
 
 .modal-content2 {
-width: 40%; 
+    margin: auto; /* 5% from the top, 15% from the bottom and centered */
+    width: 50%; 
 }
 
 
