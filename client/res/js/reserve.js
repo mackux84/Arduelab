@@ -96,7 +96,15 @@ if (experimentsSelector) {
 
 
 /////////////////////////testing area/////////////////////
-$(document).ready(function () {
+function callback(json){
+  return function(){
+    calendarDivF(json)
+  }
+}
+$('#botonindex').on('click', function (e) {
+  $('#id01').show()
+
+//$(document).ready(function () {
   var calendarDiv = document.getElementById('calendarDiv')
   if (calendarDiv) {
     var json = {
@@ -148,7 +156,9 @@ $(document).ready(function () {
         },
       ]
     }
-    calendarDivF(json)
+    //timeout and callback function are temporal fixes,
+    //when the server query (json) is added they should no longer be necessary
+    setTimeout(callback(json),500)
   }
 })
 
