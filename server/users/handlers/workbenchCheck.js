@@ -3,7 +3,7 @@
 const Boom        = require('boom')
 const Reserve     = require('../models/Reserve')
 const Jwt         = require('jsonwebtoken')
-const decyptToken = require('../util/userFunctions').decyptToken
+const decyptToken2 = require('../util/userFunctions').decyptToken2
 const Moment      = require('moment')
 const key         = require('../../config/auth').key
 
@@ -22,14 +22,18 @@ module.exports = function (request, reply) {
         }
       }
       if (decoded === undefined) {
-        reply(Boom.forbidden('Invalid workbench token'))
+        reply(Boom.forbidden('Invalid token'))
         return
       }
       if (decoded.type != 'workbench') {
-        reply(Boom.forbidden('Not a workbench token'))
+        reply(Boom.forbidden('Invalid token'))
         return
       }
-      decoded = decyptToken(decoded)
+      decoded = decyptToken2(decoded)
+      if (decoded.idExp !== request.payload.expID) {
+        reply(Boom.forbidden('Invalid token'))
+        return
+      }
       var diff = Moment().diff(Moment(decoded.iat * 1000))
       if (diff < 0) {
         reply(Boom.forbidden('Token not active yet'))

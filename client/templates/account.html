@@ -10,55 +10,51 @@
         <link rel="stylesheet" href="/css/fullcalendar.css">
     </head>
     <body>
-        <a id="botonindex" onclick="document.getElementById('id01').style.display='block'">RESERVAR</a>
+        <a id="botonindex" >RESERVAR</a>
         <div id="Timer">
             <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
         </div>
+        <a href="/">Salir</a>
         <h1>Reservar</h1>
         <p>Se le asignara 1 Hora a partir de la fecha escogida</p>
         <div class="forms">
-            <dif class="formsL">
-    
-        </dif>
+            <div class="formsL">
+                <select id="experimentsSelector"></select>
+            </div>
             <div class="formR">
                 <div id="reservaResponse"></div>
                 <div id="reservaHist">
-
-
- <table>
-           <tr>
-           <td>Token No: </td>
-           <td>  Number(index  1)  </td>
-           </tr>
-           <tr>
-           <td>Fecha de creación: </td>
-           <td>  new Date(element.created_At)  </td>
-           </tr>
-           <tr>
-           <td>Fecha Reservada: </td>
-           <td>  new Date(element.initialDate)  </td>
-           </tr>
-           <tr>
-           <td>Duración: </td>
-           <td>  new Date(element.duration).getUTCHours()   Hora(s)</td>
-           </tr>
-           <tr>
-           <td>Usado: </td>
-           <td>  element.used  </td>
-           </tr>
-           <tr>
-           <td>Ir al workbench: </td>
-           <td><a href="/users/workbench/  element.token  ">Click Here</a></td>
-           </tr>
-           </table >
-
-
-
+                    <table>
+                        <tr>
+                            <td>Token No: </td>
+                            <td>  Number(index  1)  </td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de creación: </td>
+                            <td>  new Date(element.created_At)  </td>
+                        </tr>
+                        <tr>
+                            <td>Fecha Reservada: </td>
+                            <td>  new Date(element.initialDate)  </td>
+                        </tr>
+                        <tr>
+                            <td>Duración: </td>
+                            <td>  new Date(element.duration).getUTCHours()   Hora(s)</td>
+                        </tr>
+                        <tr>
+                            <td>Usado: </td>
+                            <td>  element.used  </td>
+                        </tr>
+                        <tr>
+                            <td>Ir al workbench: </td>
+                            <td><a href="/users/workbench/  element.token  ">Click Here</a></td>
+                        </tr>
+                    </table >
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="/js/main.min.js"></script>
-        <script>
+        <!--
+            <script>
             $(":date").dateinput({
                 /*Datepicker guide:
                 http://jquerytools.github.io/demos/dateinput/index.html*/
@@ -71,30 +67,28 @@
                 }
             }).data("dateinput").setValue(0).show();
         </script>
-        <a href="/">Salir</a>
+        -->
 
         <div id="id01" class="modal">
-                        <form id="reservaForm" class="modal-content modal-content2 animate">
-                                       <div class="container">
-                        <select id="experimentsSelector"></select>
-                                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close      Modal">&times;</span>
-                            <div id="calendarDiv">
-                            </div>
+            <form id="reservaForm" class="modal-content modal-content2 animate">
+                <div class="container">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close      Modal">&times;</span>
+                    <div id="calendarDiv">
+                    </div>
                 </div>
-                    
             </form>
-  
-   
         </div>
 
     </body>
     <script>
-            // Get the modal
-            var modal = document.getElementById('id01');
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
+        // Get the modal
+        var modal = document.getElementById('id01');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
             }
-        </script>
+        }
+    </script>
+        <script type="text/javascript" src="/js/main.min.js"></script>
+</html>
