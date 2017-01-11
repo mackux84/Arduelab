@@ -31,7 +31,7 @@ module.exports = function (request, reply) {
       }
       decoded = decyptToken2(decoded)
       if (decoded.idExp !== request.payload.expID) {
-        reply(Boom.forbidden('Invalid token'))
+        reply(Boom.forbidden('Invalid token')) 
         return
       }
       var diff = Moment().diff(Moment(decoded.iat * 1000))
