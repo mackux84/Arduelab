@@ -53,7 +53,7 @@ module.exports = function (request, reply) {
         Experiment
           .find({enabled:'true'})
           // Deselect the password and version fields
-          .select('-updated_At -__v -created_At -url -enabled')
+          .select('-updated_At -__v -created_At -enabled')
           .exec((error, experiments) => {
             if (error) {
               reply(Boom.badRequest(error))
