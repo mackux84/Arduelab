@@ -78,7 +78,9 @@ h1, h2, h3, h4, h5{
     width: 50%; 
 }
 
-
+input[type=submit] {
+    width: 20em;  height: 3em;
+}
 
 /* The Close Button (x) */
 .close {
@@ -135,6 +137,46 @@ h1, h2, h3, h4, h5{
     min-width: 350px;
 }
 
+
+
+ul.tab {
+    list-style-type: none;
+    margin: 0 5% 0 5%;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: cadetblue;
+}
+
+ul.tab li {float: right;
+    margin : 10px 6px 0px 0px;
+    background: #8ab8b9;
+}
+
+.usuario{
+float : left !important;
+margin-top: 18px !important;
+margin-left: 5% !important;
+background: transparent !important;
+}
+
+ul.tab li a:hover {
+    background-color: cornflowerblue;
+
+}
+
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+
 #botonindex{
     background-color: cornflowerblue;
     margin: 10px;
@@ -152,7 +194,7 @@ h1, h2, h3, h4, h5{
 #reservaHist>table {
     margin: 5px;
     padding: 10px;
-    border: solid cadetblue;
+    border: solid darkgray;
 }
 
 .logo{
