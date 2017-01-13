@@ -138,6 +138,14 @@ input[type=submit] {
 }
 
 
+.accountcont{
+    display: none;
+    padding-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #ffffff;
+    width: 80%;
+}
 
 ul.tab {
     list-style-type: none;
