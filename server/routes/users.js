@@ -19,6 +19,7 @@ const createExpHandler               = require('../users/handlers/createExp')
 const experimentsAdminHandler        = require('../users/handlers/experimentsAdmin')
 const patchExperimentHandler         = require('../users/handlers/patchExperiment')
 const workbenchCheckHandler          = require('../users/handlers/workbenchCheck')
+const experimentReservesHandler      = require('../users/handlers/experimentReserves')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -40,6 +41,7 @@ const createExpConfig                = require('../users/config/createExp')
 const experimentsAdminConfig         = require('../users/config/experimentsAdmin')
 const patchExperimentConfig          = require('../users/config/patchExperiment')
 const workbenchCheckConfig           = require('../users/config/workbenchCheck')
+const experimentReservesConfig       = require('../users/config/experimentReserves')
 
 
 module.exports = [
@@ -158,5 +160,11 @@ module.exports = [
     path: '/users/workbenchCheck/{id}',
     config: workbenchCheckConfig,
     handler: workbenchCheckHandler
+  },
+  {
+    method: 'POST',
+    path: '/users/experimentReserves',
+    config: experimentReservesConfig,
+    handler: experimentReservesHandler
   },
 ]
