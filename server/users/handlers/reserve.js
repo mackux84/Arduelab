@@ -33,7 +33,7 @@ module.exports = function (request, reply) {
     } else {
       //If header (user) token is valid, create reservation token and add it to reservation DB
       decoded = decyptToken(decoded)
-      var datetest= new Date(request.payload.start)
+      var datetest = new Date(request.payload.start)
       var today = new Date()
       if (datetest < today) {
         reply(Boom.badRequest('Invalid submited Date'))
@@ -48,68 +48,103 @@ module.exports = function (request, reply) {
         duracion: request.payload.duration,
         experimento: request.payload.experiment
       }
-
-      Experiment
-      .findOne({_id: tokenData.experimento})
-      // Deselect fields
-      //.select('-__v -updated_At')
-      .exec((error, experiment) => {
-        if (error) {
-          reply(Boom.badRequest(error))
-          return
-        }
-        if (experiment == null) {
-          reply(Boom.notFound('No experiments with that ID found!'))
-          return
-        }
-        
-        if (experiment.enabled) {
-          if (experiment.days.indexOf(datetest.getUTCDay())!=-1) {
-            if (experiment.schedule.indexOf(tokenData.hora)!=-1) {
-              if (experiment.duration.indexOf(tokenData.duracion)!=-1) {
-                var token = createToken2(tokenData)
-                let reserve = new Reserve()
-                reserve.email = decoded.email
-                reserve.initialDate = datetest
-                reserve.duration = tokenData.duracion
-                reserve.token = token
-                reserve.used = false
-                reserve.enabled = true
-                reserve.scope = decoded.scope
-                reserve.idExp= request.payload.experiment
-                reserve.save((error, reserve) => {
-                  if (!error) {
-                    var res = {
-                      date: reserve.initialDate,
-                      duration: reserve.duration,
-                      name: experiment.name,
-                      university: experiment.university,
-                      url: experiment.url
-                    }
-                    reply(res).code(201)
-                  } else {
-                    if (11000 === error.code || 11001 === error.code) {
-                      console.log(error)
-                      reply(Boom.badRequest('Time already reserved'))
-                    } else {
-                      console.log(error)
-                      reply(Boom.badRequest(error))
-                    }
-                  }
-                })
-              } else {
-                reply(Boom.badRequest('Requested Duration not Allowed'))
-              }
-            } else {
-              reply(Boom.badRequest('Requested Initial Time not Allowed'))
-            }
-          } else {
-            reply(Boom.badRequest('Requested Day not Allowed'))
+      var searchquery = {
+        email: decoded.email,
+        idExp: tokenData.experimento
+      }
+      Reserve
+        .find(searchquery)
+        // Deselect fields
+        .select(' -__v -updated_At -scope')
+        .exec((error, reserve) => {
+          if (error) {
+            reply(Boom.badRequest(error))
+            return
           }
-        } else {
-          reply(Boom.badRequest('Requested Experiment not Enabled'))
-        }
-      })
+          var canReserve = false
+          if (!reserve.length) {
+            //no reserves found
+            canReserve = true
+          } else {
+            for (var index = 0; index < reserve.length; index++) {
+              var element = reserve[index]
+              if (element.enabled) {
+                //already reserved for this experiment
+                canReserve = false
+                break
+              } else {
+                canReserve = true
+              }
+            }
+          }
+          if (canReserve) {
+            Experiment
+              .findOne({ _id: tokenData.experimento })
+              // Deselect fields
+              //.select('-__v -updated_At')
+              .exec((error, experiment) => {
+                if (error) {
+                  reply(Boom.badRequest(error))
+                  return
+                }
+                if (experiment == null) {
+                  reply(Boom.notFound('No experiments with that ID found!'))
+                  return
+                }
+                if (experiment.enabled) {
+                  if (experiment.days.indexOf(datetest.getUTCDay()) != -1) {
+                    if ((experiment.schedule[0]<=tokenData.hora)&&(experiment.schedule[1]>=tokenData.hora)) {
+                      if (experiment.duration.indexOf(tokenData.duracion) != -1) {
+                        var token = createToken2(tokenData)
+                        let reserve = new Reserve()
+                        reserve.email = decoded.email
+                        reserve.initialDate = datetest
+                        reserve.duration = tokenData.duracion
+                        reserve.token = token
+                        reserve.used = false
+                        reserve.enabled = true
+                        reserve.scope = decoded.scope
+                        reserve.idExp = request.payload.experiment
+                        reserve.save((error, reserve) => {
+                          if (!error) {
+                            var res = {
+                              date: reserve.initialDate,
+                              duration: reserve.duration,
+                              name: experiment.name,
+                              university: experiment.university,
+                              url: experiment.url
+                            }
+                            reply(res).code(201)
+                          } else {
+                            if (11000 === error.code || 11001 === error.code) {
+                              // console.log(error)
+                              reply(Boom.badRequest('Time already reserved'))
+                            } else {
+                              // console.log(error)
+                              reply(Boom.badRequest(error))
+                            }
+                          }
+                        })
+                      } else {
+                        reply(Boom.badRequest('Requested Duration not Allowed'))
+                      }
+                    } else {
+                      reply(Boom.badRequest('Requested Initial Time not Allowed'))
+                    }
+                  } else {
+                    reply(Boom.badRequest('Requested Day not Allowed'))
+                  }
+                } else {
+                  reply(Boom.badRequest('Requested Experiment not Enabled'))
+                }
+              })
+          } else {
+            reply(Boom.badRequest('A Reserve for this experiment is already active'))
+          }
+        })
+
+
+
     }
   })
 
