@@ -48,6 +48,7 @@ function reservaHistory() {
     },
     error: function (json) {
       //alert(json)
+      console.log(json)
     }
   })
 }

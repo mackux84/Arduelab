@@ -22,7 +22,7 @@ module.exports = {
   validate: {
     headers: updateUserSchema.headerSchema,
     payload: Joi.object({
-      expID: Joi.objectId.required().description('Must match a 24 chars objectid')
+      expID: Joi.objectId().required().description('Must match a 24 chars objectid')
     }).label('Must match a 24 chars objectid')
   },
   description: 'Get current experiment reserves information',
