@@ -29,6 +29,15 @@ body
     font-size: 16px;
     margin: 0;
 }
+.accountcont{
+    display: none;
+    padding-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #ffffff;
+    width: 80%;
+}
+
 img{
     height: auto;
     width: 100%;
