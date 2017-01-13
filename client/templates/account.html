@@ -5,25 +5,36 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <link rel = "stylesheet" href = "/css/styles.css">
-        <script src="http://cdn.jquerytools.org/1.2.6/full/jquery.tools.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/skin1.min.css">
         <link rel="stylesheet" href="/css/fullcalendar.css">
     </head>
     <body>
-        <a id="botonindex" >RESERVAR</a>
         <div id="Timer">
             <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
         </div>
-        <a href="/">Salir</a>
         <h1>Reservar</h1>
-        <p>Se le asignara 1 Hora a partir de la fecha escogida</p>
-        <div class="forms">
-            <div class="formsL">
-                <select id="experimentsSelector"></select>
+        <ul class="tab">
+            <li>
+                <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'EXPERIMENTOS')">LISTA DE EXPERIMENTOS</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'RESERVAS')">RESERVAS</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'CONTRASEÑA')">CAMBIO DE CONTRASEÑA</a>
+            </li>
+            <li class="usuario">{UserName}</li>
+        </ul>
+
+        <a href="/">Salir</a>
+        <div class="accountcont" id="EXPERIMENTOS">
+            <div id="experimentsAllUser" align="center">
             </div>
-            <div class="formR">
-                <div id="reservaResponse"></div>
-                <div id="reservaHist">
+        </div>
+        <div class="accountcont" id="RESERVAS">
+            <div id="reservaResponse">
+            </div>
+                <div id="reservaHist" align="center">
                     <table>
                         <tr>
                             <td>Token No: </td>
@@ -51,44 +62,52 @@
                         </tr>
                     </table >
                 </div>
+        </div>
+        <div class="accountcont" id="CONTRASEÑA">
+            <div align="center" >
+                <table>
+                    <tr>
+                        <td>CONTRASEÑA ANTIGUA: </td>
+                        <td><input type="password" name="oldpassword"/></td>
+                    </tr>
+                    <tr>
+                        <td>CONTRASEÑA NUEVA: </td>
+                        <td><input type="password" name="newpassword"/></td>
+                    </tr>
+                    <tr>
+                        <td>CONFIRME CONTRASEÑA NUEVA: </td>
+                        <td><input type="password" name="cnewpassword"/></td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit"  name="cnewpassword" value="CAMBIAR"/></td>
+                    </tr>
+                </table >
             </div>
         </div>
-        <!--
-            <script>
-            $(":date").dateinput({
-                /*Datepicker guide:
-                http://jquerytools.github.io/demos/dateinput/index.html*/
-                format: 'dd-mm-yyyy',
-                min: -1,
-                speed: 'fast',
-                firstDay: 1,
-                onHide: function(){
-                    return false;
-                }
-            }).data("dateinput").setValue(0).show();
-        </script>
-        -->
 
         <div id="id01" class="modal">
             <form id="reservaForm" class="modal-content modal-content2 animate">
                 <div class="container">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close      Modal">&times;</span>
+                    <span id="closeX" class="close" title="Close      Modal">&times;</span>
                     <div id="calendarDiv">
                     </div>
                 </div>
             </form>
         </div>
-
-    </body>
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+        <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("accountcont");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
             }
-        }
-    </script>
+        </script>
         <script type="text/javascript" src="/js/main.min.js"></script>
 </html>

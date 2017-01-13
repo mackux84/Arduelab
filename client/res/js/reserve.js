@@ -57,9 +57,26 @@ var reservaHist = document.getElementById('reservaHist')
 if (reservaHist) {
   reservaHistory()
 }
-
+$(document).ready(function () {
+  var experimentsAllUser = document.getElementById('experimentsAllUser')
+  if (experimentsAllUser) {
+    getExperimentos()
+  }
+  var modal = document.getElementById('id01')
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = 'none'
+      $('#calendarDiv').fullCalendar('destroy')
+    }
+  }
+})
+$('#closeX').on('click', function (e) {
+  $('#id01').css('display', 'none')
+  $('#calendarDiv').fullCalendar('destroy')
+})
 function getExperimentos() {
-  $('#experimentsAll').html('')
+  $('#experimentsAllUser').html('')
   $.ajax({
     type: 'POST',
     url: '/users/experimentsAdmin',
@@ -107,7 +124,7 @@ function getExperimentos() {
           + '</table >'
         values += table
       }
-      $('#experimentsAll').html(values)
+      $('#experimentsAllUser').html(values)
       $('.reservarExp').on('click', function (e) {
         //patch Experiment
         e.preventDefault()
@@ -127,9 +144,8 @@ function getExperimentos() {
           dataType: 'json',
           contentType: 'application/json',
           success: function (json) {
+            console.log('json:')
             console.log(json)
-            alert(json)
-            alert(json.message)
             ///////////////////////////////////////////////////
             $('#id01').show()
             var calendarDiv = document.getElementById('calendarDiv')
@@ -137,16 +153,24 @@ function getExperimentos() {
               var eventsA = []
               for (var index = 0; index < json.length; index++) {
                 var element = json[index]
-                var now = new Date(element.initialDate)
-                now.setMinutes(now.getMinutes() + element.duration)
+                var startdate = new Date(element.initialDate)
+                
+                //startdate.setSeconds(startdate.getSeconds()+10)
+                var enddate = new Date(element.initialDate)
+                enddate.setMinutes(startdate.getMinutes() + element.duration)
                 var temp = {
                   title: 'Reserved',
-                  start: element.initialDate,
-                  end: now
+                  start: startdate.toISOString(),
+                  end: enddate.toISOString()
                 }
+                console.log('now')
+                console.log(temp.start)
+                console.log('now+duration')
+                console.log(temp.end)
                 eventsA.push(temp)
               }
-              var businessH = $('[name="scheduleExp;' + name_id + '"]').val()
+              var businessH = JSON.parse($('[name="scheduleExp;' + name_id + '"]').val())
+              console.log('businessH: ')
               console.log(businessH)
               var jsonCal = {
                 selectable: true,
@@ -154,22 +178,25 @@ function getExperimentos() {
                 experimentID: name_id,
                 events: eventsA,
                 selectConstraint: {
-                  start: businessH[0],
-                  end: businessH[1],
-                  dow: $('[name="daysExp;' + name_id + '"]').val()
+                  start: businessH[0] + ':00',
+                  end: businessH[1] + ':00',
+                  dow: JSON.parse($('[name="daysExp;' + name_id + '"]').val())
                 },
-                businessHours: [
-                  {
-                    start: businessH[0],
-                    end: businessH[1],
-                    dow: $('[name="daysExp;' + name_id + '"]').val()
-                  },
-                ]
+                businessHours:
+                {
+                  start: businessH[0] + ':00',
+                  end: businessH[1] + ':00',
+                  dow: JSON.parse($('[name="daysExp;' + name_id + '"]').val())
+                }
+
               }
+              console.log('jsonCal:')
+              console.log(jsonCal)
               //TODO: timeout and callback function are temporal fixes,
               //when the server query (json) is added they should no longer be necessary
-              //setTimeout(callback(jsonCal), 500)
-              calendarDivF(jsonCal)
+              //false, it is still necessary
+              setTimeout(callbackCal(jsonCal), 1000)
+              //calendarDivF(jsonCal)
             }
 
 
@@ -197,13 +224,12 @@ if (experimentsSelector) {
 
 
 
-
 /////////////////////////testing area/////////////////////
-/*function callback(json) {
+function callbackCal(json) {
   return function () {
     calendarDivF(json)
   }
-}*/
+}
 function calendarDivF(json) {
 
   $('#calendarDiv').fullCalendar({
@@ -310,4 +336,5 @@ function calendarDivF(json) {
       }
     }
   })
+  $('#calendarDiv').fullCalendar('render')
 }

@@ -35,7 +35,7 @@ module.exports = function (request, reply) {
             return
           }
           if (!reserve.length) {
-            reply(Boom.notFound('No reserves found!'))
+            reply('[]')
             return
           }
           reply(reserve)
