@@ -52,7 +52,7 @@ module.exports = function (request, reply) {
           reply.view('admin.html')
           return
         }
-        reply.view('account.html')
+        reply.view('account.html',{UserName:decoded.username})
         return
       }
     })
