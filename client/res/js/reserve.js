@@ -58,6 +58,7 @@ if (reservaHist) {
 }
 
 function getExperimentos() {
+  $('#experimentsAll').html('')
   $.ajax({
     type: 'POST',
     url: '/users/experimentsAdmin',
@@ -66,19 +67,120 @@ function getExperimentos() {
       'Authorization': window.location.pathname.split('/')[3]
     },
     success: function (json) {
-      console.log(json)
-      var arra = json
-      for (var index = 0; index < arra.length; index++) {
-        var element = arra[index]
-        var id = element._id
-        var name = element.name
-        var schedule = element.schedule
-        var duration = element.duration
-        var university = element.university
-        $('#experimentsSelector').append('<option value="' + id + '">' + name + '</option>')
+      var values = 'Experimentos: <br>'
+      for (var index = 0; index < json.length; index++) {
+        var element = json[index]
+        var table =
+          '<table>'
+          + '<tr>'
+          + '<td>Nombre: </td>'
+          + '<td><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td><img></td>'//TODO: add image
+          + '<td>' + element.description + '</td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td>Universidad: </td>'
+          + '<td><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td>Url: </td>'
+          + '<td><input type="text" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td>Horas validas: </td>'
+          + '<td><input type="text" name="scheduleExp;' + element._id + '" Value="[' + element.schedule + ']" id="' + element._id + ';' + element.schedule + '"/></td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td>Duraciones permitidas: </td>'
+          + '<td><input type="text" name="durationExp;' + element._id + '" Value="[' + element.duration + ']" id="' + element._id + ';' + element.duration + '"/></td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td>Dias permitidos: </td>'
+          + '<td><input type="text" name="daysExp;' + element._id + '" Value="[' + element.days + ']" id="' + element._id + ';' + element.days + '"/></td>'
+          + '</tr>'
+          + '<tr>'
+          + '<td><button class="reservarExp" name="' + element._id + '">Reservar</button></td>'
+          + '</tr>'
+          + '</table >'
+        values += table
       }
+      $('#experimentsAll').html(values)
+      $('.reservarExp').on('click', function (e) {
+        //patch Experiment
+        e.preventDefault()
+        var jsonData = {}
+        var name_id = $(this).attr('name')
+        jsonData = {
+          expID: name_id
+        }
+        var jsonData2 = JSON.stringify(jsonData)
+        $.ajax({
+          type: 'POST',
+          url: '/users/experimentReserves/',
+          headers: {
+            'Authorization': window.location.pathname.split('/')[3]
+          },
+          data: jsonData2,
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (json) {
+            console.log(json)
+            alert(json)
+            alert(json.message)
+            ///////////////////////////////////////////////////
+            $('#id01').show()
+            var calendarDiv = document.getElementById('calendarDiv')
+            if (calendarDiv) {
+              var eventsA = []
+              for (var index = 0; index < json.length; index++) {
+                var element = json[index]
+                var now = new Date(element.initialDate)
+                now.setMinutes(now.getMinutes() + element.duration)
+                var temp = {
+                  title: 'Reserved',
+                  start: element.initialDate,
+                  end: now
+                }
+                eventsA.push(temp)
+              }
+              var businessH = $('[name="scheduleExp;' + name_id + '"]').val()
+              console.log(businessH)
+              var jsonCal = {
+                selectable: true,
+                maxResTime: 7200000,
+                experimentID: name_id,
+                events: eventsA,
+                selectConstraint: {
+                  start: businessH[0],
+                  end: businessH[1],
+                  dow: $('[name="daysExp;' + name_id + '"]').val()
+                },
+                businessHours: [
+                  {
+                    start: businessH[0],
+                    end: businessH[1],
+                    dow: $('[name="daysExp;' + name_id + '"]').val()
+                  },
+                ]
+              }
+              //TODO: timeout and callback function are temporal fixes,
+              //when the server query (json) is added they should no longer be necessary
+              //setTimeout(callback(jsonCal), 500)
+              calendarDivF(jsonCal)
+            }
+
+
+          },
+          error: function (json) {
+            alert(json.responseJSON.message)
+          }
+        })
+      })
     },
     error: function (json) {
+      alert(json.responseJSON.message)
       //alert(json)
     }
   })
@@ -96,72 +198,11 @@ if (experimentsSelector) {
 
 
 /////////////////////////testing area/////////////////////
-function callback(json){
-  return function(){
+/*function callback(json) {
+  return function () {
     calendarDivF(json)
   }
-}
-$('#botonindex').on('click', function (e) {
-  $('#id01').show()
-
-//$(document).ready(function () {
-  var calendarDiv = document.getElementById('calendarDiv')
-  if (calendarDiv) {
-    var json = {
-      selectable: true,
-      maxResTime: 7200000,
-      experimentID: '5873d9b992359d250853ca91',
-      events: [
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2014-06-09T16:00:00'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2014-06-16T16:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2014-06-12T10:30:00',
-          end: '2014-06-12T12:30:00',
-          backgroundColor: '#ffff00',
-          borderColor: '#00ff00',
-          textColor: '#6666ff'
-        },
-        {
-          title: 'Lunch',
-          start: '2014-06-12T12:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          url: 'http://google.com/',
-          start: '2014-06-13T07:00:00'
-        },
-      ],
-      selectConstraint: {
-        start: '10:00', // a start time (10am in this example)
-        end: '18:00', // an end time (6pm in this example)
-
-        dow: [1, 2, 3, 4, 5, 6]
-        // days of week. an array of zero-based day of week integers (0=Sunday)
-        // (Monday-Thursday in this example)
-      },
-      businessHours: [
-        {
-          dow: [1, 2, 3, 4, 5, 6],
-          start: '10:00',
-          end: '18:00'
-        },
-      ]
-    }
-    //timeout and callback function are temporal fixes,
-    //when the server query (json) is added they should no longer be necessary
-    setTimeout(callback(json),500)
-  }
-})
-
+}*/
 function calendarDivF(json) {
 
   $('#calendarDiv').fullCalendar({
@@ -187,7 +228,9 @@ function calendarDivF(json) {
     eventTextColor: '#000056',
     defaultView: 'agendaWeek',
     editable: false,
-    defaultDate: '2014-06-11',
+    events: json.events,
+    selectConstraint: json.selectConstraint,
+    businessHours: json.businessHours,
 
     selectAllow: function (selectInfo) {
       var start = moment(selectInfo.start)
@@ -246,7 +289,7 @@ function calendarDivF(json) {
             reservaHistory()
           },
           error: function (json) {
-           
+
             $('#calendarDiv').fullCalendar('unselect')
             if (json.responseJSON.statusCode === 401) {
               alert(
@@ -264,9 +307,6 @@ function calendarDivF(json) {
       } else {
         $('#calendarDiv').fullCalendar('unselect')
       }
-    },
-    events: json.events,
-    selectConstraint: json.selectConstraint,
-    businessHours: json.businessHours
+    }
   })
 }
