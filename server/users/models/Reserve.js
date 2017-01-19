@@ -15,9 +15,7 @@ const reservesModel = new Schema({
   initialDate: {
     type: Date,
     required: true,
-    index: {
-      unique: true
-    }
+    index: true
   },
   duration: {
     type: Number,
