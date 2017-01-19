@@ -14,7 +14,7 @@
         </div>
         <h1>Reservar</h1>
         <ul class="tab">
-                            <li>
+            <li>
                 <a href="/" class="tablinks" >SALIR</a>
             </li>
             <li>
@@ -38,32 +38,6 @@
             <div id="reservaResponse">
             </div>
                 <div id="reservaHist" align="center">
-                    <table>
-                        <tr>
-                            <td>Token No: </td>
-                            <td>  Number(index  1)  </td>
-                        </tr>
-                        <tr>
-                            <td>Fecha de creación: </td>
-                            <td>  new Date(element.created_At)  </td>
-                        </tr>
-                        <tr>
-                            <td>Fecha Reservada: </td>
-                            <td>  new Date(element.initialDate)  </td>
-                        </tr>
-                        <tr>
-                            <td>Duración: </td>
-                            <td>  new Date(element.duration).getUTCHours()   Hora(s)</td>
-                        </tr>
-                        <tr>
-                            <td>Usado: </td>
-                            <td>  element.used  </td>
-                        </tr>
-                        <tr>
-                            <td>Ir al workbench: </td>
-                            <td><a href="/users/workbench/  element.token  ">Click Here</a></td>
-                        </tr>
-                    </table >
                 </div>
         </div>
         <div class="accountcont" id="CONTRASEÑA">
@@ -91,7 +65,11 @@
         <div id="id01" class="modal">
             <form id="reservaForm" class="modal-content modal-content2 animate">
                 <div class="container">
-                    <span id="closeX" class="close" title="Close      Modal">&times;</span>
+                    <div class="calTopMenu">
+                        <span id="expNameCal"></span>
+                        <span id="closeX" class="close" title="Close      Modal">&times;</span>
+                    </div>
+
                     <div id="calendarDiv">
                     </div>
                 </div>
