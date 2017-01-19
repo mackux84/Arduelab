@@ -21,7 +21,7 @@ module.exports = {
     headers: updateUserSchema.headerSchema,
     payload: Joi.object({
       name: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).required().description('Experiment Name').example('Arduino Car'),
-      university: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).required().description('Experiment University').example('Yale University'),
+      university: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).required().description('Experiment University').example('Yale University'),
       url: Joi.string().min(3).max(30).required().description('The Experiment Url').example('http://google.com'),
       days: Joi.array().items(Joi.number().min(0).max(6)).required().description('The experiment Allowed Days in UTC format, Sunday is 0, Monday is 1, and so on.').example('[1,2,3,4]'),
       schedule: Joi.array().length(2).items(Joi.number().min(0).max(23)).required().description('The experiment active hours (initial,, final)').example('[8,18]'),
