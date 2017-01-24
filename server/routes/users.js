@@ -8,7 +8,7 @@ const forgotPasswordHandler          = require('../users/handlers/forgotPassword
 const verifyEmailHandler             = require('../users/handlers/verifyEmail')
 const patchUserHandler               = require('../users/handlers/patchUser')
 const getAllUsersHandler             = require('../users/handlers/getAllUsers')
-const workbenchHandler               = require('../users/handlers/workbench')
+//const workbenchHandler               = require('../users/handlers/workbench')
 const accountHandler                 = require('../users/handlers/account')
 const reserveHandler                 = require('../users/handlers/reserve')
 const checkTimeHandler               = require('../users/handlers/checkTime')
@@ -20,6 +20,7 @@ const experimentsAdminHandler        = require('../users/handlers/experimentsAdm
 const patchExperimentHandler         = require('../users/handlers/patchExperiment')
 const workbenchCheckHandler          = require('../users/handlers/workbenchCheck')
 const experimentReservesHandler      = require('../users/handlers/experimentReserves')
+const passwordChangeHandler          = require('../users/handlers/passwordChange')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -30,7 +31,7 @@ const verifyEmailConfig              = require('../users/config/verifyEmail')
 const patchUserConfig                = require('../users/config/patchUser')
 const getAllUsersConfig              = require('../users/config/getAllUsers')
 const checkUserConfig                = require('../users/config/checkUser')
-const workbenchConfig                = require('../users/config/workbench')
+//const workbenchConfig                = require('../users/config/workbench')
 const accountConfig                  = require('../users/config/account')
 const reserveConfig                  = require('../users/config/reserve')
 const checkTimeConfig                = require('../users/config/checkTime')
@@ -42,6 +43,7 @@ const experimentsAdminConfig         = require('../users/config/experimentsAdmin
 const patchExperimentConfig          = require('../users/config/patchExperiment')
 const workbenchCheckConfig           = require('../users/config/workbenchCheck')
 const experimentReservesConfig       = require('../users/config/experimentReserves')
+const passwordChangeConfig           = require('../users/config/passwordChange')
 
 
 module.exports = [
@@ -167,4 +169,11 @@ module.exports = [
     config: experimentReservesConfig,
     handler: experimentReservesHandler
   },
+  {
+    method: 'POST',
+    path: '/users/passwordChange',
+    config: passwordChangeConfig,
+    handler: passwordChangeHandler
+  },
+
 ]

@@ -3,6 +3,63 @@ var $ = require('jquery')
 require('fullCalendar')
 var moment = require('moment')
 
+$('#passwordChange').on('click', function (e) {
+  cambiarPass()
+})
+
+function cambiarPass() {
+  var oldPass = $('#oldpassword').val()
+  var newPass = $('#newpassword').val()
+  var newPassCheck = $('#cnewpassword').val()
+  
+  if (!oldPass || !newPass || !newPassCheck) {
+    alert('password fields can\'t be empty')
+    return
+  }
+
+  if (newPass !== newPassCheck) {
+    alert('Passwords check failed')
+    return
+  }
+  if (oldPass === newPass) {
+    alert('New and old passwords can\'t be the same')
+    return
+  }
+
+  var jsonData = {}
+  jsonData = {
+    old_password: oldPass,
+    new_password: newPass,
+    new_password_check:newPassCheck,
+  }
+  var jsonData2 = JSON.stringify(jsonData)
+
+  $.ajax({
+    type: 'POST',
+    url: '/users/passwordChange',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    data: jsonData2,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (json) {
+      alert(json.message)
+    },
+    error: function (json) {
+      if (json.responseJSON.statusCode === 401) {
+        alert(
+          'Login expiro'
+        )
+      } else {
+        alert(
+          'Error: ' + json.responseJSON.message
+        )
+      }
+    }
+  })
+}
+
 function reservaHistory() {
   $.ajax({
     type: 'POST',
@@ -39,7 +96,7 @@ function reservaHistory() {
           + '</tr>'
           + '<tr>'
           + '<td>Ir al workbench: </td>'
-          + '<td><a href="http://'+element.url+'/' + element.token + '">Click Here</a></td>'
+          + '<td><a href="http://' + element.url + '/' + element.token + '">Click Here</a></td>'
           + '</tr>'
           + '</table >'
         values += table
@@ -196,7 +253,7 @@ function getExperimentos() {
               }
               //console.log('jsonCal:')
               //console.log(jsonCal)
-              //TODO: timeout and callback function are temporal fixes,
+              //TODO (not): timeout and callback function are temporal fixes,
               //when the server query (json) is added they should no longer be necessary
               //false, it is still necessary
               setTimeout(callbackCal(jsonCal), 1000)
@@ -274,8 +331,8 @@ function calendarDivF(json) {
       }
     },
     select: function (start, end) {
-      var startF = start.format('dddd d [de] MMMM YYYY, hh:mm a')
-      var endF = end.format('dddd d [de] MMMM YYYY, hh:mm a')
+      var startF = start.format('dddd DD [de] MMMM YYYY, HH:mm')
+      var endF = end.format('dddd DD [de] MMMM YYYY, HH:mm')
       var dur = moment.duration(end.diff(start)).asMinutes()
       var r = confirm(
         'Esta seguro de realizar esta reserva?'
