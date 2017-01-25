@@ -87,7 +87,7 @@ input[type=submit] {
     height: 35px;
     text-align: center;
 }
-#expNameCal{
+.popupTopText{
     color: #000;
     font-size: 20px;
     font-weight: bold;
@@ -152,7 +152,7 @@ input[type=submit] {
 
 .accountcont{
     display: none;
-    padding-top: 20px;
+    padding: 20px 0px;
     margin-left: 10%;
     margin-right: 10%;
     background-color: #ffffff;
@@ -161,16 +161,21 @@ input[type=submit] {
 
 ul.tab {
     list-style-type: none;
-    margin: 0 5% 0 5%;
+    margin: 0 10% 0 10%;
     padding: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     border: 1px solid #ccc;
     background-color: cadetblue;
+    display: flex;
+    justify-content: center;
 }
 
 ul.tab li {float: right;
-    margin : 10px 6px 0px 0px;
+    margin : 10px 6px 10px 6px;
     background: #8ab8b9;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
 }
 
 .usuario{
@@ -294,6 +299,101 @@ span.psw {
     float: right;
     padding-top: 1px;
 }
+
+#userList, #experimentsAll, #reservaHistAll{
+    overflow-x:auto;
+    padding: 0px 0px 20px 0px;
+}
+
+.Filter {
+    background-image: url('/images/searchicon.png')!important; /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px !important;
+    margin-bottom: 15px !important;
+}
+.myTable{
+    border-collapse: collapse;
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+}
+.myTable th, .myTable td{
+    border: 2px cadetblue solid;
+}
+.myTable tr:nth-child(even) {
+    background-color: #f1f1f1
+}
+.myTable tr.Theader, .myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #C2C2C2;
+}
+.myTable *{
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    /*vertical-align: middle;*/
+    max-width: 200px;
+    overflow: hidden;
+    /*white-space: nowrap;*/
+    text-overflow: ellipsis;
+}
+.myTable input[type=text]{
+    border: 0px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+.myTable button {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background: transparent;
+    cursor: pointer;
+}
+.myTable button:hover {
+    background-color: cadetblue;
+}
+
+
+th[role=columnheader]:not(.no-sort) {
+	cursor: pointer;
+}
+
+th[role=columnheader]:not(.no-sort):after {
+	content: '';
+	float: right;
+	margin-top: 7px;
+	border-width: 0 4px 4px;
+	border-style: solid;
+	border-color: #404040 transparent;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+th[aria-sort=ascending]:not(.no-sort):after {
+	border-bottom: none;
+	border-width: 4px 4px 0;
+}
+
+th[aria-sort]:not(.no-sort):after {
+	visibility: visible;
+	opacity: 0.4;
+}
+
+th[role=columnheader]:not(.no-sort):hover:after {
+	visibility: visible;
+	opacity: 1;
+}
+
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {

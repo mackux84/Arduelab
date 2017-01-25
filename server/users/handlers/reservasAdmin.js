@@ -46,8 +46,22 @@ module.exports = function (request, reply) {
           return
         })
     } else {
-      reply(Boom.badRequest('Must select atleast one student'))
-      return
+      Reserve
+        .find()
+        // Deselect fields
+        .select(' -__v -updated_At -scope')
+        .exec((error, reserve) => {
+          if (error) {
+            reply(Boom.badRequest(error))
+            return
+          }
+          if (!reserve.length) {
+            reply(Boom.notFound('No reserves found!'))
+            return
+          }
+          reply(reserve)
+          return
+        })
     }
   })
 }

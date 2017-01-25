@@ -9,68 +9,57 @@ function userListShow() {
       'Authorization': window.location.pathname.split('/')[3]
     },
     success: function (json) {
-      var values = 'Usuarios: <br>'
+      var table =
+        '<table class="myTable" id="usersTable">'
+        +'<thead>'
+        + '<tr class="Theader" >'
+          //+ '<th  >User Id </th>'
+          //+ '<th  >Fecha de creacion</th>'
+          //+ '<th  >Fecha de modificacion</th>'
+          + '<th>Nombre</th>'
+          + '<th>Email</th>'
+          + '<th>University</th>'
+          + '<th>Scope</th>'
+          + '<th>Verificado</th>'
+        
+          + '<th data-sort-method="none" class="no-sort">Reservas</th>'
+          + '<th data-sort-method="none" class="no-sort">Password</th>'
+          + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
+          + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
+        + '</tr>'
+        +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
-        var table =
-          '<table>'
-          + '<tr>'
-          + '<td>User Id:</td>'
-          + '<td>' + element._id + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha de creación: </td>'
-          + '<td>' + new Date(element.created_At) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha de modificación: </td>'
-          + '<td>' + new Date(element.updated_At) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Nombre: </td>'
-          + '<td><input type="text" name="usernameUser;' + element._id + '" Value="' + element.username + '" id="' + element._id + ';' + element.username + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>PassWord: </td>'
-          + '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Email (Unique): </td>'
-          + '<td><input type="text" name="emailUser;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>University</td>'
-          + '<td><input type="text" name="universityUser;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Scope: </td>'
-          + '<td><input type="text" name="scopeUser;' + element._id + '" Value="' + element.scope + '" id="' + element._id + ';' + element.scope + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Verificado: </td>'
+        table +=
+          '<tr class="searchItem">'
+          //+ '<td>' + element._id + '</td>'
+          //+ '<td >' + new Date(element.created_At) + '</td>'
+          //+ '<td >' + new Date(element.updated_At) + '</td>'
+          + '<td data-sort='+element.username+'><input type="text" name="usernameUser;' + element._id + '" Value="' + element.username + '" id="' + element._id + ';' + element.username + '"/></td>'
+          + '<td data-sort='+element.email+'><input type="text" name="emailUser;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
+          + '<td data-sort='+element.university+'><input type="text" name="universityUser;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
+          + '<td data-sort='+element.scope+'><input type="text" name="scopeUser;' + element._id + '" Value="' + element.scope + '" id="' + element._id + ';' + element.scope + '"/></td>'
         if (element.isVerified) {
-          table += '<td><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" checked/></td>'
+          table += '<td data-sort="true"><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" checked/></td>'
         } else {
-          table += '<td><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" /></td>'
+          table += '<td data-sort="false"><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" /></td>'
         }
-        table += '</tr>'
-          + '<tr>'
-          + '<td>Ver Reservas (Seleccionar): </td>'
-          + '<td><input type="checkbox" name="selectUser" value="' + element.email + '" ></td>'
-          + '</tr>'
-          + '<tr>'
+        table +=
+          '<td><button class="reservasUser" name="' + element._id + '">Ver</button></td>'
+          + '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
           + '<td><button class="editarUser" name="' + element._id + '">Editar</button></td>'
           + '<td><button class="reiniciarUser" name="' + element._id + '">Cancelar</button></td>'
-          + '</tr>'
-          + '</table >'
-        values += table
+          +'</tr>'
       }
-      $('#userList').html(values)
+      table += '</table >'
+      $('#userList').html('')
+      $('#userList').html(table)
       $('.editarUser').on('click', function (e) {
         //patch user
         e.preventDefault()
         var jsonData = {}
         var name_id = $(this).attr('name')
+        //checks if email is updated so that server sends verification email
         if ($('[name="emailUser;' + name_id + '"]').val() === $('[name="emailUser;' + name_id + '"]').attr('id').split(';')[1]) {
           jsonData = {
             username: $('[name="usernameUser;' + name_id + '"]').val(),
@@ -84,7 +73,7 @@ function userListShow() {
             email: $('[name="emailUser;' + name_id + '"]').val(),
             university: $('[name="universityUser;' + name_id + '"]').val(),
             scope: $('[name="scopeUser;' + name_id + '"]').val(),
-            isVerified: $('[name="isVerifiedUser;' + name_id + '"]').is(':checked')
+            isVerified: 'false' //if email is updated
           }
         }
         var jsonData2 = JSON.stringify(jsonData)
@@ -105,7 +94,7 @@ function userListShow() {
           }
         })
       })
-      $('.cancelarUser').on('click', function (e) {
+      $('.reiniciarUser').on('click', function (e) {
         //Reset user values
         e.preventDefault()
         var name_id = $(this).attr('name')
@@ -146,13 +135,10 @@ function userListShow() {
           }
         })
       })
-
-
-      if (reservaHistAll) {
-        $('#selectAll').prop('checked', true);
-        checkAllUsers()
-        reservaHistoryAll()
-      }
+      $('.reservasUser').on('click', function (e) {
+        e.preventDefault()
+        //TODO: !!!!!!!!!!!!
+      })
     },
     error: function (json) {
       //console.log('get all users error')
@@ -160,28 +146,13 @@ function userListShow() {
     }
   })
 }
-var userList = document.getElementById('userList')
-if (userList) {
-  userListShow()
-}
-
-function checkAllUsers() {
-  $('input[name="selectUser"]').each(function () {
-    this.checked = true
-  })
-}
-$('#selectAll').on('click', function (e) {
-  $('input[name="selectUser"]').each(function () {
-    this.checked = $('#selectAll').is(':checked')
-  })
-})
 
 function reservaHistoryAll() {
   $('#reservaHistAll').html('')
   var selecteduser = []
-  $.each($('input[name="selectUser"]:checked'), function () {
+  /*$.each($('input[name="selectUser"]:checked'), function () {
     selecteduser.push($(this).val())
-  })
+  })*/
   var jsonData = {
     array: selecteduser,
   }
@@ -196,51 +167,46 @@ function reservaHistoryAll() {
     dataType: 'json',
     contentType: 'application/json',
     success: function (json) {
-      var values = 'Reservas: <br>'
+      var table =
+        '<table class="myTable" id="reservesTable">'
+        +'<thead>'
+        + '<tr class="Theader" >'
+          + '<th>Reserve Id: </th>'
+          + '<th>Token: </th>'
+          + '<th>Experiment Id: </th>'
+          + '<th>Fecha de creación: </th>'
+          + '<th>Fecha Reservada: </th>'
+          + '<th>Duración: </th>'
+          + '<th>Reservado por: </th>'
+          + '<th>Usado: </th>'
+          + '<th>Disponible: </th>'
+          + '<th data-sort-method="none" class="no-sort">Guardar: </th>'
+          + '</tr>'
+        +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
-        var table =
-          '<table>'
-          + '<tr>'
-          + '<td>Token No: </td>'
+        table+=  
+           '<tr class="searchItem">'
           + '<td>' + element._id + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha de creación: </td>'
+          + '<td>' + element.token + '</td>'
+          + '<td>' + element.idExp + '</td>'
           + '<td>' + new Date(element.created_At) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha Reservada: </td>'
           + '<td>' + new Date(element.initialDate) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Duración: </td>'
-          + '<td>' + new Date(element.duration).getUTCHours() + ' Hora(s)</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Reservado por: </td>'
+          + '<td>' + element.duration + ' Minutes</td>'
           + '<td>' + element.email + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Usado: </td>'
           + '<td>' + element.used + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Disponible: </td>'
         if (element.enabled) {
-          table += '<td><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
+          table += '<td data-sort="true"><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
         } else {
-          table += '<td><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
+          table += '<td data-sort="false"><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-          '</tr>'
-          + '<tr>'
-          + '<td>Guardar: </td>'
-          + '<td><button class="guardarReserva" name="' + element._id + '">Guardar</button></td>' + '</tr>'
-          + '</table >'
-        values += table
+           '<td><button class="guardarReserva" name="' + element._id + '">Guardar</button></td>'
+          + '</tr>'
       }
-      $('#reservaHistAll').html(values)
+      table += '</table >'
+      $('#reservaHistAll').html('')
+      $('#reservaHistAll').html(table)
       $('.guardarReserva').on('click', function (e) {
         e.preventDefault()
         var jsonData = {}
@@ -266,22 +232,12 @@ function reservaHistoryAll() {
           }
         })
       })
-
     },
     error: function (json) {
       alert(json.responseJSON.message)
     }
   })
 }
-var reservaHistAll = document.getElementById('reservaHistAll')
-
-$('#filtrar').on('click', function (e) {
-  reservaHistoryAll()
-})
-
-
-
-
 
 function crearExp() {
   var jsonData = {
@@ -312,11 +268,9 @@ function crearExp() {
   })
 }
 
-
 $('#crearExp').on('click', function (e) {
   crearExp()
 })
-
 
 function experimentsGetAll() {
   $('#experimentsAll').html('')
@@ -327,52 +281,46 @@ function experimentsGetAll() {
       'Authorization': window.location.pathname.split('/')[3]
     },
     success: function (json) {
-      var values = 'Experimentos: <br>'
+      var table =
+        '<table class="myTable" id="experimentsTable">'
+        +'<thead>'
+        + '<tr class="Theader" >'
+          + '<th>Nombre: </th>'
+          + '<th>Universidad: </th>'
+          //+ '<th>Fecha de creación: </th>'
+          + '<th>Url: </th>'
+          + '<th>Dias validos: </th>'
+          + '<th>Horas validas: </th>'
+          + '<th>Duraciones permitidas: </th>'
+          + '<th>Disponible: </th>'
+          + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
+          + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
+        + '</tr>'
+        +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
-        var table =
-          '<table>'
-          + '<tr>'
-          + '<td>Nombre: </td>'
-          + '<td><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Universidad: </td>'
-          + '<td><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha de creación: </td>'
-          + '<td>' + new Date(element.created_At) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Url: </td>'
-          + '<td><input type="text" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Horas validas: </td>'
-          + '<td><input type="text" name="scheduleExp;' + element._id + '" Value="[' + element.schedule + ']" id="' + element._id + ';' + element.schedule + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Duraciones permitidas: </td>'
-          + '<td><input type="text" name="durationExp;' + element._id + '" Value="[' + element.duration + ']" id="' + element._id + ';' + element.duration + '"/></td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Disponible: </td>'
+        table +=
+          '<tr class="searchItem">'
+          + '<td data-sort="'+element.name+'"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
+          + '<td data-sort='+element.university+'><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
+          //+ '<td>' + new Date(element.created_At) + '</td>'
+          + '<td data-sort='+element.url+'><input type="text" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
+          + '<td data-sort='+element.days+'><input type="text" name="daysExp;' + element._id + '" Value="[' + element.days + ']" id="' + element._id + ';' + element.days + '"/></td>'
+          + '<td data-sort='+element.schedule+'><input type="text" name="scheduleExp;' + element._id + '" Value="[' + element.schedule + ']" id="' + element._id + ';' + element.schedule + '"/></td>'
+          + '<td data-sort='+element.duration+'><input type="text" name="durationExp;' + element._id + '" Value="[' + element.duration + ']" id="' + element._id + ';' + element.duration + '"/></td>'
         if (element.enabled) {
-          table += '<td><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
+          table += '<td data-sort="true"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
         } else {
-          table += '<td><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
+          table += '<td data-sort="false"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-          '</tr>'
-          + '<tr>'
-          + '<td><button class="editarExp" name="' + element._id + '">Guardar</button></td>'
+           '<td><button class="editarExp" name="' + element._id + '">Guardar</button></td>'
           + '<td><button class="reiniciarExp" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
-          + '</table >'
-        values += table
       }
-      $('#experimentsAll').html(values)
+      table+= '</table >'
+      $('#experimentsAll').html('')
+      $('#experimentsAll').html(table)
       $('.editarExp').on('click', function (e) {
         //patch Experiment
         e.preventDefault()
@@ -382,6 +330,7 @@ function experimentsGetAll() {
           name: $('[name="nameExp;' + name_id + '"]').val(),
           university: $('[name="universityExp;' + name_id + '"]').val(),
           url: $('[name="urlExp;' + name_id + '"]').val(),
+          days: $('[name="daysExp;' + name_id + '"]').val(),
           schedule: $('[name="scheduleExp;' + name_id + '"]').val(),
           duration: $('[name="durationExp;' + name_id + '"]').val(),
           enabled: $('[name="enabledExp;' + name_id + '"]').is(':checked')
@@ -415,6 +364,8 @@ function experimentsGetAll() {
         $('[name="universityExp;' + name_id + '"]').val($('[name="universityExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="urlExp;' + name_id + '"]').attr('value', $('[name="urlExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="urlExp;' + name_id + '"]').val($('[name="urlExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="daysExp;' + name_id + '"]').attr('value', $('[name="daysExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="daysExp;' + name_id + '"]').val($('[name="daysExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="scheduleExp;' + name_id + '"]').attr('value', $('[name="scheduleExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="scheduleExp;' + name_id + '"]').val($('[name="scheduleExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="durationExp;' + name_id + '"]').attr('value', $('[name="durationExp;' + name_id + '"]').attr('id').split(';')[1])
@@ -433,7 +384,18 @@ function experimentsGetAll() {
   })
 }
 
-var experimentsAll = document.getElementById('experimentsAll')
-if (experimentsAll) {
-  experimentsGetAll()
-}
+$(document).ready(function () { 
+
+  var experimentsAll = document.getElementById('experimentsAll')
+  if (experimentsAll) {
+    experimentsGetAll()
+  }
+  var userList = document.getElementById('userList')
+  if (userList) {
+    userListShow()
+  }
+  var reservaHistAll = document.getElementById('reservaHistAll')
+  if (reservaHistAll) {
+    reservaHistoryAll()
+  }
+})

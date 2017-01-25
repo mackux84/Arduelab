@@ -30,7 +30,7 @@ gulp.task('styles', function () {
     .pipe(rename({suffix: '.min'}))
     .pipe(cssnano())
     .pipe(gulp.dest('client/static/css'))
-    .pipe(notify({ message: 'Styles task complete file: <%= file.relative %>' }))
+    //.pipe(notify({ message: 'Styles task complete file: <%= file.relative %>' }))
 })
 gulp.task('scripts', function () {
   // var uglifyjsharmony = require('uglify-js-harmony')
@@ -50,7 +50,7 @@ gulp.task('scripts', function () {
       console.error('Error in compress task', err.toString())
     })
     .pipe(gulp.dest('client/static/js'))
-    .pipe(notify({ message: 'Scripts task complete file: <%= file.relative %>' }))
+    //.pipe(notify({ message: 'Scripts task complete file: <%= file.relative %>' }))
 })
 gulp.task('scripts2', () => {
   // var uglifyjsharmony = require('uglify-js-harmony')
@@ -77,7 +77,7 @@ gulp.task('scripts2', () => {
   .pipe(sourcemaps.init({loadMaps: true}))
   .pipe(sourcemaps.write('./maps'))
   .pipe(gulp.dest('client/static/js'))
-  .pipe(notify({ message: 'Scripts task completed file: <%= file.relative %>' }))
+  //.pipe(notify({ message: 'Scripts task completed file: <%= file.relative %>' }))
 })
 gulp.task('lint:client', function () {
   return gulp.src('client/res/js/**/*.js')
@@ -93,12 +93,12 @@ gulp.task('images', function () {
   return gulp.src('client/res/images/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
     .pipe(gulp.dest('client/static/images'))
-    .pipe(notify({ message: 'Images task complete file: <%= file.relative %>' }))
+    //.pipe(notify({ message: 'Images task complete file: <%= file.relative %>' }))
 })
 gulp.task('fonts', function () {
   return gulp.src('client/res/fonts/**/*')
     .pipe(gulp.dest('client/static/fonts'))
-    .pipe(notify({ message: 'Fonts task complete file: <%= file.relative %>' }))
+    //.pipe(notify({ message: 'Fonts task complete file: <%= file.relative %>' }))
 })
 gulp.task('clean', function () {
   return del(['client/static/css', 'client/static/js', 'client/static/images', 'client/static/fonts'])
