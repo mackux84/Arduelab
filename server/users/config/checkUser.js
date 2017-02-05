@@ -22,7 +22,7 @@ module.exports = {
     payload: checkUserSchema
   },
   description: 'Check user information',
-  notes: 'Check if the email is already taken',
+  notes: 'Verifica si el correo ya se encuentra en uso',
   tags: ['api', 'users'],
   plugins: {
     'hapi-swagger': {

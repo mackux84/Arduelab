@@ -47,7 +47,7 @@ module.exports = [
     path: '/static/bundle.js',
     config: {
       handler: { file: './node_modules/nes/lib/client.js' },
-      description: 'Serve the websocket client library'
+      description: 'Server the websocket client library'
     }
   }
 ]

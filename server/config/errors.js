@@ -22,33 +22,33 @@ module.exports = {
   e403:            {
     'description': 'Forbidden',
     'schema':      Joi.object({
-      statusCode:  Joi.number().required().description('Error Status Code').default(403),
-      error:       Joi.string().required().description('Error type').default('Forbidden'),
-      message:     Joi.string().required().description('Error message').default('invalid verification link')
+      statusCode:  Joi.number().required().description('CODIGO DE ERROR').default(403),
+      error:       Joi.string().required().description('TIPO DE ERROR').default('Forbidden'),
+      message:     Joi.string().required().description('MENSAJE DE ERROR').default('LINK DE VERIFICACION INVALIDO')
     }).label('Forbidden')
   },
   e404:            {
     'description': 'Not Found',
     'schema':      Joi.object({
-      statusCode:  Joi.number().required().description('Error Status Code').default(404),
-      error:       Joi.string().required().description('Error type').default('Not Found'),
-      message:     Joi.string().required().description('Error message')
+      statusCode:  Joi.number().required().description('CODIGO DE ERROR').default(404),
+      error:       Joi.string().required().description('TIPO DE ERROR').default('Not Found'),
+      message:     Joi.string().required().description('MENSAJE DE ERROR')
     }).label('Not Found')
   },
   e500:            {
     'description': 'internal server error',
     'schema':      Joi.object({
-      statusCode:  Joi.number().required().description('Error Status Code').default(500),
-      error:       Joi.string().required().description('Error type').default('internal server error'),
-      message:     Joi.string().required().description('Error message')
+      statusCode:  Joi.number().required().description('CODIGO DE ERROR').default(500),
+      error:       Joi.string().required().description('TIPO DE ERROR').default('internal server error'),
+      message:     Joi.string().required().description('MENSAJE DE ERROR')
     }).label('internal server error')
   },
   e503:            {
     'description': 'Service Unavailable',
     'schema':      Joi.object({
-      statusCode:  Joi.number().required().description('Error Status Code').default(503),
-      error:       Joi.string().required().description('Error type').default('Service Unavailable'),
-      message:     Joi.string().required().description('Error message').default('Try again in a few Hours')  
-    }).label('Service Unavailable')
+      statusCode:  Joi.number().required().description('CODIGO DE ERROR').default(503),
+      error:       Joi.string().required().description('TIPO DE ERROR').default('Service Unavailable'),
+      message:     Joi.string().required().description('MENSAJE DE ERROR').default('INTENTE NUEVAMENTEN MAS TARDE')  
+    }).label('SERVICIO NO DISPONIBLE')
   }
 }

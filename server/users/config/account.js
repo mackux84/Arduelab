@@ -17,7 +17,7 @@ module.exports = {
         '200': {
           'description': 'Cuenta de usuario',
           'schema': Joi.object({
-            message: Joi.string().required().description('message').default('Cuenta de usuario')
+            message: Joi.string().required().description('mensaje').default('Cuenta de usuario')
           }).label('Cuenta de usuario')
         },
         '400': errors.e400,

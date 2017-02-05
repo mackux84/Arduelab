@@ -17,16 +17,16 @@ module.exports = {
     payload: forgotPasswordSchema
   },
   description: 'Forgot Password',
-  notes: 'Send password reset link to email, Email required',
+  notes: 'Envia el link de RESET de password en caso de olvido',
   tags: ['api', 'users'],
   plugins: {
     'hapi-swagger': {
       responses: {
         '200': {
-          'description': 'Password reset link sent to registered email',
+          'description': 'Link de RESET de password enviado al correo registrado',
           'schema': Joi.object({
-            message: Joi.string().required().description('message').default('password is sent to registered email')
-          }).label('verification email sent')
+            message: Joi.string().required().description('message').default('Link de RESET de password enviado al correo registrado')
+          }).label('Correo de verificacion enviado')
         },
         '400': errors.e400,
         '403': errors.e403,

@@ -26,16 +26,16 @@ module.exports = {
     payload: createUserSchema
   },
   description: 'Create a new User',
-  notes: 'Create a new user, all parameters are required, confirmation email will be sent, use a valid email',
+  notes: 'Crea un nuevo usuario con todos los parametros requeridos, se requiere un correo electronico para la verificacion de la cuenta, o autorizacion del administradoe',
   tags: ['api', 'users'],
   plugins: {
     'hapi-swagger': {
       responses: {
         '200': {
-          'description': 'Account created, please confirm your email by clicking the link in the email we sent you',
+          'description': 'Cuenta creada, favor verificar el correo o espere que el Administrador active la cuenta',
           'schema': Joi.object({
-            message: Joi.string().required().description('Success message').default('Please confirm your email id by clicking on link in email')
-          }).label('Success')
+            message: Joi.string().required().description('Mensaje de Aprovacion').default('Por favor verifica tu cuenta presionando en el enlace que se encuentra en el correo electronico')
+          }).label('Correcto')
         },
         '400': errors.e400,
         '500': errors.e500,
