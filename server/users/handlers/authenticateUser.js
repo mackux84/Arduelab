@@ -8,7 +8,7 @@ module.exports = function (request, reply) {
   // If it was incorrect, the error will bubble up from the pre method
   // "Your email address is not verified. please verify your email address to proceed"
   if (request.pre.user === 'Your email address is not verified. please verify your email address to proceed') {
-    reply(Boom.forbidden('Your email address is not verified. please verify your email address to proceed')) // HTTP 403 
+    reply(Boom.forbidden('TU DIRECCION DE CORREO ELECTRONICO AUN NO HA SIDO VALIDADA, CONTACTE AL ADMINISTRADOR')) // HTTP 403 
     return
   }
   var tokenData = {

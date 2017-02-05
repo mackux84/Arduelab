@@ -38,14 +38,14 @@ module.exports = function (request, reply) {
       }
       Common.sentMailVerificationLink(user, createToken(tokenData), (error) => {
         if (error) {
-          reply(Boom.serverUnavailable('Try again in a few Hours'))
+          reply(Boom.serverUnavailable('INTENTE DE NUEVO MAS TARDE'))
           return
         }
-        reply({message: 'Please confirm your email id by clicking on link in email'})
+        reply({message: 'POR FAVOR VERIFICA TU CUENTA CON EL LINK QUE LLEGARA A TU CORREO ELECTRONICO, CUALQUIER INQUIETUD CONTACTE AL ADMINISTRADOR'})
       })
     }else {
       if (11000 === error.code || 11001 === error.code) {
-        reply(Boom.forbidden('please provide another user email'))
+        reply(Boom.forbidden('POR FAVOR INGRESE OTRO CORREO ELECTRONICO, ESTE YA SE ENCUENTRA EN USO'))
       } else {
         console.log(error)
         reply(Boom.forbidden(error)) // HTTP 403 //why?

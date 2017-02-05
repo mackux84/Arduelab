@@ -14,7 +14,7 @@ module.exports = function (request, reply) {
         return
       }
       if (!users.length) {
-        reply(Boom.notFound('No users found!'))
+        reply(Boom.notFound('NO SE ENCONTRARON USUARIOS'))
         return
       }
       reply(users)

@@ -17,11 +17,11 @@ module.exports = function (request, reply) {
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     if (decoded.type != 'user') {
-      reply(Boom.forbidden('Not a user token'))
+      reply(Boom.forbidden('NO ES UN TOKEN DE USUARIO'))
       return
     }
     
@@ -29,7 +29,7 @@ module.exports = function (request, reply) {
 
     var diff = Moment().diff(Moment(decoded.iat * 1000))
     if (diff > key.tokenExpiry || diff < 0) {
-      reply(Boom.forbidden('Token not active yet'))
+      reply(Boom.forbidden('ESTE TOKEN AUN NO ESTA DISPONIBLE'))
       return
     } else {
 

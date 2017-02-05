@@ -12,26 +12,26 @@ module.exports = function (request, reply) {
   Jwt.verify(request.params.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN DE INGRESO EXPIRADO'))
         return
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('Invalid user token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     if (decoded.type != 'user') {
-      reply(Boom.forbidden('Not a user token'))
+      reply(Boom.forbidden('NO ES UN TOKEN DE USUARIO'))
       return
     }
     decoded = decyptToken(decoded)
     var diff = Moment().diff(Moment(decoded.iat * 1000))
     if (diff < 0) {
-      reply(Boom.forbidden('Token not active yet'))
+      reply(Boom.forbidden('ESTE TOKEN AUN NO SE ENCUENTRA DISPONIBLE'))
       return
     }
     if (diff > key.tokenExpiry) {
-      reply(Boom.forbidden('Token expired'))
+      reply(Boom.forbidden('TOKEN EXPIRO'))
       return
     } 
     User.findOne({
@@ -44,7 +44,7 @@ module.exports = function (request, reply) {
         return
       }
       if (user === null) {
-        reply(Boom.forbidden('User not valid'))
+        reply(Boom.forbidden('USUARIO NO ES VALIDO'))
         return
       }
       if (user.isVerified === true) {

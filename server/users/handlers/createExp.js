@@ -16,7 +16,7 @@ module.exports = function (request, reply) {
 
   experiment.save((error, experiment) => {
     if (!error) {
-      reply({ message: 'Experiment created successfully' })
+      reply({ message: 'EXPERIMENTO CREADO CORRECTAMENTE' })
     } else {
       console.log(error)
       reply(Boom.forbidden(error))

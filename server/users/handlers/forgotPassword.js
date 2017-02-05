@@ -10,15 +10,15 @@ module.exports = function (request, reply) {
   }, function (error, user) {
     if (!error) {
       if (user === null) {
-        reply(Boom.forbidden('invalid Email'))
+        reply(Boom.forbidden('CORREO INVALIDO'))
         return
       }
       Common.sentMailForgotPassword(user, (error) => {
         if (error) {
-          reply(Boom.serverUnavailable('Try again in a few Hours'))
+          reply(Boom.serverUnavailable('POR FAVOR INTENTE MAS TARDE'))
           return
         }
-        reply({message: 'password is sent to registered email'})
+        reply({message: 'LA CONTRASEÑA FUE ENVIADA AL CORREO ELECTRONICO ENVIADO'})
       })
     }else {
       console.error(error)

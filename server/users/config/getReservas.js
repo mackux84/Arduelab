@@ -15,7 +15,7 @@ module.exports = {
     headers: updateUserSchema.headerSchema
   },
   description: 'Get current user reserves information',
-  notes: 'Get information of all reserves of current user',
+  notes: 'Obtiene la informacion de todas las reservas del usuario',
   tags: ['api', 'users'],
   plugins: {
     'hapi-swagger': {

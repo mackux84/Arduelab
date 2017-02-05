@@ -15,7 +15,7 @@ function verifyUniqueUser (request, reply) {
     // Check whether the email is already taken and error out if so
     if (user) {
       if (user.email === request.payload.email) {
-        reply(Boom.badRequest('Email already in use'))
+        reply(Boom.badRequest('ESTE CORREO ELECTRONICO YA SE ENCUENTRA EN USO'))
         return
       }
     }
@@ -31,7 +31,7 @@ function verifyUniqueReserve (request, reply) {
   }, (err, reserve) => {
     // Check if the reserve exists
     if (reserve) {
-      reply(Boom.badRequest('A reserve for that time already exists'))
+      reply(Boom.badRequest('UNA RESERVA PARA ESE ESPACIO DE TIEMPO YA SE ENCUNTRA TOMADA'))
       return
     }
     // If everything checks out, send the payload through to the route handler
@@ -58,21 +58,21 @@ function verifyCredentials (request, reply) {
     // }
     if (!err) {
       if (user === null) {
-        reply(Boom.forbidden('invalid username or password'))
+        reply(Boom.forbidden('USUARIO O CONTRASEÑA INCORRECTOS'))
         return
       }
       if (request.payload.password === Common.decrypt(user.password)) {
         if (!user.isVerified) {
-          reply('Your email address is not verified. please verify your email address to proceed')
+          reply('SU CUENTA DE CORREO AUN NO SE ENCUENTRA VERIFICADA, REVISE SU CORREO ELECTRONICO O CONTACTE AL ADMININSTRADOR')
           return
         }
         reply(user)
       }else {
-        reply(Boom.forbidden('invalid username or password'))
+        reply(Boom.forbidden('NOMBRE DE USUARIO O CONTRASEÑA INVALIDOS'))
       }
     }else {
       if (11000 === err.code || 11001 === err.code) {
-        reply(Boom.forbidden('please provide another user email'))
+        reply(Boom.forbidden('POR FAVOR INGRESE OTRA CUENTA DE CORREO ELECTRONICO, LA SUMINISTRADA YA SE ENCUENTRA EN USO'))
       }else {
         console.error(err)
         reply(Boom.badImplementation(err))
