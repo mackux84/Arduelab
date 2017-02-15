@@ -73,7 +73,7 @@ function reservaHistory() {
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         var table =
-          '<table>'
+          '<table class="myTable">'
           + '<tr>'
           + '<td>Token No: </td>'
           + '<td>' + Number(index + 1) + '</td>'
@@ -95,10 +95,10 @@ function reservaHistory() {
           + '<td>' + element.used + '</td>'
           + '</tr>'
           + '<tr>'
-          + '<td>Ir al workbench: </td>'
-          + '<td><a href="http://' + element.url + '/' + element.token + '">Click Here</a></td>'
+          + '<td colspan="2" align="center"><a href="http://' + element.url + '/' + element.token + '">Ir al Experimento</a></td>'
           + '</tr>'
           + '</table >'
+          + '<br>'
         values += table
       }
       $('#reservaHist').html(values)
@@ -152,7 +152,7 @@ function getExperimentos() {
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         var table =
-          '<table>'
+          '<table class="myTable">'
           + '<tr>'
           + '<td>Nombre: </td>'
           + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
@@ -182,9 +182,10 @@ function getExperimentos() {
           + '<td id="daysExp;' + element._id + '" >[' + element.days + ']</td>'
           + '</tr>'
           + '<tr>'
-          + '<td><button class="reservarExp" name="' + element._id + '">Reservar</button></td>'
+          + '<td colspan="2" align="center"><button class="reservarExp" name="' + element._id + '">Reservar</button></td>'
           + '</tr>'
           + '</table >'
+          + '<br>'
         values += table
       }
       $('#experimentsAllUser').html(values)
