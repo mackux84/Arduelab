@@ -7,7 +7,7 @@ module.exports = function (request, reply) {
   // If the user's password is correct, we can issue a token.
   // If it was incorrect, the error will bubble up from the pre method
   // "Your email address is not verified. please verify your email address to proceed"
-  if (request.pre.user === 'Your email address is not verified. please verify your email address to proceed') {
+  if (request.pre.user === 'SU CUENTA DE CORREO AUN NO SE ENCUENTRA VERIFICADA, REVISE SU CORREO ELECTRONICO O CONTACTE AL ADMININSTRADOR') {
     reply(Boom.forbidden('TU DIRECCION DE CORREO ELECTRONICO AUN NO HA SIDO VALIDADA, CONTACTE AL ADMINISTRADOR')) // HTTP 403 
     return
   }
