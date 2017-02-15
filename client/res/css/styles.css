@@ -23,11 +23,12 @@
 }
 body
 {
-    background: #45c7ed;
     color: black;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     margin: 0;
+    background-image: url(/images/light-wool.png);
+    background-color: #45c7ed;
 }
 
 img{
@@ -208,13 +209,13 @@ ul.tab li a {
     cursor: pointer;
 }
 
-#reservaHist>table>*>tr>td {
+.infotable>*>tr>td {
     border: solid darkgrey;
 }
-#reservaHist>table>*>tr {
+.infotable>*>tr {
     border: solid darkgrey;
 }
-#reservaHist>table {
+.infotable {
     margin: 5px;
     padding: 10px;
     border: solid darkgray;
