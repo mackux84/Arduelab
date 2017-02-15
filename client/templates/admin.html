@@ -32,6 +32,9 @@
       <li>
         <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'CONTRASEÑA')">CAMBIO DE CONTRASEÑA</a>
       </li>
+      <li>
+        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'BROADCAST')">BROADCAST</a>
+      </li>
     </ul>
     <div class="accountcont" id="USUARIOS">
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#usersTable', '.searchItem', this.value)" placeholder="Filter Users..">
@@ -68,6 +71,16 @@
             <td colspan="2" align="center"><button id="passwordChange">Cambiar Contraseña</button></td>
           </tr>
         </table>
+      </div>
+    </div>
+    <div class="accountcont" id="BROADCAST">
+      <div align="center">
+        BROADCAST:
+        <form>
+          <input id="m3" autocomplete="off" />
+          <button onclick='wsBroadcast(m3.value)' type="button">Broadcast</button>
+          <button type="reset">Reset</button>
+        </form>
       </div>
     </div>
 
