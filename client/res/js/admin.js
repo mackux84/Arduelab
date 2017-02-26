@@ -194,7 +194,11 @@ function reservaHistoryAll() {
           + '<td>' + (new Date(element.initialDate)).toLocaleFormat() + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
           + '<td>' + element.email + '</td>'
-          + '<td>' + element.used + '</td>'
+        if (element.used) {
+          table += '<td> Sí </td>'
+        } else {
+          table += '<td> No </td>'
+        }
         if (element.enabled) {
           table += '<td data-sort="true"><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
         } else {
