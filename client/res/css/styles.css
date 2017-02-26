@@ -37,7 +37,7 @@ img{
 }
 h1, h2, h3, h4, h5{
     margin: 10px 0px;
-    float: left;
+    /*float: left;*/
     text-align: center;
     width: 100%;
 }
@@ -47,10 +47,10 @@ h1, h2, h3, h4, h5{
     border-style: inset;
     border-color: #000;
     margin-left: 10%;
-    margin-right: 10px;
-    width :20%;
+    margin-right: 10%;
+    width :25%;
     border-radius: 5px;
-    float: left;
+    /*float: left;*/
 }
 
 .modal {
@@ -103,7 +103,7 @@ input[type=submit] {
     font-size: 35px;
     font-weight: bold;
     float: right;
-    right: -8px;
+    right: 8px;
 }
 
 .close:hover,
@@ -128,7 +128,7 @@ input[type=submit] {
     to {transform: scale(1)}
 }
 .info{
-    overflow: scroll;
+    overflow: auto;
     height: 10%;
     width: 100%;
 }
@@ -153,26 +153,32 @@ input[type=submit] {
 
 .accountcont{
     display: none;
-    padding: 20px 0px;
+    padding: 10px 10px;
     margin-left: 10%;
     margin-right: 10%;
     background-color: #ffffff;
-    width: 80%;
+    /*width: 80%;*/
+    border: 1px solid #ccc;
+    border-top: 0px;
+    background-image: linear-gradient(to bottom, white 0%, white 100%), linear-gradient(to bottom, cadetblue 0%, cadetblue 100%);
+background-clip: content-box, padding-box;
 }
 
 ul.tab {
     list-style-type: none;
-    margin: 0 10% 0 10%;
+    margin: 0 10%;
     padding: 0;
     /*overflow: hidden;*/
     border: 1px solid #ccc;
+    border-bottom: 0px;
     background-color: cadetblue;
     display: flex;
     justify-content: center;
 }
 
-ul.tab li {float: right;
-    margin : 10px 6px 10px 6px;
+ul.tab li {
+    /*float: right;*/
+    margin: 1vh 0.4vw;
     background: #8ab8b9;
     justify-content: center;
     flex-direction: column;
@@ -195,10 +201,12 @@ ul.tab li a {
     display: inline-block;
     color: black;
     text-align: center;
-    padding: 14px 16px;
+    /*padding: 14px 16px;*/
+    padding: 1vh 1vw;
     text-decoration: none;
     transition: 0.3s;
-    font-size: 17px;
+    /*font-size: 17px;*/
+    font-size: calc(8px + 0.6vw);
 }
 
 #botonindex{
@@ -220,7 +228,12 @@ ul.tab li a {
     padding: 10px;
     border: solid darkgray;
 }
-
+.notas{
+    margin: 5px;
+}
+#m3{
+    margin: 10px;
+}
 .logo{
     
     /*padding-left: 10%;*/
@@ -256,7 +269,6 @@ input[type=text], input[type=password], input[type=email] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
 /* Set a style for all buttons */
 form>*>button {
     background-color: #4CAF50;
@@ -322,6 +334,7 @@ span.psw {
 }
 .myTable th, .myTable td{
     border: 2px cadetblue solid;
+    padding: 0px 5px;
 }
 .myTable tr:nth-child(even) {
     background-color: #f1f1f1
@@ -340,6 +353,7 @@ span.psw {
     overflow: hidden;
     /*white-space: nowrap;*/
     text-overflow: ellipsis;
+    font-size: calc(8px + 0.5vw);
 }
 .myTable input[type=text]{
     border: 0px;
@@ -360,7 +374,13 @@ span.psw {
 .myTable button:hover {
     background-color: cadetblue;
 }
-
+.myTable textarea {
+    overflow: auto;
+    resize: none;
+    border: 0px;
+    background: transparent;
+    margin-right: -5px
+}
 
 th[role=columnheader]:not(.no-sort) {
 	cursor: pointer;
@@ -397,16 +417,33 @@ th[role=columnheader]:not(.no-sort):hover:after {
 
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+        .cancelbtn {
+            width: 100%;
+        }
     }
-    .cancelbtn {
-        width: 100%;
+    @media screen and (max-width: 580px) {
+        h1{
+            font-size: 1em;
+        }
+        #timebox {
+            margin-right: 10%;
+            width: auto;
+        }
+        .myTable *{
+            font-size: calc(9px + 0.6vw);
+        }
+        ul.tab li a {
+            font-size: calc(8px + 1vw);
+        }
+        ul.tab {
+            display: block;
+        }
     }
-}
-
     @media screen and (max-width: 800px) {
         .forms{
             display: block;
