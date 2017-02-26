@@ -106,7 +106,7 @@ function userListShow() {
         $('[name="universityUser;' + name_id + '"]').val($('[name="universityUser;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="scopeUser;' + name_id + '"]').attr('value', $('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="scopeUser;' + name_id + '"]').val($('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
-        $('[name="isVerified;' + name_id + '"]').attr('value', $('[name="isVerifiedUser;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="isVerified;' + name_id + '"]').attr('value', $('[name="isVerified;' + name_id + '"]').attr('id').split(';')[1])
         if ($('[name="isVerified;' + name_id + '"]').attr('value') === 'true') {
           $('[name="isVerified;' + name_id + '"]').prop('checked', true)
         } else {
@@ -188,11 +188,11 @@ function reservaHistoryAll() {
         table+=  
            '<tr class="searchItem">'
           + '<td>' + element._id + '</td>'
-          + '<td>' + element.token + '</td>'
+          + '<td><textarea readonly>' + element.token + '</textarea></td>'
           + '<td>' + element.idExp + '</td>'
-          + '<td>' + new Date(element.created_At) + '</td>'
-          + '<td>' + new Date(element.initialDate) + '</td>'
-          + '<td>' + element.duration + ' Minutes</td>'
+          + '<td>' + (new Date(element.created_At)).toLocaleFormat() + '</td>'
+          + '<td>' + (new Date(element.initialDate)).toLocaleFormat() + '</td>'
+          + '<td>' + element.duration + ' Minutos</td>'
           + '<td>' + element.email + '</td>'
           + '<td>' + element.used + '</td>'
         if (element.enabled) {
@@ -244,6 +244,7 @@ function crearExp() {
     name: $('#crearExpNombre').val(),
     university: $('#crearExpUniversidad').val(),
     url: $('#crearExpUrl').val(),
+    days: $('#crearExpDays').val(),
     schedule: $('#crearExpSchedule').val(),
     duration: $('#crearExpDuration').val(),
     enabled: $('#crearExpEnabled').is(':checked')
@@ -333,7 +334,7 @@ function experimentsGetAll() {
           days: $('[name="daysExp;' + name_id + '"]').val(),
           schedule: $('[name="scheduleExp;' + name_id + '"]').val(),
           duration: $('[name="durationExp;' + name_id + '"]').val(),
-          enabled: $('[name="enabledExp;' + name_id + '"]').is(':checked')
+          enabled: $('[name="isEnabledExp;' + name_id + '"]').is(':checked')
         }
         var jsonData2 = JSON.stringify(jsonData)
         $.ajax({
