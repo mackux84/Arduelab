@@ -313,7 +313,7 @@ span.psw {
     padding-top: 1px;
 }
 
-#userList, #experimentsAll, #reservaHistAll{
+.info{
     overflow-x:auto;
     padding: 0px 0px 20px 0px;
 }
@@ -414,7 +414,17 @@ th[role=columnheader]:not(.no-sort):hover:after {
 	visibility: visible;
 	opacity: 1;
 }
-
+.crearExp{
+    background: #8ab8b9;
+    border: 0px;
+    width: 50%;
+    height: 50px;
+    cursor: pointer;
+    margin: 0px 25%;
+}
+.crearExp:hover{
+    background: cadetblue;
+}
 
 /* Change styles for span and cancel button on extra small screens */
     @media screen and (max-width: 300px) {
@@ -442,6 +452,9 @@ th[role=columnheader]:not(.no-sort):hover:after {
         }
         ul.tab {
             display: block;
+        }
+        .modal-content2{
+            width: 100%;
         }
     }
     @media screen and (max-width: 800px) {
