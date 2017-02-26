@@ -22,7 +22,7 @@ function userListShow() {
           + '<th>Scope</th>'
           + '<th>Verificado</th>'
         
-          + '<th data-sort-method="none" class="no-sort">Reservas</th>'
+          // + '<th data-sort-method="none" class="no-sort">Reservas</th>'
           + '<th data-sort-method="none" class="no-sort">Password</th>'
           + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
           + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
@@ -45,8 +45,8 @@ function userListShow() {
           table += '<td data-sort="false"><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" /></td>'
         }
         table +=
-          '<td><button class="reservasUser" name="' + element._id + '">Ver</button></td>'
-          + '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
+          // '<td><button class="reservasUser" name="' + element._id + '">Ver</button></td>'
+           '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
           + '<td><button class="editarUser" name="' + element._id + '">Editar</button></td>'
           + '<td><button class="reiniciarUser" name="' + element._id + '">Cancelar</button></td>'
           +'</tr>'
