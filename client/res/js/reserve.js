@@ -69,39 +69,38 @@ function reservaHistory() {
       'Authorization': window.location.pathname.split('/')[3]
     },
     success: function (json) {
-      var values = 'Reservas: <br>'
+      var table =
+        '<table class="myTable">'
+        +'<thead>'
+        + '<tr class="Theader" >'
+          + '<th>Token No: </th>'
+          + '<th>Fecha de creación: </th>'
+          + '<th>Fecha Reservada: </th>'
+          + '<th>Duración: </th>'
+          + '<th>Usado: </th>'
+          + '<th>Ir al Experimento:</th>'
+        + '</tr>'
+        +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
-        var table =
-          '<table class="myTable">'
-          + '<tr>'
-          + '<td>Token No: </td>'
+        table +=
+          '<tr>'
           + '<td>' + Number(index + 1) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha de creación: </td>'
-          + '<td>' + new Date(element.created_At) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Fecha Reservada: </td>'
-          + '<td>' + new Date(element.initialDate) + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Duración: </td>'
+          + '<td>' + (new Date(element.created_At)).toLocaleFormat() + '</td>'
+          + '<td>' + (new Date(element.initialDate)).toLocaleFormat() + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
+        if (element.used) {
+          table += '<td> Sí </td>'
+        } else {
+          table += '<td> No </td>'
+        }
+        table +=
+          '<td><a href="http://' + element.url + '/' + element.token + '">Ir al Experimento</a></td>'
           + '</tr>'
-          + '<tr>'
-          + '<td>Usado: </td>'
-          + '<td>' + element.used + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td colspan="2" align="center"><a href="http://' + element.url + '/' + element.token + '">Ir al Experimento</a></td>'
-          + '</tr>'
-          + '</table >'
-          + '<br>'
-        values += table
       }
-      $('#reservaHist').html(values)
+      table+='</table >'
+      
+      $('#reservaHist').html(table)
     },
     error: function (json) {
       //alert(json)
@@ -148,47 +147,36 @@ function getExperimentos() {
       'Authorization': window.location.pathname.split('/')[3]
     },
     success: function (json) {
-      var values = 'Experimentos: <br>'
+      var table =
+        '<table class="myTable">'
+        +'<thead>'
+        + '<tr class="Theader" >'
+          + '<th>Nombre: </th>'
+          + '<th>Pic: </th>'
+          + '<th>Descripción: </th>'
+          + '<th>Universidad: </th>'
+          + '<th>Horas validas: </th>'
+          + '<th>Duraciones permitidas: </th>'
+          + '<th>Dias permitidos: </th>'
+          + '<th>Reservar: </th>'
+        +'<tr>'
+        +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
-        var table =
-          '<table class="myTable">'
-          + '<tr>'
-          + '<td>Nombre: </td>'
-          + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td><img></td>'//TODO: add image
-          + '<td>' + element.description + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Universidad: </td>'
-          + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Url: </td>'
-          + '<td id="urlExp;' + element._id + '" >' + element.url + '</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Horas validas: </td>'
-          + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Duraciones permitidas: </td>'
-          + '<td id="durationExp;' + element._id + '">[' + element.duration + ']</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td>Dias permitidos: </td>'
-          + '<td id="daysExp;' + element._id + '" >[' + element.days + ']</td>'
-          + '</tr>'
-          + '<tr>'
-          + '<td colspan="2" align="center"><button class="reservarExp" name="' + element._id + '">Reservar</button></td>'
-          + '</tr>'
-          + '</table >'
-          + '<br>'
-        values += table
+        table +=
+        '<tr>'
+        + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
+        + '<td><img></td>'//TODO: add image
+        + '<td>' + element.description + '</td>'
+        + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
+        + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
+        + '<td id="durationExp;' + element._id + '">[' + element.duration + ']</td>'
+        + '<td id="daysExp;' + element._id + '" >[' + element.days + ']</td>'
+        + '<td><button class="reservarExp" name="' + element._id + '">Reservar</button></td>'
+        + '</tr>'
       }
-      $('#experimentsAllUser').html(values)
+      table+= '</table >'
+      $('#experimentsAllUser').html(table)
       $('.reservarExp').on('click', function (e) {
         //patch Experiment
         e.preventDefault()
