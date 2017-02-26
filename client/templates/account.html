@@ -30,12 +30,47 @@
             <li class="usuario">{UserName}</li>
         </ul>
 
-        <div class="accountcont" id="EXPERIMENTOS">
-            <div id="experimentsAllUser" align="center">
+        <div class="accountcont" id="EXPERIMENTOS"> 
+            <p class="notas">
+                Notas:
+                <br>
+                Los dias válidos inician en domingo con indice 0:
+            </p>
+            <div style="margin:5px; overflow: auto;">
+                <table class="myTable">
+                <thead>
+                    <tr class="Theader" >
+                    <td>Domingo</td>
+                    <td>Lunes</td>
+                    <td>Martes</td>
+                    <td>Miercoles</td>
+                    <td>Jueves</td>
+                    <td>Viernes</td>
+                    <td>Sabado</td>
+                    </tr>
+                    </thead>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                </table>
+            </div>
+            <p class="notas">
+                Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H.
+                <br>
+                Las Duraciones permitidas en minutos multiplos de 30.
+            </p>
+            <div id="experimentsAllUser" align="center" class="info">
             </div>
         </div>
         <div class="accountcont" id="RESERVAS">
-            <div id="reservaHist" align="center">
+            <p></p>
+            <div id="reservaHist" align="center" class="info">
             </div>
         </div>
         <div class="accountcont" id="CONTRASEÑA">
