@@ -353,7 +353,7 @@ span.psw {
     overflow: hidden;
     /*white-space: nowrap;*/
     text-overflow: ellipsis;
-    font-size: calc(8px + 0.5vw);
+    font-size: calc(7px + 0.5vw);
 }
 .myTable input[type=text]{
     border: 0px;
@@ -453,8 +453,14 @@ th[role=columnheader]:not(.no-sort):hover:after {
         ul.tab {
             display: block;
         }
-        .modal-content2{
+        .modal-content, .modal-content2{
             width: 100%;
+        }
+        .forms{
+            margin: 0px;
+        }
+        .cancelbtn {
+            padding: initial;
         }
     }
     @media screen and (max-width: 800px) {
