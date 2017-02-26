@@ -37,17 +37,75 @@
       </li>
     </ul>
     <div class="accountcont" id="USUARIOS">
+      <p class="notas">
+        Notas:
+        <br>
+        El contenido de la tabla es editable para la facilidad en la edición.
+        <br>
+        Los scopes permitidos son User y Admin.
+        <br>
+        Password reset enviara al correo del usuaro la contraseña
+        <br>
+        Recuerde guardar los cambios.
+      </p>
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#usersTable', '.searchItem', this.value)" placeholder="Filter Users..">
       <div id="userList" align="center" class="info">
       </div>
     </div>
     <div class="accountcont" id="EXPERIMENTOS">
+      <p class="notas">
+        Notas:
+        <br>
+        El contenido de la tabla es editable para la facilidad en la edición.
+        <br>
+        Los dias válidos inician en domingo con indice 0:
+      </p>
+      <div style="margin:5px;">
+        <table class="myTable">
+          <thead>
+            <tr class="Theader" >
+              <td>Domingo</td>
+              <td>Lunes</td>
+              <td>Martes</td>
+              <td>Miercoles</td>
+              <td>Jueves</td>
+              <td>Viernes</td>
+              <td>Sabado</td>
+            </tr>
+          </thead>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+          </tr>
+        </table>
+      </div>
+      <p class="notas">
+        Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H.
+        <br>
+        Las Duraciones permitidas deben ser multiplos de 30.
+        <br>
+        Recuerde guardar los cambios.
+      </p>
       <button onclick="document.getElementById('id02').style.display='block'">Crear Experimento</button>
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filter Experiments..">
       <div id="experimentsAll" align="center">
       </div>
     </div>
     <div class="accountcont" id="RESERVAS">
+      <p class="notas">
+        Notas:
+        <br>
+        Campos Solo lectura
+        <br>
+        Es posible deshabilitar una reserva.
+        <br>
+        Recuerde guardar los cambios.
+      </p>
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#reservesTable', '.searchItem', this.value)" placeholder="Filter Reserves..">
       <div id="reservaHistAll" align="center" class="info">
       </div>
@@ -75,15 +133,16 @@
     </div>
     <div class="accountcont" id="BROADCAST">
       <div align="center">
+        <br>
         BROADCAST:
-        <form>
-          <input id="m3" autocomplete="off" />
-          <button onclick='wsBroadcast(m3.value)' type="button">Broadcast</button>
-          <button type="reset">Reset</button>
-        </form>
+        <br>
+        Se enviara un mensaje a todos los usuarios de la pagina, util para anunciar mantenimientos o noticias inmediatas.
+        <br>
+        <input id="m3" autocomplete="off">
+        <button onclick="wsBroadcast(m3.value)" type="button">Broadcast</button>
+        <button type="reset">Clear</button>
       </div>
     </div>
-
     <div id="id01" class="modal">
         <form id="reservaForm" class="modal-content modal-content2 animate">
             <div class="container">
@@ -117,6 +176,10 @@
             <tr>
               <td>URL: </td>
               <td><input type="text" id="crearExpUrl"></td>
+            </tr>
+             <tr>
+              <td>Dias validos: </td>
+              <td><input type="text" id="crearExpDays" value="[]"></td>
             </tr>
             <tr>
               <td>Horas validas: </td>
