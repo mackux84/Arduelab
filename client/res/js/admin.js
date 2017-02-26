@@ -18,7 +18,7 @@ function userListShow() {
           //+ '<th  >Fecha de modificacion</th>'
           + '<th>Nombre</th>'
           + '<th>Email</th>'
-          + '<th>University</th>'
+          + '<th>Universidad</th>'
           + '<th>Scope</th>'
           + '<th>Verificado</th>'
         
@@ -190,8 +190,8 @@ function reservaHistoryAll() {
           + '<td>' + element._id + '</td>'
           + '<td><textarea readonly>' + element.token + '</textarea></td>'
           + '<td>' + element.idExp + '</td>'
-          + '<td>' + (new Date(element.created_At)).toLocaleFormat() + '</td>'
-          + '<td>' + (new Date(element.initialDate)).toLocaleFormat() + '</td>'
+          + '<td>' + (new Date(element.created_At)).toLocaleString() + '</td>'
+          + '<td>' + (new Date(element.initialDate)).toLocaleString() + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
           + '<td>' + element.email + '</td>'
         if (element.used) {

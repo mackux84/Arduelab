@@ -86,8 +86,8 @@ function reservaHistory() {
         table +=
           '<tr>'
           + '<td>' + Number(index + 1) + '</td>'
-          + '<td>' + (new Date(element.created_At)).toLocaleFormat() + '</td>'
-          + '<td>' + (new Date(element.initialDate)).toLocaleFormat() + '</td>'
+          + '<td>' + (new Date(element.created_At)).toLocaleString() + '</td>'
+          + '<td>' + (new Date(element.initialDate)).toLocaleString() + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
         if (element.used) {
           table += '<td> Sí </td>'
@@ -152,7 +152,7 @@ function getExperimentos() {
         +'<thead>'
         + '<tr class="Theader" >'
           + '<th>Nombre: </th>'
-          + '<th>Pic: </th>'
+          // + '<th>Pic: </th>'
           + '<th>Descripción: </th>'
           + '<th>Universidad: </th>'
           + '<th>Horas validas: </th>'
@@ -166,7 +166,7 @@ function getExperimentos() {
         table +=
         '<tr>'
         + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
-        + '<td><img></td>'//TODO: add image
+        // + '<td><img></td>'//TODO: add image
         + '<td>' + element.description + '</td>'
         + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
         + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
