@@ -1,5 +1,6 @@
 
 module.exports = [
+  /*
   {
     method: 'GET',
     path: '/chat',
@@ -37,7 +38,7 @@ module.exports = [
         server.publish('/item/' + request.payload.channel, { channel: request.payload.channel,  message: request.payload.message })
       }
     }
-  },
+  },*/
   {
     // WS Broadcast
     method: 'POST',
