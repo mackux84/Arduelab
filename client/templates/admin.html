@@ -60,7 +60,7 @@
         <br>
         Los dias válidos inician en domingo con indice 0:
       </p>
-      <div style="margin:5px;">
+      <div style="margin:5px; overflow: auto;">
         <table class="myTable">
           <thead>
             <tr class="Theader" >
@@ -87,13 +87,13 @@
       <p class="notas">
         Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H.
         <br>
-        Las Duraciones permitidas deben ser multiplos de 30.
+        Las Duraciones permitidas en minutos deben ser multiplos de 30.
         <br>
         Recuerde guardar los cambios.
       </p>
-      <button onclick="document.getElementById('id02').style.display='block'">Crear Experimento</button>
+      <button class="crearExp" onclick="document.getElementById('id02').style.display='block'">Crear Nuevo Experimento</button>
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filter Experiments..">
-      <div id="experimentsAll" align="center">
+      <div id="experimentsAll" align="center" class="info">
       </div>
     </div>
     <div class="accountcont" id="RESERVAS">
