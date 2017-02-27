@@ -42,8 +42,6 @@
         <br>
         El contenido de la tabla es editable para la facilidad en la edición.
         <br>
-        Los scopes permitidos son User y Admin.
-        <br>
         Password reset enviara al correo del usuaro la contraseña
         <br>
         Recuerde guardar los cambios.
@@ -126,7 +124,7 @@
             <td><input type="password" id="cnewpassword" /></td>
           </tr>
           <tr>
-            <td colspan="2" align="center"><button id="passwordChange">Cambiar Contraseña</button></td>
+            <td colspan="2" align="center"><button class="crearExp" id="passwordChange">Cambiar Contraseña</button></td>
           </tr>
         </table>
       </div>
@@ -139,8 +137,9 @@
         Se enviara un mensaje a todos los usuarios de la pagina, util para anunciar mantenimientos o noticias inmediatas.
         <br>
         <input id="m3" autocomplete="off">
-        <button onclick="wsBroadcast(m3.value)" type="button">Broadcast</button>
-        <button type="reset">Clear</button>
+        <button class="crearExp" onclick="wsBroadcast(m3.value)" type="button">Broadcast</button>
+        <br>
+        <br>
       </div>
     </div>
     <div id="id01" class="modal">
