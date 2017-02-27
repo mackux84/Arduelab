@@ -38,7 +38,16 @@ function userListShow() {
           + '<td data-sort='+element.username+'><input type="text" name="usernameUser;' + element._id + '" Value="' + element.username + '" id="' + element._id + ';' + element.username + '"/></td>'
           + '<td data-sort='+element.email+'><input type="text" name="emailUser;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
           + '<td data-sort='+element.university+'><input type="text" name="universityUser;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-          + '<td data-sort='+element.scope+'><input type="text" name="scopeUser;' + element._id + '" Value="' + element.scope + '" id="' + element._id + ';' + element.scope + '"/></td>'
+          // + '<td data-sort=' + element.scope + '><input type="text" name="scopeUser;' + element._id + '" Value="' + element.scope + '" id="' + element._id + ';' + element.scope + '"/></td>'
+          + '<td data-sort=' + element.scope + '><select name="selectUser;' + element._id + '" id="' + element._id + ';' + element.scope + '">'
+        if (element.scope === 'Admin') {
+          table+= '<option value="User">User</option>'
+            + '<option value="Admin" selected="selected">Admin</option>'
+        } else {
+          table+= '<option value="User" selected="selected">User</option>'
+            + '<option value="Admin">Admin</option>'
+        }
+        table+= '</select></td>'
         if (element.isVerified) {
           table += '<td data-sort="true"><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" checked/></td>'
         } else {
@@ -64,7 +73,8 @@ function userListShow() {
           jsonData = {
             username: $('[name="usernameUser;' + name_id + '"]').val(),
             university: $('[name="universityUser;' + name_id + '"]').val(),
-            scope: $('[name="scopeUser;' + name_id + '"]').val(),
+            // scope: $('[name="scopeUser;' + name_id + '"]').val(),
+            scope: $('[name="selectUser;' + name_id + '"]').val(),
             isVerified: $('[name="isVerified;' + name_id + '"]').is(':checked')
           }
         } else {
@@ -72,7 +82,8 @@ function userListShow() {
             username: $('[name="usernameUser;' + name_id + '"]').val(),
             email: $('[name="emailUser;' + name_id + '"]').val(),
             university: $('[name="universityUser;' + name_id + '"]').val(),
-            scope: $('[name="scopeUser;' + name_id + '"]').val(),
+            // scope: $('[name="scopeUser;' + name_id + '"]').val(),
+            scope: $('[name="selectUser;' + name_id + '"]').val(),
             isVerified: 'false' //if email is updated
           }
         }
@@ -104,8 +115,14 @@ function userListShow() {
         $('[name="emailUser;' + name_id + '"]').val($('[name="emailUser;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="universityUser;' + name_id + '"]').attr('value', $('[name="universityUser;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="universityUser;' + name_id + '"]').val($('[name="universityUser;' + name_id + '"]').attr('id').split(';')[1])
-        $('[name="scopeUser;' + name_id + '"]').attr('value', $('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
-        $('[name="scopeUser;' + name_id + '"]').val($('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
+        // $('[name="scopeUser;' + name_id + '"]').attr('value', $('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
+        // $('[name="scopeUser;' + name_id + '"]').val($('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
+        if ($('[name="selectUser;' + name_id + '"]').prop('id').split(';')[1] === 'Admin') {
+          $('[name="selectUser;' + name_id + '"] option[value="Admin"]').prop('selected','selected')
+        } else {
+          $('[name="selectUser;' + name_id + '"] option[value="User"]').prop('selected','selected')
+        }
+
         $('[name="isVerified;' + name_id + '"]').attr('value', $('[name="isVerified;' + name_id + '"]').attr('id').split(';')[1])
         if ($('[name="isVerified;' + name_id + '"]').attr('value') === 'true') {
           $('[name="isVerified;' + name_id + '"]').prop('checked', true)
