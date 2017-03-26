@@ -351,10 +351,12 @@ function calendarDivF(json) {
           dataType: 'json',
           contentType: 'application/json',
           success: function (json) {
+            var ini = new Date(json.date).toUTCString()
+            var fin = new Date(Date.parse(json.date) + json.duration*60000).toUTCString()
             alert(
               'Reserva realizada para:'
-              + 'Hora Inicial: ' + new Date(json.date)
-              + 'Hora Final: ' + new Date(Date.parse(json.date) + json.duration)
+              + '\nHora Inicial: ' + ini.substring(0,ini.length-3)
+              + '\nHora Final: ' + fin.substring(0,fin.length-3)
             )
             var eventData = {
               title: 'Reservado',
