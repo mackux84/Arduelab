@@ -27,7 +27,8 @@ function verifyUniqueReserve (request, reply) {
   var date = new Date(request.payload.start)
   Reserve.findOne({
     initialDate: date,
-    enabled: true
+    enabled: true,
+    idExp: request.payload.experiment
   }, (err, reserve) => {
     // Check if the reserve exists
     if (reserve) {
