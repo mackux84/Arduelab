@@ -356,7 +356,7 @@ span.psw {
     font-size: calc(7px + 0.5vw);
 }
 .myTable input[type=text]{
-    border: 0px;
+    /*border: 0px;*/
     width: 100%;
     height: 100%;
     background: transparent;
