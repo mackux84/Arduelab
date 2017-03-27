@@ -8,6 +8,10 @@ const reservesModel = new Schema({
     type: String,
     required: true,
   },
+  expName: {
+    type: String,
+    required: true,
+  },
   idExp: {
     type: Schema.Types.ObjectId,
     required: true
