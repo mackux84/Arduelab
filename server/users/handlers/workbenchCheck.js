@@ -22,16 +22,16 @@ module.exports = function (request, reply) {
         }
       }
       if (decoded === undefined) {
-        reply(Boom.forbidden('Invalid token'))
+        reply(Boom.forbidden('Invalid token 1'))
         return
       }
       if (decoded.type != 'workbench') {
-        reply(Boom.forbidden('Invalid token'))
+        reply(Boom.forbidden('Invalid token 2'))
         return
       }
       decoded = decyptToken2(decoded)
       if (decoded.idExp !== request.payload.expID) {
-        reply(Boom.forbidden('Invalid token')) 
+        reply(Boom.forbidden('Invalid token 3')) 
         return
       }
       var diff = Moment().diff(Moment(decoded.iat * 1000))
