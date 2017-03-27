@@ -19,13 +19,13 @@ module.exports = {
     }),
     params: Joi.object({
       id: Joi.string().required().description('Token')
-    }),
-    headers: updateUserSchema.headerSchema
+    })
+    // headers: updateUserSchema.headerSchema
     
   },
-  auth: {
-    strategy: 'jwt',
-  },
+  // auth: {
+  //   strategy: 'jwt',
+  // },
   description: 'Check workbench auth info',
   notes: 'Check workbench auth info',
   tags: ['api', 'users'],
@@ -44,7 +44,7 @@ module.exports = {
         '500': errors.e500
       },
       payloadType: 'json',
-      security: [{ 'jwt': [] }]
+      // security: [{ 'jwt': [] }]
     }
   }
 }
