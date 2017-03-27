@@ -111,6 +111,7 @@ module.exports = function (request, reply) {
                       reserve.enabled = true
                       reserve.scope = decoded.scope
                       reserve.idExp = request.payload.experiment
+                      reserve.expName= experiment.name
                       reserve.save((error, reserve) => {
                         if (!error) {
                           var res = {
