@@ -188,9 +188,9 @@ function reservaHistoryAll() {
         '<table class="myTable" id="reservesTable">'
         +'<thead>'
         + '<tr class="Theader" >'
-          + '<th>Reserve Id: </th>'
+          // + '<th>Reserve Id: </th>'
           + '<th>Token: </th>'
-          + '<th>Experiment Id: </th>'
+          + '<th>Experiment Name: </th>'
           + '<th>Fecha de creación: </th>'
           + '<th>Fecha Reservada: </th>'
           + '<th>Duración: </th>'
@@ -202,13 +202,15 @@ function reservaHistoryAll() {
         +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
+        var ini = (new Date(element.created_At)).toLocaleString()
+        var fin = (new Date(element.initialDate)).toUTCString()
         table+=  
            '<tr class="searchItem">'
-          + '<td>' + element._id + '</td>'
+          // + '<td>' + element._id + '</td>'
           + '<td><textarea readonly>' + element.token + '</textarea></td>'
-          + '<td>' + element.idExp + '</td>'
-          + '<td>' + (new Date(element.created_At)).toLocaleString() + '</td>'
-          + '<td>' + (new Date(element.initialDate)).toLocaleString() + '</td>'
+          + '<td>' + element.expName + '</td>'
+          + '<td>' + ini + '</td>'
+          + '<td>' + fin.substring(0,fin.length-3) + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
           + '<td>' + element.email + '</td>'
         if (element.used) {
@@ -264,10 +266,11 @@ function crearExp() {
   var jsonData = {
     name: $('#crearExpNombre').val(),
     university: $('#crearExpUniversidad').val(),
+    description: $('#crearExpDesc').val(),
     url: $('#crearExpUrl').val(),
-    days: $('#crearExpDays').val(),
-    schedule: $('#crearExpSchedule').val(),
-    duration: $('#crearExpDuration').val(),
+    days: '['+$('#crearExpDays').val()+']',
+    schedule: '['+$('#crearExpSchedule').val()+']',
+    duration: '['+$('#crearExpDuration').val()+']',
     enabled: $('#crearExpEnabled').is(':checked')
   }
   var jsonData2 = JSON.stringify(jsonData)
@@ -315,7 +318,8 @@ function experimentsGetAll() {
         + '<tr class="Theader" >'
           + '<th>Nombre: </th>'
           + '<th>Universidad: </th>'
-          //+ '<th>Fecha de creación: </th>'
+          + '<th>Descripción: </th>'
+          + '<th>Fecha de creación: </th>'
           + '<th>Url: </th>'
           + '<th>Dias validos: </th>'
           + '<th>Horas validas: </th>'
@@ -331,11 +335,12 @@ function experimentsGetAll() {
           '<tr class="searchItem">'
           + '<td data-sort="'+element.name+'"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
           + '<td data-sort='+element.university+'><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-          //+ '<td>' + new Date(element.created_At) + '</td>'
+          + '<td><input type="text" name="descriptionExp;' + element._id + '" Value="' + element.description + '" id="' + element._id + ';' + element.description + '"/></td>'
+          + '<td>' + new Date(element.created_At).toLocaleString() + '</td>'
           + '<td data-sort='+element.url+'><input type="text" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
-          + '<td data-sort='+element.days+'><input type="text" name="daysExp;' + element._id + '" Value="[' + element.days + ']" id="' + element._id + ';' + element.days + '"/></td>'
-          + '<td data-sort='+element.schedule+'><input type="text" name="scheduleExp;' + element._id + '" Value="[' + element.schedule + ']" id="' + element._id + ';' + element.schedule + '"/></td>'
-          + '<td data-sort='+element.duration+'><input type="text" name="durationExp;' + element._id + '" Value="[' + element.duration + ']" id="' + element._id + ';' + element.duration + '"/></td>'
+          + '<td data-sort='+element.days+'><input type="text" name="daysExp;' + element._id + '" Value="' + element.days + '" id="' + element._id + ';' + element.days + '"/></td>'
+          + '<td data-sort='+element.schedule+'><input type="text" name="scheduleExp;' + element._id + '" Value="' + element.schedule + '" id="' + element._id + ';' + element.schedule + '"/></td>'
+          + '<td data-sort='+element.duration+'><input type="text" name="durationExp;' + element._id + '" Value="' + element.duration + '" id="' + element._id + ';' + element.duration + '"/></td>'
         if (element.enabled) {
           table += '<td data-sort="true"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
         } else {
@@ -357,10 +362,11 @@ function experimentsGetAll() {
         jsonData = {
           name: $('[name="nameExp;' + name_id + '"]').val(),
           university: $('[name="universityExp;' + name_id + '"]').val(),
+          description: $('[name="descriptionExp;' + name_id + '"]').val(),
           url: $('[name="urlExp;' + name_id + '"]').val(),
-          days: $('[name="daysExp;' + name_id + '"]').val(),
-          schedule: $('[name="scheduleExp;' + name_id + '"]').val(),
-          duration: $('[name="durationExp;' + name_id + '"]').val(),
+          days: '['+$('[name="daysExp;' + name_id + '"]').val()+']',
+          schedule: '['+$('[name="scheduleExp;' + name_id + '"]').val()+']',
+          duration: '['+$('[name="durationExp;' + name_id + '"]').val()+']',
           enabled: $('[name="isEnabledExp;' + name_id + '"]').is(':checked')
         }
         var jsonData2 = JSON.stringify(jsonData)
@@ -390,6 +396,8 @@ function experimentsGetAll() {
         $('[name="nameExp;' + name_id + '"]').val($('[name="nameExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="universityExp;' + name_id + '"]').attr('value', $('[name="universityExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="universityExp;' + name_id + '"]').val($('[name="universityExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="descriptionExp;' + name_id + '"]').attr('value', $('[name="descriptionExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="descriptionExp;' + name_id + '"]').val($('[name="descriptionExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="urlExp;' + name_id + '"]').attr('value', $('[name="urlExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="urlExp;' + name_id + '"]').val($('[name="urlExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="daysExp;' + name_id + '"]').attr('value', $('[name="daysExp;' + name_id + '"]').attr('id').split(';')[1])
