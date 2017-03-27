@@ -4,15 +4,15 @@ const Boom = require('boom')
 const Experiment = require('../models/Experiment')
 
 module.exports = function (request, reply) {
-  let experiment = new Experiment()
-  experiment.name = request.payload.name
-  experiment.university = request.payload.university
-  experiment.url = request.payload.url
-  experiment.days = request.payload.days
-  experiment.schedule = request.payload.schedule
-  experiment.duration = request.payload.duration
-  experiment.enabled = request.payload.enabled
-  experiment.description= request.payload.description
+  let experiment         = new Experiment()
+  experiment.name        = request.payload.name
+  experiment.university  = request.payload.university
+  experiment.url         = request.payload.url
+  experiment.days        = request.payload.days
+  experiment.schedule    = request.payload.schedule
+  experiment.duration    = request.payload.duration
+  experiment.enabled     = request.payload.enabled
+  experiment.description = request.payload.description
 
   experiment.save((error, experiment) => {
     if (!error) {
