@@ -148,7 +148,7 @@ function decyptToken2 (token) {
     duracion: duracion,
     experimento:idExp,
     iat: token.iat,
-    idExp: token.exp,
+    exp: token.exp,
     type: token.type
   }
   return decoded
