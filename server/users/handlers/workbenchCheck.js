@@ -9,10 +9,11 @@ const key         = require('../../config/auth').key
 
 module.exports = function (request, reply) {
   var token1 = request.params.id
-  var token2 = request.auth.token
+  //var token2 = request.auth.token
   var token3 = request.payload.token
 
-  if ((token1 === token2) && (token2 === token3)) {
+  // if ((token1 === token2) && (token2 === token3)) {
+  if(token1===token3){
     let privateKey = require('../../config/auth').key.privateKey
     Jwt.verify(request.params.id, privateKey, function (error, decoded) {
       if (error) {
@@ -34,7 +35,13 @@ module.exports = function (request, reply) {
         reply(Boom.forbidden('Invalid token 3')) 
         return
       }
+      //var today = new Date()
+      //today.setTime(today.getTime() - today.getTimezoneOffset() * 60 * 1000)
+      //var tp = Moment(decoded.iat *1000)
+      //tp.add(today.getTimezoneOffset()*60*1000)
+      //var diff = Moment().diff(Moment(decoded.iat * 1000 + today.getTimezoneOffset()*60*1000))
       var diff = Moment().diff(Moment(decoded.iat * 1000))
+     // var diff2 = Moment().diff(tp)
       if (diff < 0) {
         reply(Boom.forbidden('Token not active yet'))
         return
@@ -63,6 +70,7 @@ module.exports = function (request, reply) {
             statusCode: 202,
             message: 'ok'
           }
+          reserve.used = true
           reply(replyjson)
           return
         })
