@@ -30,7 +30,7 @@ module.exports = function (request, reply) {
         return
       }
       decoded = decyptToken2(decoded)
-      if (decoded.idExp !== request.payload.expID) {
+      if (decoded.experimento !== request.payload.expID) {
         reply(Boom.forbidden('Invalid token 3')) 
         return
       }
