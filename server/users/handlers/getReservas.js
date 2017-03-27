@@ -32,7 +32,7 @@ module.exports = function (request, reply) {
     }
     decoded = decyptToken(decoded)
     Reserve
-      .find({ email: decoded.email })
+      .find({ email: decoded.email, enabled: true })
       // Deselect fields
       .select('-_id -__v -updated_At -scope -email')
       .exec((error, reserve) => {
