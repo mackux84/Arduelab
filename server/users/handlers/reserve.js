@@ -9,6 +9,11 @@ const Moment = require('moment')
 const key = require('../../config/auth').key
 const decyptToken = require('../util/userFunctions').decyptToken
 
+Date.prototype.addHours = function(h) {    
+  this.setTime(this.getTime() + (h*60*60*1000))
+  return this
+}
+
 module.exports = function (request, reply) {
   let privateKey = key.privateKey
   Jwt.verify(request.auth.token, privateKey, function (error, decoded) {
@@ -35,6 +40,7 @@ module.exports = function (request, reply) {
     decoded = decyptToken(decoded)
     var datetest = new Date(request.payload.start)
     var today = new Date()
+    today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 )
     if (datetest < today) {
       reply(Boom.badRequest('Invalid submited Date'))
       return
