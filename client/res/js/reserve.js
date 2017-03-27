@@ -83,11 +83,13 @@ function reservaHistory() {
         +'</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
+        var ini = (new Date(element.created_At)).toLocaleString()
+        var fin = (new Date(element.initialDate)).toUTCString()
         table +=
           '<tr>'
           + '<td>' + Number(index + 1) + '</td>'
-          + '<td>' + (new Date(element.created_At)).toLocaleString() + '</td>'
-          + '<td>' + (new Date(element.initialDate)).toLocaleString() + '</td>'
+          + '<td>' +  ini + '</td>'
+          + '<td>' +  fin.substring(0,fin.length-3) + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
         if (element.used) {
           table += '<td> Sí </td>'
