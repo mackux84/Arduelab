@@ -76,8 +76,17 @@ module.exports = function (request, reply) {
             var element = reserve[index]
             if (element.enabled) {
               //already reserved for this experiment
-              canReserve = false
-              break
+              var datetest2 = new Date(element.initialDate)
+              //var today = new Date()
+              datetest2.setTime( datetest2.getTime() + element.duration*60*1000 )
+              if (datetest2 < today) {
+                //reserva expiro
+                element.enabled = false
+                element.save()
+                canReserve=true
+              } else {
+                canReserve = false
+              }
             } else {
               canReserve = true
             }
