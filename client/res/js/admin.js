@@ -188,7 +188,7 @@ function reservaHistoryAll() {
         '<table class="myTable" id="reservesTable">'
         +'<thead>'
         + '<tr class="Theader" >'
-          // + '<th>Reserve Id: </th>'
+          + '<th># </th>'
           + '<th>Token: </th>'
           + '<th>Experiment Name: </th>'
           + '<th>Fecha de creación: </th>'
@@ -207,6 +207,7 @@ function reservaHistoryAll() {
         table+=  
            '<tr class="searchItem">'
           // + '<td>' + element._id + '</td>'
+          + '<td>'+(index+1)+'</td>'
           + '<td><textarea readonly>' + element.token + '</textarea></td>'
           + '<td>' + element.expName + '</td>'
           + '<td>' + ini + '</td>'
@@ -316,6 +317,7 @@ function experimentsGetAll() {
         '<table class="myTable" id="experimentsTable">'
         +'<thead>'
         + '<tr class="Theader" >'
+          + '<th>ID: </td>'
           + '<th>Nombre: </th>'
           + '<th>Universidad: </th>'
           + '<th>Descripción: </th>'
@@ -333,6 +335,7 @@ function experimentsGetAll() {
         var element = json[index]
         table +=
           '<tr class="searchItem">'
+          + '<td>'+element._id+'</td>'
           + '<td data-sort="'+element.name+'"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
           + '<td data-sort='+element.university+'><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
           + '<td><input type="text" name="descriptionExp;' + element._id + '" Value="' + element.description + '" id="' + element._id + ';' + element.description + '"/></td>'
