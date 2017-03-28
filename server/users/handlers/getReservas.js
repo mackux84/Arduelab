@@ -44,8 +44,9 @@ module.exports = function (request, reply) {
           reply(Boom.notFound('No reserves found!'))
           return
         }
-        ////////////////////////////////////  reply(reserve)
-
+        ////////////////////////////////////  
+        reply(reserve)
+/*
         var expIds = []
         for (var index = 0; index < reserve.length; index++) {
           var element = reserve[index]
@@ -69,6 +70,7 @@ module.exports = function (request, reply) {
             var reservesA = []
             for (var index = 0; index < experiments.length; index++) {
               var element = experiments[index]
+              
               var json = {
                 created_At: reserve[index].created_At,
                 initialDate: reserve[index].initialDate,
@@ -81,6 +83,7 @@ module.exports = function (request, reply) {
             }
             reply(reservesA)
           })
+        */
       })
   })
 }
