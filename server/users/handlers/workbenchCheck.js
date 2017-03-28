@@ -23,16 +23,16 @@ module.exports = function (request, reply) {
         }
       }
       if (decoded === undefined) {
-        reply(Boom.forbidden('Invalid token 1'))
+        reply(Boom.forbidden('Invalid token'))
         return
       }
       if (decoded.type != 'workbench') {
-        reply(Boom.forbidden('Invalid token 2'))
+        reply(Boom.forbidden('This Token is not a work token'))
         return
       }
       decoded = decyptToken2(decoded)
       if (decoded.experimento !== request.payload.expID) {
-        reply(Boom.forbidden('Invalid token 3')) 
+        reply(Boom.forbidden('This Token is not for this experiment')) 
         return
       }
       //var today = new Date()
