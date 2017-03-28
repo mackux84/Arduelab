@@ -12,6 +12,10 @@ const reservesModel = new Schema({
     type: String,
     required: true,
   },
+  url: {
+    type: String,
+    required: true
+  },
   idExp: {
     type: Schema.Types.ObjectId,
     required: true
