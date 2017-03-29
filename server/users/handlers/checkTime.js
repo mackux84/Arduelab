@@ -3,6 +3,8 @@
 const Boom   = require('boom')
 const Jwt    = require('jsonwebtoken')
 const Moment = require('moment')
+const decyptToken = require('../util/userFunctions').decyptToken
+const decyptToken2 = require('../util/userFunctions').decyptToken2
 const key    = require('../../config/auth').key
 
 module.exports = function (request, reply) {
@@ -15,16 +17,36 @@ module.exports = function (request, reply) {
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('TOKEN INVALIDO DE LABORATORIO'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
-    var diff = Moment().diff(Moment(decoded.iat * 1000))
-    if (diff > key.tokenExpiry || diff < 0) {
-      reply(Boom.forbidden('TOKEN AUN NO SE ENCUENTRA ACTIVO'))
+    if (decoded.type != 'user') {
+      //workbench token
+      decoded = decyptToken2(decoded)
+      var diff = Moment().diff(Moment(decoded.iat * 1000))
+      if (diff < 0) {
+        reply(Boom.forbidden('Token not active yet'))
+        return
+      }
+      if (diff > decoded.duracion*60*1000) {
+        reply(Boom.forbidden('Token expired'))
+        return
+      }
+      reply((decoded.duracion * 60 * 1000) - diff)
       return
     } else {
-      reply(parseInt(parseInt(key.tokenExpiry)-diff))
+      // decoded = decyptToken(decoded)
+      var diff2 = Moment().diff(Moment(decoded.iat * 1000))
+      if (diff < 0) {
+        reply(Boom.forbidden('Token not active yet'))
+        return
+      }
+      if (diff > key.tokenExpiry) {
+        reply(Boom.forbidden('Token expired'))
+        return
+      }
+      reply(parseInt(parseInt(key.tokenExpiry) - diff2))
       return
-    }
+    }  
   })
 }
