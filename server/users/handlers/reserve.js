@@ -42,7 +42,7 @@ module.exports = function (request, reply) {
     var today = new Date()
     today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 )
     if (datetest < today) {
-      reply(Boom.badRequest('Invalid submited Date'))
+      reply(Boom.badRequest('Can not create a reserve in the past!'))
       return
     }
     var tokenData = {
