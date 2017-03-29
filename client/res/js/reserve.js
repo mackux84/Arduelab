@@ -76,6 +76,7 @@ function reservaHistory() {
           + '<th>Token No: </th>'
           + '<th>Fecha de creación: </th>'
           + '<th>Fecha Reservada: </th>'
+          + '<th>Experimento: </th>'
           + '<th>Duración: </th>'
           + '<th>Usado: </th>'
           + '<th>Ir al Experimento:</th>'
@@ -89,7 +90,8 @@ function reservaHistory() {
           '<tr>'
           + '<td>' + Number(index + 1) + '</td>'
           + '<td>' +  ini + '</td>'
-          + '<td>' +  fin.substring(0,fin.length-3) + '</td>'
+          + '<td>' + fin.substring(0, fin.length - 3) + '</td>'
+          + '<td>' + element.expName + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
         if (element.used) {
           table += '<td> Sí </td>'
