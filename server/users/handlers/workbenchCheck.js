@@ -46,7 +46,7 @@ module.exports = function (request, reply) {
         reply(Boom.forbidden('Token not active yet'))
         return
       }
-      if (diff > key.tokenExpiry) {
+      if (diff > decoded.duracion*60*1000) {
         reply(Boom.forbidden('Token expired'))
         return
       }
@@ -71,6 +71,7 @@ module.exports = function (request, reply) {
             message: 'ok'
           }
           reserve.used = true
+          reserve.save()
           reply(replyjson)
           return
         })
