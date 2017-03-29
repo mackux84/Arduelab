@@ -7,7 +7,7 @@ module.exports = {
   auth: {
     // Add authentication to this route
     strategy: 'jwt',
-    scope: ['User', 'Admin']
+    // scope: ['User', 'Admin']
   },
   description: 'Check Time',
   notes: 'Check JWT Current Time Left',
