@@ -338,7 +338,7 @@ function experimentsGetAll() {
           + '<td>'+element._id+'</td>'
           + '<td data-sort="'+element.name+'"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
           + '<td data-sort='+element.university+'><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-          + '<td><input type="text" name="descriptionExp;' + element._id + '" Value="' + element.description + '" id="' + element._id + ';' + element.description + '"/></td>'
+          + '<td><textarea name="descriptionExp;' + element._id + '" Value="' + element.description + '" id="' + element._id + ';' + element.description + '">' + element.description + '</textarea></td>'
           + '<td>' + new Date(element.created_At).toLocaleString() + '</td>'
           + '<td data-sort='+element.url+'><input type="text" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
           + '<td data-sort='+element.days+'><input type="text" name="daysExp;' + element._id + '" Value="' + element.days + '" id="' + element._id + ';' + element.days + '"/></td>'
