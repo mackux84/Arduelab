@@ -163,7 +163,7 @@
             <span class="popupTopText">Crear Experimento</span>
             <span class="close closeX" title="Close      Modal">&times;</span>
           </div>
-          <table>
+          <table style="width: 100%">
             <tr>
               <td>Nombre: </td>
               <td><input type="text" id="crearExpNombre"></td>
@@ -174,7 +174,10 @@
             </tr>
             <tr>
               <td>Descripción: </td>
-              <td><textarea id="crearExpDesc"></textarea></td>
+              <td>
+                <textarea id="crearExpDesc" rows="6" maxlength="250"></textarea>
+                <div id="textarea_feedback"></div>
+              </td>
             </tr>
             <tr>
               <td>URL: </td>
