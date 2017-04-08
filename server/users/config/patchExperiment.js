@@ -3,6 +3,7 @@
 const Joi              = require('joi')
 const updateUserSchema = require('../schemas/updateUser')
 const errors           = require('../../config/errors')
+Joi.objectId = require('joi-objectid')(Joi)
 
 module.exports = {
   payload: {
@@ -18,7 +19,12 @@ module.exports = {
     payload: Joi.object({
       name: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).description('Experiment Name').example('Arduino Car'),
       university: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).description('Experiment University').example('Yale University'),
-      url: Joi.string().min(3).max(30).description('The Experiment Url').example('http://google.com'),
+      city: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).description('Ciudad del experimento').example('Barranquilla'),
+      country: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).description('País del experimento').example('Colombia'),
+      idCreator: Joi.objectId().description('Identificador de creador').example('235325425513125312353463'),
+      arduino: Joi.string().description('Arduino usado en el experimento').example('Arduino Mega 2560'),
+      image: Joi.string().min(3).description('Link de la Imagen').example('http://i.imgur.com/mG1n223.gif'),
+      url: Joi.string().min(3).description('The Experiment Url').example('http://google.com'),
       days: Joi.array().items(Joi.number().min(0).max(6)).description('The experiment Allowed Days in UTC format, Sunday is 0, Monday is 1, and so on.').example('[1,2,3,4]'),
       schedule: Joi.array().length(2).items(Joi.number().min(0).max(24)).required().description('The experiment active hours (initial,, final)').example('[8,18]'),
       duration: Joi.array().items(Joi.number().multiple(30)).description('The experiment Allowed durations in Minutes (must be multiples of 30)').example('[30,60,90,120]'),

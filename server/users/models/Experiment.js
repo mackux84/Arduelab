@@ -12,6 +12,26 @@ const experimentsModel = new Schema({
     type: String,
     required: true
   },
+  city: {
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },  
+  idCreator: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  arduino: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
   url: {
     type: String,
     required: true

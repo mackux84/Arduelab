@@ -3,6 +3,7 @@
 const Joi = require('joi')
 const errors = require('../../config/errors')
 const updateUserSchema = require('../schemas/updateUser')
+Joi.objectId = require('joi-objectid')(Joi)
 
 module.exports = {
   payload: {
@@ -22,7 +23,12 @@ module.exports = {
     payload: Joi.object({
       name: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).required().description('Nombre del experimento').example('Uso sensores de movimiento'),
       university: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).required().description('Universidad del experimento').example('Universidad Autonoma del Caribe'),
-      url: Joi.string().min(3).max(30).required().description('Enlace del experimento').example('http://192.168.0.1:5001'),
+      city: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).required().description('Ciudad del experimento').example('Barranquilla'),
+      country: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).required().description('País del experimento').example('Colombia'),
+      idCreator: Joi.objectId().required().description('Identificador de creador').example('235325425513125312353463'),
+      arduino: Joi.string().min(3).required().description('Arduino usado en el experimento').example('Arduino Mega 2560'),
+      image: Joi.string().min(3).required().description('Link de la Imagen').example('http://i.imgur.com/mG1n223.gif'),
+      url: Joi.string().min(3).required().description('Enlace del experimento').example('http://192.168.0.1:5001'),
       days: Joi.array().items(Joi.number().min(0).max(6)).required().description('Los dias permitidos por el experimento, donde 0 es Domingo, 1 es Lunes, y asi sucesivamente').example('[1,2,3,4]'),
       schedule: Joi.array().length(2).items(Joi.number().min(0).max(24)).required().description('Las horas activas del experimento (inicio,fin) formato 24h').example('[8,18]'),
       duration: Joi.array().items(Joi.number().multiple(30)).required().description('Duraciones permitidas en el experimento en minutos, multiplos de 30').example('[30,60,90,120]'),
