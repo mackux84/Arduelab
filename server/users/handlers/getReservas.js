@@ -2,7 +2,7 @@
 
 const Boom = require('boom')
 const Reserve = require('../models/Reserve')
-const Experiment = require('../models/Experiment')
+// const Experiment = require('../models/Experiment')
 const Jwt = require('jsonwebtoken')
 const Moment = require('moment')
 const key = require('../../config/auth').key
@@ -46,43 +46,43 @@ module.exports = function (request, reply) {
         }
         ////////////////////////////////////  
         reply(reserve)
-/*
-        var expIds = []
-        for (var index = 0; index < reserve.length; index++) {
-          var element = reserve[index]
-          expIds.push(element.idExp)
-        }
-        Experiment
-          .find({
-            '_id': { $in: expIds }
-          })
-          // Deselect the password and version fields
-          .select('-updated_At -__v -created_At -enabled')
-          .exec((error, experiments) => {
-            if (error) {
-              reply(Boom.badRequest(error))
-              return
-            }
-            if (!experiments.length) {
-              reply(Boom.notFound('No Experiments found!'))
-              return
-            }
-            var reservesA = []
-            for (var index = 0; index < experiments.length; index++) {
-              var element = experiments[index]
-              
-              var json = {
-                created_At: reserve[index].created_At,
-                initialDate: reserve[index].initialDate,
-                duration: reserve[index].duration,
-                used: reserve[index].used,
-                token: reserve[index].token,
-                url: element.url
+        /*
+          var expIds = []
+          for (var index = 0; index < reserve.length; index++) {
+            var element = reserve[index]
+            expIds.push(element.idExp)
+          }
+          Experiment
+            .find({
+              '_id': { $in: expIds }
+            })
+            // Deselect the password and version fields
+            .select('-updated_At -__v -created_At -enabled')
+            .exec((error, experiments) => {
+              if (error) {
+                reply(Boom.badRequest(error))
+                return
               }
-              reservesA.push(json)
-            }
-            reply(reservesA)
-          })
+              if (!experiments.length) {
+                reply(Boom.notFound('No Experiments found!'))
+                return
+              }
+              var reservesA = []
+              for (var index = 0; index < experiments.length; index++) {
+                var element = experiments[index]
+                
+                var json = {
+                  created_At: reserve[index].created_At,
+                  initialDate: reserve[index].initialDate,
+                  duration: reserve[index].duration,
+                  used: reserve[index].used,
+                  token: reserve[index].token,
+                  url: element.url
+                }
+                reservesA.push(json)
+              }
+              reply(reservesA)
+            })
         */
       })
   })

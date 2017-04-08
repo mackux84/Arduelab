@@ -1,6 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
+Joi.objectId = require('joi-objectid')(Joi)
 
 const createUserSchema = Joi.object({
   start: Joi.date().iso().required().description('Fecha inicial en formato ISO').example('2014-09-08T08:02:17-05:00'),

@@ -2,7 +2,8 @@
 
 const Boom      = require('boom')
 const User      = require('../models/User')
-const Reserve   = require('../models/Reserve')
+const Reserve = require('../models/Reserve')
+const Creator = require('../models/Creator')
 // const Jwt    = require('jsonwebtoken')
 const Common    = require('./common')
 // const bcrypt = require('bcrypt')
@@ -23,6 +24,23 @@ function verifyUniqueUser (request, reply) {
     reply(request.payload)
   })
 }
+function verifyUniqueCreator (request, reply) {
+  // Find an entry from the database that matches the email
+  Creator.findOne({
+    identification: request.payload.identification
+  }, (err, user) => {
+    // Check whether the email is already taken and error out if so
+    if (user) {
+      if (user.identification === request.payload.identification) {
+        reply(Boom.badRequest('ESTA IDENTIFICACION YA SE ENCUENTRA EN USO'))
+        return
+      }
+    }
+    // If everything checks out, send the payload through to the route handler
+    reply(request.payload)
+  })
+}
+
 function verifyUniqueReserve (request, reply) {
   var date = new Date(request.payload.start)
   Reserve.findOne({
@@ -161,5 +179,6 @@ module.exports = {
   createToken:         createToken,
   createToken2:        createToken2,
   decyptToken:         decyptToken,
-  decyptToken2:        decyptToken2
+  decyptToken2:        decyptToken2,
+  verifyUniqueCreator: verifyUniqueCreator
 }
