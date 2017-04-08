@@ -1,7 +1,6 @@
 'use strict'
 
 const Joi              = require('joi')
-const verifyUniqueUser = require('../util/userFunctions').verifyUniqueUser
 const updateUserSchema = require('../schemas/updateUser')
 const errors           = require('../../config/errors')
 
