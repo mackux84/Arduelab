@@ -72,7 +72,8 @@ h1, h2, h3, h4, h5{
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 30%; /* Could be more or less, depending on screen size */
+    width: 40%; /* Could be more or less, depending on screen size */
+    max-width: 450px;
 }
 
 .modal-content2 {
@@ -80,13 +81,10 @@ h1, h2, h3, h4, h5{
     width: 50%; 
 }
 #crearExpDesc{
-    resize: none;
-width: 100%;
-padding: 12px 20px;
-margin: 8px 0;
-display: inline-block;
-border: 1px solid #ccc;
-box-sizing: border-box;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
 }
 input[type=submit] {
     width: 20em;  height: 3em;
@@ -159,7 +157,7 @@ input[type=submit] {
     min-width: 350px;
 }
 
-.accountcont{
+.accountcont, .accountcont2{
     display: none;
     padding: 10px 10px;
     margin-left: 10%;
@@ -172,6 +170,13 @@ input[type=submit] {
 background-clip: content-box, padding-box;
 }
 
+.accountcont2{
+    margin-left: 0px;
+    margin-right: 0px;
+    border: 0px none;
+    padding: 0px;
+}
+
 ul.tab {
     list-style-type: none;
     margin: 0 10%;
@@ -182,6 +187,12 @@ ul.tab {
     background-color: cadetblue;
     display: flex;
     justify-content: center;
+}
+ul.tab2{
+    margin: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px solid #ccc;;
 }
 
 ul.tab li {
@@ -215,6 +226,17 @@ ul.tab li a {
     transition: 0.3s;
     /*font-size: 17px;*/
     font-size: calc(8px + 0.6vw);
+}
+
+.checkList{
+    column-fill: balance;
+    column-count: 4;
+    text-align: justify !important;
+    /*column-gap: 10px;
+    column-rule: aquamarine;
+    column-rule-width: 5px;
+    column-width: 10px;
+    column-rule-style: solid;*/
 }
 
 #botonindex{
@@ -357,7 +379,7 @@ span.psw {
     align-self: center;
     text-align: center;
     /*vertical-align: middle;*/
-    max-width: 200px;
+    /*max-width: 200px;*/
     overflow: hidden;
     /*white-space: nowrap;*/
     text-overflow: ellipsis;
@@ -384,11 +406,12 @@ span.psw {
 }
 .myTable textarea {
     overflow: auto;
-    resize: none;
-    /*border: 0px;*/
+    resize: both;
     border: 1px solid #ccc;
     background: transparent;
     /*margin-right: -5px*/
+    text-align: justify;
+    width: 100%;
 }
 
 th[role=columnheader]:not(.no-sort) {
@@ -470,6 +493,9 @@ th[role=columnheader]:not(.no-sort):hover:after {
         }
         .cancelbtn {
             padding: initial;
+        }
+        .checkList{
+            column-count: 2;
         }
     }
     @media screen and (max-width: 800px) {

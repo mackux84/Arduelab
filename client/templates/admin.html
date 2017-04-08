@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <link rel="stylesheet" href="/css/styles.css">
-    
   </head>
-
   <body>
     <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
       <div id="Timer">
@@ -39,12 +36,9 @@
     <div class="accountcont" id="USUARIOS">
       <p class="notas">
         Notas:
-        <br>
-        El contenido de la tabla es editable para la facilidad en la edición.
-        <br>
-        Password reset enviara al correo del usuaro la contraseña
-        <br>
-        Recuerde guardar los cambios.
+        <br> El contenido de la tabla es editable para la facilidad en la edición.
+        <br> Password reset enviara al correo del usuaro la contraseña
+        <br> Recuerde guardar los cambios.
       </p>
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#usersTable', '.searchItem', this.value)" placeholder="Filter Users..">
       <div id="userList" align="center" class="info">
@@ -53,15 +47,13 @@
     <div class="accountcont" id="EXPERIMENTOS">
       <p class="notas">
         Notas:
-        <br>
-        El contenido de la tabla es editable para la facilidad en la edición.
-        <br>
-        Los dias válidos inician en domingo con indice 0:
+        <br> El contenido de la tabla es editable para la facilidad en la edición.
+        <br> Los dias válidos inician en domingo con indice 0:
       </p>
       <div style="margin:5px; overflow: auto;">
         <table class="myTable">
           <thead>
-            <tr class="Theader" >
+            <tr class="Theader">
               <td>Domingo</td>
               <td>Lunes</td>
               <td>Martes</td>
@@ -84,27 +76,109 @@
       </div>
       <p class="notas">
         Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H.
-        <br>
-        Las Duraciones permitidas en minutos deben ser multiplos de 30.
-        <br>
-        El servidor maneja un horario GMT-5.
-        <br>
-        Recuerde guardar los cambios.
+        <br> Las Duraciones permitidas en minutos deben ser multiplos de 30.
+        <br> El servidor maneja un horario GMT-5.
+        <br> Recuerde guardar los cambios.
       </p>
-      <button class="crearExp" onclick="document.getElementById('id02').style.display='block'">Crear Nuevo Experimento</button>
-      <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filter Experiments..">
-      <div id="experimentsAll" align="center" class="info">
+      <ul class="tab tab2">
+        <li>
+          <a href="javascript:void(0)" class="tablinks2" onclick="openCity2(event, 'ListaE')">LISTA</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="tablinks2" onclick="openCity2(event, 'crearE')">CREAR</a>
+        </li>
+      </ul>
+      <div class="accountcont2" id="ListaE">
+        <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filter Experiments..">
+        <div id="experimentsAll" align="center" class="info">
+        </div>
+      </div>
+      <div class="accountcont2" id="crearE">
+        <div id="experimentsAll" align="center" class="info">
+        </div>
+        <table class="myTable" style="width: 100%">
+          <tr>
+            <td>Nombre: </td>
+            <td><input type="text" id="crearExpNombre"></td>
+          </tr>
+          <tr>
+            <td>Universidad: </td>
+            <td><input type="text" id="crearExpUniversidad"></td>
+          </tr>
+          <tr>
+            <td>Descripción: </td>
+            <td>
+              <textarea id="crearExpDesc" rows="6" maxlength="250"></textarea>
+              <div id="textarea_feedback"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>URL: </td>
+            <td><input type="text" id="crearExpUrl"></td>
+          </tr>
+          <tr>
+            <td>Dias validos: </td>
+            <td>
+              <div class="checkList">
+                <label><input name="crearExpDays" value="1" type="checkbox">Lunes</label>
+                <br>
+                <label><input name="crearExpDays" value="2" type="checkbox">Martes</label>
+                <br>
+                <label><input name="crearExpDays" value="3" type="checkbox">Miercoles</label>
+                <br>
+                <label><input name="crearExpDays" value="4" type="checkbox">Jueves</label>
+                <br>
+                <label><input name="crearExpDays" value="5" type="checkbox">Viernes</label>
+                <br>
+                <label><input name="crearExpDays" value="6" type="checkbox">Sabado</label>
+                <br>
+                <label><input name="crearExpDays" value="0" type="checkbox">Domingo</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Horas validas: </td>
+            <td><input type="text" id="crearExpSchedule" value=""></td>
+          </tr>
+          <tr>
+            <td>Duraciones permitidas: </td>
+            <td>
+              <div class="checkList">
+                <label><input name="crearExpDuration" value="30" type="checkbox">0:30:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="60" type="checkbox">1:00:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="90" type="checkbox">1:30:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="120" type="checkbox">2:00:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="150" type="checkbox">2:30:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="180" type="checkbox">3:00:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="210" type="checkbox">3:30:00</label>
+                <br>
+                <label><input name="crearExpDuration" value="240" type="checkbox">4:00:00</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Activo</td>
+            <td><input type="checkbox" id="crearExpEnabled" checked></td>
+          </tr>
+        </table>
+        <br>
+        <button class="crearExp" id="crearExp">Crear Nuevo Experimento</button>
+        <br>
+        <br>
       </div>
     </div>
     <div class="accountcont" id="RESERVAS">
       <p class="notas">
         Notas:
-        <br>
-        Campos Solo lectura
-        <br>
-        Es posible deshabilitar una reserva.
-        <br>
-        Recuerde guardar los cambios.
+        <br> Campos Solo lectura
+        <br> Es posible deshabilitar una reserva.
+        <br> Recuerde guardar los cambios.
       </p>
       <input type="text" class="Filter" onkeyup="w3.filterHTML('#reservesTable', '.searchItem', this.value)" placeholder="Filter Reserves..">
       <div id="reservaHistAll" align="center" class="info">
@@ -133,10 +207,8 @@
     </div>
     <div class="accountcont" id="BROADCAST">
       <div align="center">
-        <br>
-        BROADCAST:
-        <br>
-        Se enviara un mensaje a todos los usuarios de la pagina, util para anunciar mantenimientos o noticias inmediatas.
+        <br> BROADCAST:
+        <br> Se enviara un mensaje a todos los usuarios de la pagina, util para anunciar mantenimientos o noticias inmediatas.
         <br>
         <input id="m3" autocomplete="off">
         <button class="crearExp" onclick="wsBroadcast(m3.value)" type="button">Broadcast</button>
@@ -145,19 +217,18 @@
       </div>
     </div>
     <div id="id01" class="modal">
-        <form id="reservaForm" class="modal-content modal-content2 animate">
-            <div class="container">
-                <div class="calTopMenu">
-                    <span id="expNameCal" class="popupTopText"></span>
-                    <span class="close closeX" title="Close      Modal">&times;</span>
-                </div>
+      <form id="reservaForm" class="modal-content modal-content2 animate">
+        <div class="container">
+          <div class="calTopMenu">
+            <span id="expNameCal" class="popupTopText"></span>
+            <span class="close closeX" title="Close      Modal">&times;</span>
+          </div>
 
-                <div id="calendarDiv">
-                </div>
-            </div>
-        </form>
+          <div id="calendarDiv">
+          </div>
+        </div>
+      </form>
     </div>
-
     <div id="id02" class="modal">
       <form class="modal-content modal-content2 animate" id="createExpForm">
         <div class="container">
@@ -165,47 +236,7 @@
             <span class="popupTopText">Crear Experimento</span>
             <span class="close closeX" title="Close      Modal">&times;</span>
           </div>
-          <table style="width: 100%">
-            <tr>
-              <td>Nombre: </td>
-              <td><input type="text" id="crearExpNombre"></td>
-            </tr>
-            <tr>
-              <td>Universidad: </td>
-              <td><input type="text" id="crearExpUniversidad"></td>
-            </tr>
-            <tr>
-              <td>Descripción: </td>
-              <td>
-                <textarea id="crearExpDesc" rows="6" maxlength="250"></textarea>
-                <div id="textarea_feedback"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>URL: </td>
-              <td><input type="text" id="crearExpUrl"></td>
-            </tr>
-             <tr>
-              <td>Dias validos: </td>
-              <td><input type="text" id="crearExpDays" value=""></td>
-            </tr>
-            <tr>
-              <td>Horas validas: </td>
-              <td><input type="text" id="crearExpSchedule" value=""></td>
-            </tr>
-            <tr>
-              <td>Duraciones permitidas: </td>
-              <td><input type="text" id="crearExpDuration" value=""></td>
-            </tr>
-            <tr>
-              <td>Enabled</td>
-              <td><input type="checkbox" id="crearExpEnabled" checked></td>
-            </tr>
-            <tr>
-              <td>Crear </td>
-              <td><button id="crearExp">Guardar</button></td>
-            </tr>
-          </table>
+
         </div>
       </form>
     </div>
@@ -223,28 +254,43 @@
         }
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
-        new Tablesort(document.getElementById('reservesTable'), {
-          ascending: true,
-          descending: true
-        });
-        new Tablesort(document.getElementById('usersTable'), {
-          ascending: true,
-          descending: true
-        });
-        new Tablesort(document.getElementById('experimentsTable'), {
-          ascending: true,
-          descending: true
-        });
       }
+
+      function openCity2(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("accountcont2");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks2");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+
+      /*tablesort*/
+      new Tablesort(document.getElementById('reservesTable'), {
+        ascending: true,
+        descending: true
+      });
+      new Tablesort(document.getElementById('usersTable'), {
+        ascending: true,
+        descending: true
+      });
+      new Tablesort(document.getElementById('experimentsTable'), {
+        ascending: true,
+        descending: true
+      });
     </script>
     <script type="text/javascript" src="/js/main.min.js"></script>
     <!--W3 is the filter-->
-     <script src="http://www.w3schools.com/lib/w3.js"></script>
-     <script src='/js/tablesort.js'></script>
+    <script src="http://www.w3schools.com/lib/w3.js"></script>
+    <script src='/js/tablesort.js'></script>
     <!-- Include sort types you need -->
     <script src='/js/tablesort.number.js'></script>
     <script src='/js/tablesort.date.js'></script>
     <script src='/js/tablesort.dotsep.js'></script>
   </body>
-
 </html>

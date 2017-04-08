@@ -301,16 +301,16 @@ function crearExp() {
     }
   })
 }
-/*
+
 $('#crearExp').on('click', function (e) {
   crearExp()
-})*/
+})
 
-$('#createExpForm').on('submit', function (e) {
+/*$('#createExpForm').on('submit', function (e) {
   e.preventDefault()
   crearExp()
   $('#id02').css('display', 'none')
-})
+})*/
 
 
 function experimentsGetAll() {
