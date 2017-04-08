@@ -274,6 +274,14 @@ function crearExp() {
     duration: '['+$('#crearExpDuration').val()+']',
     enabled: $('#crearExpEnabled').is(':checked')
   }
+  $('#crearExpNombre').val('')
+  $('#crearExpUniversidad').val('')
+  $('#crearExpDesc').val('')
+  $('#crearExpUrl').val('')
+  $('#crearExpDays').val('')
+  $('#crearExpSchedule').val('')
+  $('#crearExpDuration').val('')
+  $('#crearExpEnabled').prop('checked', false)
   var jsonData2 = JSON.stringify(jsonData)
   $.ajax({
     type: 'POST',
@@ -301,6 +309,7 @@ $('#crearExp').on('click', function (e) {
 $('#createExpForm').on('submit', function (e) {
   e.preventDefault()
   crearExp()
+  $('#id02').css('display', 'none')
 })
 
 
