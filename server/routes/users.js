@@ -21,6 +21,9 @@ const patchExperimentHandler         = require('../users/handlers/patchExperimen
 const workbenchCheckHandler          = require('../users/handlers/workbenchCheck')
 const experimentReservesHandler      = require('../users/handlers/experimentReserves')
 const passwordChangeHandler          = require('../users/handlers/passwordChange')
+const createCreatorHandler          = require('../users/handlers/createCreator')
+const getAllCreatorsHandler          = require('../users/handlers/getAllCreators')
+const patchCreatorHandler          = require('../users/handlers/patchCreator')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -44,6 +47,9 @@ const patchExperimentConfig          = require('../users/config/patchExperiment'
 const workbenchCheckConfig           = require('../users/config/workbenchCheck')
 const experimentReservesConfig       = require('../users/config/experimentReserves')
 const passwordChangeConfig           = require('../users/config/passwordChange')
+const createCreatorConfig           = require('../users/config/createCreator')
+const getAllCreatorsConfig           = require('../users/config/getAllCreators')
+const patchCreatorConfig           = require('../users/config/patchCreator')
 
 
 module.exports = [
@@ -175,5 +181,22 @@ module.exports = [
     config: passwordChangeConfig,
     handler: passwordChangeHandler
   },
-
+  {
+    method: 'POST',
+    path: '/users/createCreator',
+    config: createCreatorConfig,
+    handler: createCreatorHandler
+  },
+  {
+    method: 'POST',
+    path: '/users/getAllCreators',
+    config: getAllCreatorsConfig,
+    handler: getAllCreatorsHandler
+  },
+  {
+    method:  'PATCH',
+    path:    '/creator/{id}',
+    config:  patchCreatorConfig,
+    handler: patchCreatorHandler
+  },
 ]
