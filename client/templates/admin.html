@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link href="/css/nouislider.min.css" rel="stylesheet">
   </head>
   <body>
     <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
@@ -18,13 +19,16 @@
         <a href="/" class="tablinks">SALIR</a>
       </li>
       <li>
-        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'USUARIOS')"> LISTA DE USUARIOS</a>
+        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'USUARIOS')">USUARIOS</a>
       </li>
       <li>
-        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'EXPERIMENTOS')">LISTA DE EXPERIMENTOS</a>
+        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'EXPERIMENTOS')">EXPERIMENTOS</a>
       </li>
       <li>
-        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'RESERVAS')">LISTA DE RESERVAS</a>
+        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'RESERVAS')">RESERVAS</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'DONADORES')">DONADORES</a>
       </li>
       <li>
         <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'CONTRASEÑA')">CAMBIO DE CONTRASEÑA</a>
@@ -75,7 +79,7 @@
         </table>
       </div>
       <p class="notas">
-        Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H.
+        Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H., la hora final es excluyente
         <br> Las Duraciones permitidas en minutos deben ser multiplos de 30.
         <br> El servidor maneja un horario GMT-5.
         <br> Recuerde guardar los cambios.
@@ -94,16 +98,39 @@
         </div>
       </div>
       <div class="accountcont2" id="crearE">
-        <div id="experimentsAll" align="center" class="info">
-        </div>
         <table class="myTable" style="width: 100%">
           <tr>
-            <td>Nombre: </td>
+            <td>ID Donador: </td>
+            <td>
+              <input type="text" id="crearExpIDCreador">
+              <button id="LookupCreador">Confirmar</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Nombre el Donador (Auto): </td>
+            <td>
+              <input type="text" id="crearExpNombreCreador" disabled>
+            </td>
+          </tr>
+          <tr>
+            <td>Nombre del Experimento: </td>
             <td><input type="text" id="crearExpNombre"></td>
           </tr>
           <tr>
             <td>Universidad: </td>
             <td><input type="text" id="crearExpUniversidad"></td>
+          </tr>
+          <tr>
+            <td>País: </td>
+            <td><input type="text" id="crearExpPais"></td>
+          </tr>
+          <tr>
+            <td>Ciudad: </td>
+            <td><input type="text" id="crearExpCiudad"></td>
+          </tr>
+          <tr>
+            <td>Arduino: </td>
+            <td><input type="text" id="crearExpArduino"></td>
           </tr>
           <tr>
             <td>Descripción: </td>
@@ -113,8 +140,12 @@
             </td>
           </tr>
           <tr>
-            <td>URL: </td>
-            <td><input type="text" id="crearExpUrl"></td>
+            <td>URL Experimento: </td>
+            <td><input type="url" id="crearExpUrl"></td>
+          </tr>
+          <tr>
+            <td>URL Imagen: </td>
+            <td><input type="url" id="crearExpImgUrl"></td>
           </tr>
           <tr>
             <td>Dias validos: </td>
@@ -138,7 +169,13 @@
           </tr>
           <tr>
             <td>Horas validas: </td>
-            <td><input type="text" id="crearExpSchedule" value=""></td>
+            <td>
+              <br>
+              <div id="crearExpSchedule"></div>
+              <br>
+              <span id="crearExpScheduleMin"></span>-<span id="crearExpScheduleMax"></span>
+              <br>
+            </td>
           </tr>
           <tr>
             <td>Duraciones permitidas: </td>
@@ -292,5 +329,33 @@
     <script src='/js/tablesort.number.js'></script>
     <script src='/js/tablesort.date.js'></script>
     <script src='/js/tablesort.dotsep.js'></script>
+
+    <script src="/js/nouislider.min.js"></script>
+    <script>
+      var slider = document.getElementById('crearExpSchedule');
+
+      noUiSlider.create(slider, {
+        start: [0, 24],
+        connect: true,
+        step: 1,
+        range: {
+          'min': 0,
+          'max': 24
+        },
+        margin: 1,
+      });
+
+
+      var paddingMin = document.getElementById('crearExpScheduleMin'),
+        paddingMax = document.getElementById('crearExpScheduleMax');
+
+      slider.noUiSlider.on('update', function (values, handle) {
+        if (handle) {
+          paddingMax.innerHTML = values[handle] ;
+        } else {
+          paddingMin.innerHTML = values[handle];
+        }
+      });
+    </script>
   </body>
 </html>
