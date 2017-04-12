@@ -379,7 +379,7 @@ span.psw {
     align-self: center;
     text-align: center;
     /*vertical-align: middle;*/
-    /*max-width: 200px;*/
+    max-width: 200px;
     overflow: hidden;
     /*white-space: nowrap;*/
     text-overflow: ellipsis;
@@ -388,7 +388,7 @@ span.psw {
 #crearExpSchedule, #crearExpSchedule *{
     overflow: initial !important;
 }
-.myTable input[type=text], .myTable input[type=url]{
+.myTable input[type=text], .myTable input[type=url], .myTable input[type=email]{
     /*border: 0px;*/
     width: 100%;
     height: 100%;
