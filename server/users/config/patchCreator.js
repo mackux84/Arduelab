@@ -14,7 +14,7 @@ module.exports = {
   // uploads - the directory used for writing file uploads. Defaults to os.tmpDir().
   },
   pre: [
-    { method: verifyUniqueCreator, assign: 'user' }
+    { method: verifyUniqueCreator, assign: 'creator' }
   ],
   validate: {
     params: updateUserSchema.paramsSchema,

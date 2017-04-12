@@ -12,7 +12,10 @@ module.exports = {
     scope: 'Admin'
   },
   validate: {
-    headers: updateUserSchema.headerSchema
+    headers: updateUserSchema.headerSchema,
+    payload:Joi.object({
+      identification: Joi.string().required().allow('').description('The Id of the creator').example('7168253795')
+    })
   },
   description: 'Get all users information',
   notes: 'Get information of all users, except password and version Require \'Admin\' scope',

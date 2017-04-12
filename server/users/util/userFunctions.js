@@ -1,17 +1,17 @@
 'use strict'
 
-const Boom      = require('boom')
-const User      = require('../models/User')
+const Boom = require('boom')
+const User = require('../models/User')
 const Reserve = require('../models/Reserve')
 const Creator = require('../models/Creator')
 // const Jwt    = require('jsonwebtoken')
-const Common    = require('./common')
+const Common = require('./common')
 // const bcrypt = require('bcrypt')
 
-function verifyUniqueUser (request, reply) {
+function verifyUniqueUser(request, reply) {
   // Find an entry from the database that matches the email
   User.findOne({
-    email: request.payload.email 
+    email: request.payload.email
   }, (err, user) => {
     // Check whether the email is already taken and error out if so
     if (user) {
@@ -24,7 +24,7 @@ function verifyUniqueUser (request, reply) {
     reply(request.payload)
   })
 }
-function verifyUniqueCreator (request, reply) {
+function verifyUniqueCreator(request, reply) {
   // Find an entry from the database that matches the email
   Creator.findOne({
     identification: request.payload.identification
@@ -40,8 +40,23 @@ function verifyUniqueCreator (request, reply) {
     reply(request.payload)
   })
 }
-
-function verifyUniqueReserve (request, reply) {
+function verifyCreatorExists(request, reply) {
+  // Find an entry from the database that matches the email
+  Creator.findOne({
+    identification: request.payload.idCreator
+  }, (err, user) => {
+    // Check whether the email is already taken and error out if so
+    if (user) {
+      if (user.identification === request.payload.idCreator) {
+        reply(request.payload)
+        return
+      }
+    }
+    // If everything checks out, send the payload through to the route handler
+    reply(Boom.badRequest('ESTA IDENTIFICACION NO EXISTE'))
+  })
+}
+function verifyUniqueReserve(request, reply) {
   var date = new Date(request.payload.start)
   Reserve.findOne({
     initialDate: date,
@@ -57,7 +72,7 @@ function verifyUniqueReserve (request, reply) {
     reply(request.payload)
   })
 }
-function verifyCredentials (request, reply) {
+function verifyCredentials(request, reply) {
   // const password = request.payload.password
   // Find an entry from the database that matches the email
   User.findOne({
@@ -86,13 +101,13 @@ function verifyCredentials (request, reply) {
           return
         }
         reply(user)
-      }else {
+      } else {
         reply(Boom.forbidden('NOMBRE DE USUARIO O CONTRASEÑA INVALIDOS'))
       }
-    }else {
+    } else {
       if (11000 === err.code || 11001 === err.code) {
         reply(Boom.forbidden('POR FAVOR INGRESE OTRA CUENTA DE CORREO ELECTRONICO, LA SUMINISTRADA YA SE ENCUENTRA EN USO'))
-      }else {
+      } else {
         console.error(err)
         reply(Boom.badImplementation(err))
         return
@@ -100,7 +115,7 @@ function verifyCredentials (request, reply) {
     }
   })
 }
-function createToken (tokenData) {
+function createToken(tokenData) {
   let Jwt = require('jsonwebtoken')
   let key = require('../../config/auth').key
   let a = Common.encrypt('' + tokenData.email)
@@ -108,10 +123,10 @@ function createToken (tokenData) {
   let c = Common.encrypt('' + tokenData.id)
   let d = a + ';' + b + ';' + c
   let e = Common.encrypt('' + d)
-  let f = { hash: e, type:'user' }
+  let f = { hash: e, type: 'user' }
   return Jwt.sign(f, key.privateKey, { algorithm: 'HS256', expiresIn: key.tokenExpiry })
 }
-function createToken2 (tokenData) {
+function createToken2(tokenData) {
   let Jwt = require('jsonwebtoken')
   let moment = require('moment')
   let key = require('../../config/auth').key
@@ -124,12 +139,12 @@ function createToken2 (tokenData) {
   let g = Common.encrypt('' + tokenData.experimento)
   let h = a + ';' + b + ';' + c + ';' + d + ';' + e + ';' + f + ';' + g
   let i = Common.encrypt('' + h)
-  var initial = moment(tokenData.hora + ':' + tokenData.minuto + ':00-'+tokenData.dia+'-'+(tokenData.mes+1)+'-'+tokenData.anio, 'HH:mm:ss-DD-MM-YYYY').unix()
+  var initial = moment(tokenData.hora + ':' + tokenData.minuto + ':00-' + tokenData.dia + '-' + (tokenData.mes + 1) + '-' + tokenData.anio, 'HH:mm:ss-DD-MM-YYYY').unix()
   let j = { hash: i, type: 'workbench', iat: initial }
-  let expires= tokenData.duracion * 60 * 1000 //minutos*segundos*miliseg
+  let expires = tokenData.duracion * 60 * 1000 //minutos*segundos*miliseg
   return Jwt.sign(j, key.privateKey, { algorithm: 'HS256', expiresIn: expires })
 }
-function decyptToken (token) {
+function decyptToken(token) {
   let hash = token.hash
   let a = Common.decrypt(hash)
   let b = a.split(';')
@@ -146,7 +161,7 @@ function decyptToken (token) {
   }
   return decoded
 }
-function decyptToken2 (token) {
+function decyptToken2(token) {
   let hash = token.hash
   let a = Common.decrypt(hash)
   let b = a.split(';')
@@ -165,7 +180,7 @@ function decyptToken2 (token) {
     mes: mes,
     anio: anio,
     duracion: duracion,
-    experimento:idExp,
+    experimento: idExp,
     iat: token.iat,
     exp: token.exp,
     type: token.type
@@ -173,12 +188,13 @@ function decyptToken2 (token) {
   return decoded
 }
 module.exports = {
-  verifyUniqueUser:    verifyUniqueUser,
+  verifyUniqueUser: verifyUniqueUser,
   verifyUniqueReserve: verifyUniqueReserve,
-  verifyCredentials:   verifyCredentials,
-  createToken:         createToken,
-  createToken2:        createToken2,
-  decyptToken:         decyptToken,
-  decyptToken2:        decyptToken2,
-  verifyUniqueCreator: verifyUniqueCreator
+  verifyCredentials: verifyCredentials,
+  createToken: createToken,
+  createToken2: createToken2,
+  decyptToken: decyptToken,
+  decyptToken2: decyptToken2,
+  verifyUniqueCreator: verifyUniqueCreator,
+  verifyCreatorExists: verifyCreatorExists
 }
