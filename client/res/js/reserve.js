@@ -156,7 +156,7 @@ function getExperimentos() {
         +'<thead>'
         + '<tr class="Theader" >'
           + '<th>Nombre: </th>'
-          // + '<th>Pic: </th>'
+          + '<th>Imagen: </th>'
           + '<th>Descripción: </th>'
           + '<th>Universidad: </th>'
           + '<th>Horas validas: </th>'
@@ -170,7 +170,7 @@ function getExperimentos() {
         table +=
         '<tr>'
         + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
-        // + '<td><img></td>'//TODO: add image
+        + '<td><img src="'+element.image+'"  height="50" width="50"></td>'
         + '<td>' + element.description + '</td>'
         + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
         + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
