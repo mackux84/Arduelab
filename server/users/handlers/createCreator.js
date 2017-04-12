@@ -9,7 +9,7 @@ module.exports = function (request, reply) {
   creator.name           = request.payload.name
   creator.email          = request.payload.email
   creator.telephone      = request.payload.telephone
-  creator.celphone       = request.payload.celphone
+  creator.cellphone       = request.payload.cellphone
 
   creator.save((error, creator) => {
     if (!error) {
