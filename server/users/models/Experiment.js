@@ -24,6 +24,10 @@ const experimentsModel = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
+  docCreator: {
+    type: String,
+    required: true
+  },
   arduino: {
     type: String,
     required: true

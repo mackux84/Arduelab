@@ -2,6 +2,7 @@
 
 const Joi              = require('joi')
 const updateUserSchema = require('../schemas/updateUser')
+const verifyCreatorExists = require('../util/userFunctions').verifyCreatorExists
 const errors           = require('../../config/errors')
 Joi.objectId = require('joi-objectid')(Joi)
 
@@ -13,6 +14,10 @@ module.exports = {
   // maxBytes - limits the size of incoming payloads to the specified byte count. Allowing very large payloads may cause the server to run out of memory. Defaults to 1048576 (1MB).
   // uploads - the directory used for writing file uploads. Defaults to os.tmpDir().
   },
+  pre: [
+    // Before the route handler runs, verify that the user is unique
+    { method: verifyCreatorExists }
+  ],
   validate: {
     params: updateUserSchema.paramsSchema,
     headers: updateUserSchema.headerSchema,
@@ -22,6 +27,7 @@ module.exports = {
       city: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).description('Ciudad del experimento').example('Barranquilla'),
       country: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).description('País del experimento').example('Colombia'),
       idCreator: Joi.objectId().description('Identificador de creador').example('235325425513125312353463'),
+      docCreator: Joi.string().required().description('Documento de identidad del creador').example('8859236584'),
       arduino: Joi.string().description('Arduino usado en el experimento').example('Arduino Mega 2560'),
       image: Joi.string().min(3).description('Link de la Imagen').example('http://i.imgur.com/mG1n223.gif'),
       url: Joi.string().min(3).description('The Experiment Url').example('http://google.com'),

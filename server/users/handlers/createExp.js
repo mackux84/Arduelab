@@ -10,6 +10,7 @@ module.exports = function (request, reply) {
   experiment.city        = request.payload.city
   experiment.country     = request.payload.country
   experiment.idCreator   = request.payload.idCreator
+  experiment.docCreator  = request.payload.docCreator
   experiment.arduino     = request.payload.arduino
   experiment.image       = request.payload.image
   experiment.url         = request.payload.url

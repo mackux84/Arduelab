@@ -1,6 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
+const verifyUniqueCreator = require('../util/userFunctions').verifyUniqueCreator
 const errors = require('../../config/errors')
 const updateUserSchema = require('../schemas/updateUser')
 Joi.objectId = require('joi-objectid')(Joi)
@@ -18,6 +19,10 @@ module.exports = {
     strategy: 'jwt',
     scope: ['Admin']
   },
+  pre: [
+    // Before the route handler runs, verify that the user is unique
+    { method: verifyUniqueCreator }
+  ],
   validate: {
     headers: updateUserSchema.headerSchema,
     payload: Joi.object({
@@ -26,6 +31,7 @@ module.exports = {
       city: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).required().description('Ciudad del experimento').example('Barranquilla'),
       country: Joi.string().regex(/^[a-zA-Z0-9 ]{3,60}$/).min(3).max(60).required().description('País del experimento').example('Colombia'),
       idCreator: Joi.objectId().required().description('Identificador de creador').example('235325425513125312353463'),
+      docCreator: Joi.string().required().description('Documento de identidad del creador').example('8859236584'),
       arduino: Joi.string().min(3).required().description('Arduino usado en el experimento').example('Arduino Mega 2560'),
       image: Joi.string().min(3).required().description('Link de la Imagen').example('http://i.imgur.com/mG1n223.gif'),
       url: Joi.string().min(3).required().description('Enlace del experimento').example('http://192.168.0.1:5001'),
