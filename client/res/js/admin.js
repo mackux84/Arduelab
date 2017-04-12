@@ -11,23 +11,23 @@ function userListShow() {
     success: function (json) {
       var table =
         '<table class="myTable" id="usersTable">'
-        +'<thead>'
+        + '<thead>'
         + '<tr class="Theader" >'
-          //+ '<th  >User Id </th>'
-          //+ '<th  >Fecha de creacion</th>'
-          //+ '<th  >Fecha de modificacion</th>'
-          + '<th>Nombre</th>'
-          + '<th>Email</th>'
-          + '<th>Universidad</th>'
-          + '<th>Scope</th>'
-          + '<th>Verificado</th>'
-        
-          // + '<th data-sort-method="none" class="no-sort">Reservas</th>'
-          + '<th data-sort-method="none" class="no-sort">Password</th>'
-          + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
-          + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
+        //+ '<th  >User Id </th>'
+        //+ '<th  >Fecha de creacion</th>'
+        //+ '<th  >Fecha de modificacion</th>'
+        + '<th>Nombre</th>'
+        + '<th>Email</th>'
+        + '<th>Universidad</th>'
+        + '<th>Scope</th>'
+        + '<th>Verificado</th>'
+
+        // + '<th data-sort-method="none" class="no-sort">Reservas</th>'
+        + '<th data-sort-method="none" class="no-sort">Password</th>'
+        + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
+        + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
         + '</tr>'
-        +'</thead>'
+        + '</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         table +=
@@ -35,19 +35,19 @@ function userListShow() {
           //+ '<td>' + element._id + '</td>'
           //+ '<td >' + new Date(element.created_At) + '</td>'
           //+ '<td >' + new Date(element.updated_At) + '</td>'
-          + '<td data-sort='+element.username+'><input type="text" name="usernameUser;' + element._id + '" Value="' + element.username + '" id="' + element._id + ';' + element.username + '"/></td>'
-          + '<td data-sort='+element.email+'><input type="text" name="emailUser;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
-          + '<td data-sort='+element.university+'><input type="text" name="universityUser;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
+          + '<td data-sort=' + element.username + '><input type="text" name="usernameUser;' + element._id + '" Value="' + element.username + '" id="' + element._id + ';' + element.username + '"/></td>'
+          + '<td data-sort=' + element.email + '><input type="email" name="emailUser;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
+          + '<td data-sort=' + element.university + '><input type="text" name="universityUser;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
           // + '<td data-sort=' + element.scope + '><input type="text" name="scopeUser;' + element._id + '" Value="' + element.scope + '" id="' + element._id + ';' + element.scope + '"/></td>'
           + '<td data-sort=' + element.scope + '><select name="selectUser;' + element._id + '" id="' + element._id + ';' + element.scope + '">'
         if (element.scope === 'Admin') {
-          table+= '<option value="User">User</option>'
+          table += '<option value="User">User</option>'
             + '<option value="Admin" selected="selected">Admin</option>'
         } else {
-          table+= '<option value="User" selected="selected">User</option>'
+          table += '<option value="User" selected="selected">User</option>'
             + '<option value="Admin">Admin</option>'
         }
-        table+= '</select></td>'
+        table += '</select></td>'
         if (element.isVerified) {
           table += '<td data-sort="true"><input type="checkbox" name="isVerified;' + element._id + '" Value="' + element.isVerified + '" id="' + element._id + ';' + element.isVerified + '" checked/></td>'
         } else {
@@ -55,10 +55,10 @@ function userListShow() {
         }
         table +=
           // '<td><button class="reservasUser" name="' + element._id + '">Ver</button></td>'
-           '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
+          '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
           + '<td><button class="editarUser" name="' + element._id + '">Editar</button></td>'
           + '<td><button class="reiniciarUser" name="' + element._id + '">Cancelar</button></td>'
-          +'</tr>'
+          + '</tr>'
       }
       table += '</table >'
       $('#userList').html('')
@@ -118,9 +118,9 @@ function userListShow() {
         // $('[name="scopeUser;' + name_id + '"]').attr('value', $('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
         // $('[name="scopeUser;' + name_id + '"]').val($('[name="scopeUser;' + name_id + '"]').attr('id').split(';')[1])
         if ($('[name="selectUser;' + name_id + '"]').prop('id').split(';')[1] === 'Admin') {
-          $('[name="selectUser;' + name_id + '"] option[value="Admin"]').prop('selected','selected')
+          $('[name="selectUser;' + name_id + '"] option[value="Admin"]').prop('selected', 'selected')
         } else {
-          $('[name="selectUser;' + name_id + '"] option[value="User"]').prop('selected','selected')
+          $('[name="selectUser;' + name_id + '"] option[value="User"]').prop('selected', 'selected')
         }
 
         $('[name="isVerified;' + name_id + '"]').attr('value', $('[name="isVerified;' + name_id + '"]').attr('id').split(';')[1])
@@ -186,32 +186,32 @@ function reservaHistoryAll() {
     success: function (json) {
       var table =
         '<table class="myTable" id="reservesTable">'
-        +'<thead>'
+        + '<thead>'
         + '<tr class="Theader" >'
-          + '<th># </th>'
-          + '<th>Token: </th>'
-          + '<th>Experiment Name: </th>'
-          + '<th>Fecha de creación: </th>'
-          + '<th>Fecha Reservada: </th>'
-          + '<th>Duración: </th>'
-          + '<th>Reservado por: </th>'
-          + '<th>Usado: </th>'
-          + '<th>Disponible: </th>'
-          + '<th data-sort-method="none" class="no-sort">Guardar: </th>'
-          + '</tr>'
-        +'</thead>'
+        + '<th># </th>'
+        + '<th>Token: </th>'
+        + '<th>Experiment Name: </th>'
+        + '<th>Fecha de creación: </th>'
+        + '<th>Fecha Reservada: </th>'
+        + '<th>Duración: </th>'
+        + '<th>Reservado por: </th>'
+        + '<th>Usado: </th>'
+        + '<th>Disponible: </th>'
+        + '<th data-sort-method="none" class="no-sort">Guardar: </th>'
+        + '</tr>'
+        + '</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         var ini = (new Date(element.created_At)).toLocaleString()
         var fin = (new Date(element.initialDate)).toUTCString()
-        table+=  
-           '<tr class="searchItem">'
+        table +=
+          '<tr class="searchItem">'
           // + '<td>' + element._id + '</td>'
-          + '<td>'+(index+1)+'</td>'
+          + '<td>' + (index + 1) + '</td>'
           + '<td><textarea readonly>' + element.token + '</textarea></td>'
           + '<td>' + element.expName + '</td>'
           + '<td>' + ini + '</td>'
-          + '<td>' + fin.substring(0,fin.length-3) + '</td>'
+          + '<td>' + fin.substring(0, fin.length - 3) + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
           + '<td>' + element.email + '</td>'
         if (element.used) {
@@ -225,7 +225,7 @@ function reservaHistoryAll() {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-           '<td><button class="guardarReserva" name="' + element._id + '">Guardar</button></td>'
+          '<td><button class="guardarReserva" name="' + element._id + '">Guardar</button></td>'
           + '</tr>'
       }
       table += '</table >'
@@ -264,24 +264,38 @@ function reservaHistoryAll() {
 }
 
 function crearExp() {
+  var crearExpDays = $('input[name=crearExpDays]:checked').map(
+    function () {
+      return this.value
+    }).get().join(',')
+  var crearExpDuration = $('input[name=crearExpDuration]:checked').map(
+    function () {
+      return this.value
+    }).get().join(',')
+  var crearExpScheduleMin = $('#crearExpScheduleMin').text()
+  crearExpScheduleMin = parseInt(crearExpScheduleMin.toString())
+  var crearExpScheduleMax = $('#crearExpScheduleMax').text()
+  if (crearExpScheduleMax == '23.59') {
+    crearExpScheduleMax = '24'
+  }
+  crearExpScheduleMax = parseInt(crearExpScheduleMax.toString())
   var jsonData = {
+    idCreator: $('#crearExpNombreCreador').attr('name'),
+    docCreator: $('#crearExpIDCreador').val(),
     name: $('#crearExpNombre').val(),
     university: $('#crearExpUniversidad').val(),
+    country: $('#crearExpPais').val(),
+    city: $('#crearExpCiudad').val(),
+    arduino: $('#crearExpArduino').val(),
     description: $('#crearExpDesc').val(),
+    image: $('#crearExpImgUrl').val(),
     url: $('#crearExpUrl').val(),
-    days: '['+$('#crearExpDays').val()+']',
-    schedule: '['+$('#crearExpSchedule').val()+']',
-    duration: '['+$('#crearExpDuration').val()+']',
+    days: '[' + crearExpDays + ']',
+    schedule: '[' + crearExpScheduleMin + ',' + crearExpScheduleMax + ']',
+    duration: '[' + crearExpDuration + ']',
+
     enabled: $('#crearExpEnabled').is(':checked')
   }
-  $('#crearExpNombre').val('')
-  $('#crearExpUniversidad').val('')
-  $('#crearExpDesc').val('')
-  $('#crearExpUrl').val('')
-  $('#crearExpDays').val('')
-  $('#crearExpSchedule').val('')
-  $('#crearExpDuration').val('')
-  $('#crearExpEnabled').prop('checked', false)
   var jsonData2 = JSON.stringify(jsonData)
   $.ajax({
     type: 'POST',
@@ -295,6 +309,19 @@ function crearExp() {
     success: function (json) {
       alert(json.message)
       experimentsGetAll()
+      $('#crearExpScheduleMin').val('')
+      $('#crearExpScheduleMax').val('')
+      $('#crearExpNombreCreador').val('')
+      $('#crearExpNombreCreador').attr('name', '')
+      $('#crearExpemailCreador').val('')
+      $('#crearExpNombre').val('')
+      $('#crearExpUniversidad').val('')
+      $('#crearExpPais').val('')
+      $('#crearExpCiudad').val('')
+      $('#crearExpArduino').val('')
+      $('#crearExpDesc').val('')
+      $('#crearExpImgUrl').val('')
+      $('#crearExpUrl').val('')
     },
     error: function (json) {
       alert(json.responseJSON.message)
@@ -306,12 +333,44 @@ $('#crearExp').on('click', function (e) {
   crearExp()
 })
 
+function LookupCreador() {
+  var selectedCreator = $('#crearExpIDCreador').val()
+  var jsonData = {
+    identification: selectedCreator,
+  }
+  var jsonData2 = JSON.stringify(jsonData)
+  $.ajax({
+    type: 'POST',
+    url: '/users/getAllCreators',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    data: jsonData2,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (json) {
+      $('#crearExpNombreCreador').val(json[0].name)
+      $('#crearExpNombreCreador').attr('value', json[0].name)
+      $('#crearExpNombreCreador').attr('name', json[0]._id)
+      $('#crearExpemailCreador').val(json[0].email)
+      $('#crearExpemailCreador').attr('value', json[0].email)
+      document.getElementById('crearExp').disabled = false
+    },
+    error: function (json) {
+      alert('Id de Donador no encontrado')
+      //console.log(json)
+    }
+  })
+}
+
+$('#LookupCreador').on('click', function (e) {
+  LookupCreador()
+})
 /*$('#createExpForm').on('submit', function (e) {
   e.preventDefault()
   crearExp()
   $('#id02').css('display', 'none')
 })*/
-
 
 function experimentsGetAll() {
   $('#experimentsAll').html('')
@@ -324,46 +383,61 @@ function experimentsGetAll() {
     success: function (json) {
       var table =
         '<table class="myTable" id="experimentsTable">'
-        +'<thead>'
+        + '<thead>'
         + '<tr class="Theader" >'
-          + '<th>ID: </td>'
-          + '<th>Nombre: </th>'
-          + '<th>Universidad: </th>'
-          + '<th>Descripción: </th>'
-          + '<th>Fecha de creación: </th>'
-          + '<th>Url: </th>'
-          + '<th>Dias validos: </th>'
-          + '<th>Horas validas: </th>'
-          + '<th>Duraciones permitidas: </th>'
-          + '<th>Disponible: </th>'
-          + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
-          + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
+        + '<th>ID: </td>'
+        + '<th>Fecha de creación: </th>'
+        + '<th>Nombre: </th>'
+        + '<th>Universidad: </th>'
+        + '<th>País: </th>'
+        + '<th>Ciudad: </th>'
+        + '<th>ID Donador: </th>'
+        + '<th>Arduino: </th>'
+        + '<th>Descripción: </th>'
+        + '<th>Url Imagen: </th>'
+        + '<th>Url Experimento: </th>'
+        + '<th>Dias validos: </th>'
+        + '<th>Horas validas: </th>'
+        + '<th>Duraciones permitidas: </th>'
+        + '<th>Disponible: </th>'
+        + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
+        + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
         + '</tr>'
-        +'</thead>'
+        + '</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         table +=
           '<tr class="searchItem">'
-          + '<td>'+element._id+'</td>'
-          + '<td data-sort="'+element.name+'"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
-          + '<td data-sort='+element.university+'><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-          + '<td><textarea name="descriptionExp;' + element._id + '" Value="' + element.description + '" id="' + element._id + ';' + element.description + '">' + element.description + '</textarea></td>'
+          + '<td>' + element._id + '</td>'
           + '<td>' + new Date(element.created_At).toLocaleString() + '</td>'
-          + '<td data-sort='+element.url+'><input type="text" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
-          + '<td data-sort='+element.days+'><input type="text" name="daysExp;' + element._id + '" Value="' + element.days + '" id="' + element._id + ';' + element.days + '"/></td>'
-          + '<td data-sort='+element.schedule+'><input type="text" name="scheduleExp;' + element._id + '" Value="' + element.schedule + '" id="' + element._id + ';' + element.schedule + '"/></td>'
-          + '<td data-sort='+element.duration+'><input type="text" name="durationExp;' + element._id + '" Value="' + element.duration + '" id="' + element._id + ';' + element.duration + '"/></td>'
+          + '<td data-sort="' + element.name + '"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
+          + '<td data-sort=' + element.university + '><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
+
+          + '<td data-sort=' + element.country + '><input type="text" name="countryExp;' + element._id + '" Value="' + element.country + '" id="' + element._id + ';' + element.country + '"/></td>'
+          + '<td data-sort=' + element.city + '><input type="text" name="cityExp;' + element._id + '" Value="' + element.city + '" id="' + element._id + ';' + element.city + '"/></td>'
+          + '<td data-sort=' + element.docCreator + '>'
+          + '<input type="text" class="docCreatorExp" name="docCreatorExp;' + element._id + '" Value="' + element.docCreator + '" id="' + element._id + ';' + element.docCreator + '"/>'
+          + '<input type="text" name="idCreatorExp;' + element._id + '" Value="' + element.idCreator + '" id="' + element._id + ';' + element.idCreator + '" style="display:none;"/>'
+          + '<button class="verificarCreador" name="' + element._id + '">Confirmar</button>'
+          + '</td > '
+          + '<td data-sort=' + element.arduino + '><input type="text" name="arduinoExp;' + element._id + '" Value="' + element.arduino + '" id="' + element._id + ';' + element.arduino + '"/></td>'
+          + '<td><textarea name="descriptionExp;' + element._id + '" Value="' + element.description + '" id="' + element._id + ';' + element.description + '">' + element.description + '</textarea></td>'
+          + '<td data-sort=' + element.image + '><input type="url" name="imageExp;' + element._id + '" Value="' + element.image + '" id="' + element._id + ';' + element.image + '"/></td>'
+          + '<td data-sort=' + element.url + '><input type="url" name="urlExp;' + element._id + '" Value="' + element.url + '" id="' + element._id + ';' + element.url + '"/></td>'
+          + '<td data-sort=' + element.days + '><input type="text" name="daysExp;' + element._id + '" Value="' + element.days + '" id="' + element._id + ';' + element.days + '"/></td>'
+          + '<td data-sort=' + element.schedule + '><input type="text" name="scheduleExp;' + element._id + '" Value="' + element.schedule + '" id="' + element._id + ';' + element.schedule + '"/></td>'
+          + '<td data-sort=' + element.duration + '><input type="text" name="durationExp;' + element._id + '" Value="' + element.duration + '" id="' + element._id + ';' + element.duration + '"/></td>'
         if (element.enabled) {
           table += '<td data-sort="true"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
         } else {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-           '<td><button class="editarExp" name="' + element._id + '">Guardar</button></td>'
+          '<td><button class="editarExp" name="' + element._id + '" id="editarExp;'+element._id+'">Guardar</button></td>'
           + '<td><button class="reiniciarExp" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
       }
-      table+= '</table >'
+      table += '</table >'
       $('#experimentsAll').html('')
       $('#experimentsAll').html(table)
       $('.editarExp').on('click', function (e) {
@@ -374,11 +448,17 @@ function experimentsGetAll() {
         jsonData = {
           name: $('[name="nameExp;' + name_id + '"]').val(),
           university: $('[name="universityExp;' + name_id + '"]').val(),
+          city: $('[name="cityExp;' + name_id + '"]').val(),
+          country: $('[name="countryExp;' + name_id + '"]').val(),
+          idCreator: $('[name="idCreatorExp;' + name_id + '"]').val(),
+          docCreator: $('[name="docCreatorExp;' + name_id + '"]').val(),
+          arduino: $('[name="arduinoExp;' + name_id + '"]').val(),
+          image: $('[name="arduinoExp;' + name_id + '"]').val(),
           description: $('[name="descriptionExp;' + name_id + '"]').val(),
           url: $('[name="urlExp;' + name_id + '"]').val(),
-          days: '['+$('[name="daysExp;' + name_id + '"]').val()+']',
-          schedule: '['+$('[name="scheduleExp;' + name_id + '"]').val()+']',
-          duration: '['+$('[name="durationExp;' + name_id + '"]').val()+']',
+          days: '[' + $('[name="daysExp;' + name_id + '"]').val() + ']',
+          schedule: '[' + $('[name="scheduleExp;' + name_id + '"]').val() + ']',
+          duration: '[' + $('[name="durationExp;' + name_id + '"]').val() + ']',
           enabled: $('[name="isEnabledExp;' + name_id + '"]').is(':checked')
         }
         var jsonData2 = JSON.stringify(jsonData)
@@ -408,6 +488,18 @@ function experimentsGetAll() {
         $('[name="nameExp;' + name_id + '"]').val($('[name="nameExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="universityExp;' + name_id + '"]').attr('value', $('[name="universityExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="universityExp;' + name_id + '"]').val($('[name="universityExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="countryExp;' + name_id + '"]').attr('value', $('[name="countryExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="countryExp;' + name_id + '"]').val($('[name="countryExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="cityExp;' + name_id + '"]').attr('value', $('[name="cityExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="cityExp;' + name_id + '"]').val($('[name="cityExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="docCreatorExp;' + name_id + '"]').attr('value', $('[name="docCreatorExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="docCreatorExp;' + name_id + '"]').val($('[name="docCreatorExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="idCreatorExp;' + name_id + '"]').attr('value', $('[name="idCreatorExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="idCreatorExp;' + name_id + '"]').val($('[name="idCreatorExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="arduinoExp;' + name_id + '"]').attr('value', $('[name="arduinoExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="arduinoExp;' + name_id + '"]').val($('[name="arduinoExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="imageExp;' + name_id + '"]').attr('value', $('[name="imageExp;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="imageExp;' + name_id + '"]').val($('[name="imageExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="descriptionExp;' + name_id + '"]').attr('value', $('[name="descriptionExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="descriptionExp;' + name_id + '"]').val($('[name="descriptionExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="urlExp;' + name_id + '"]').attr('value', $('[name="urlExp;' + name_id + '"]').attr('id').split(';')[1])
@@ -424,7 +516,40 @@ function experimentsGetAll() {
         } else {
           $('[name="enabledExp;' + name_id + '"]').prop('checked', false)
         }
+        document.getElementById('editarExp;'+ name_id ).disabled = true
+        $('[name="idCreatorExp;' + name_id + '"]').val('')
       })
+      $('.verificarCreador').on('click', function (e) {
+        var name_id = $(this).attr('name')
+        var selectedCreator = $('[name="docCreatorExp;' + name_id + '"]').val()
+        var jsonData = {
+          identification: selectedCreator,
+        }
+        var jsonData2 = JSON.stringify(jsonData)
+        $.ajax({
+          type: 'POST',
+          url: '/users/getAllCreators',
+          headers: {
+            'Authorization': window.location.pathname.split('/')[3]
+          },
+          data: jsonData2,
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (json) {
+            $('#idCreatorExp').val(json[0]._id)
+            document.getElementById('editarExp;'+name_id).disabled = false
+          },
+          error: function (json) {
+            alert('Id de Donador no encontrado')
+            //console.log(json)
+          }
+        })
+      })
+      $('.docCreatorExp').keyup( function (e) {
+        var name_id = $(this).attr('name').split(';')[1]
+        document.getElementById('editarExp;'+name_id).disabled = true
+        $('[name="idCreatorExp;' + name_id + '"]').val('')
+      }) 
     },
     error: function (json) {
       alert(json.responseJSON.message)
@@ -432,7 +557,153 @@ function experimentsGetAll() {
   })
 }
 
-$(document).ready(function () { 
+function creatorListShow() {
+  var selectedCreator = ''
+  var jsonData = {
+    identification: selectedCreator,
+  }
+  var jsonData2 = JSON.stringify(jsonData)
+  $.ajax({
+    type: 'POST',
+    url: '/users/getAllCreators',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    data: jsonData2,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (json) {
+      var table =
+        '<table class="myTable" id="creatorsTable">'
+        + '<thead>'
+        + '<tr class="Theader" >'
+        + '<th>Identificacion</th>'
+        + '<th>Nombre</th>'
+        + '<th>Email</th>'
+        + '<th>Telefono</th>'
+        + '<th>Celular</th>'
+        + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
+        + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
+        + '</tr>'
+        + '</thead>'
+      for (var index = 0; index < json.length; index++) {
+        var element = json[index]
+        table +=
+          '<tr class="searchItem">'
+          + '<td data-sort=' + element.identification + '><input type="text" name="idCreator;' + element._id + '" Value="' + element.identification + '" id="' + element._id + ';' + element.identification + '"/></td>'
+          + '<td data-sort=' + element.name + '><input type="text" name="nameCreator;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
+          + '<td data-sort=' + element.email + '><input type="email" name="emailCreator;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
+          + '<td data-sort=' + element.telephone + '><input type="text" name="telephoneCreator;' + element._id + '" Value="' + element.telephone + '" id="' + element._id + ';' + element.telephone + '"/></td>'
+          + '<td data-sort=' + element.cellphone + '><input type="text" name="cellphoneCreator;' + element._id + '" Value="' + element.cellphone + '" id="' + element._id + ';' + element.cellphone + '"/></td>'
+          + '<td><button class="editarCreator" name="' + element._id + '">Editar</button></td>'
+          + '<td><button class="reiniciarCreator" name="' + element._id + '">Cancelar</button></td>'
+          + '</tr>'
+      }
+      table += '</table >'
+      $('#creadoresList').html('')
+      $('#creadoresList').html(table)
+      $('.editarCreator').on('click', function (e) {
+        //patch creator
+        e.preventDefault()
+        var jsonData = {}
+        var name_id = $(this).attr('name')
+        if ($('[name="idCreator;' + name_id + '"]').val() === $('[name="idCreator;' + name_id + '"]').attr('id').split(';')[1]) {
+          jsonData = {
+            name: $('[name="nameCreator;' + name_id + '"]').val(),
+            email: $('[name="emailCreator;' + name_id + '"]').val(),
+            telephone: $('[name="telephoneCreator;' + name_id + '"]').val(),
+            cellphone: $('[name="cellphoneCreator;' + name_id + '"]').val(),
+          }
+        } else {
+          jsonData = {
+            identification: $('[name="idCreator;' + name_id + '"]').val(),
+            name: $('[name="nameCreator;' + name_id + '"]').val(),
+            email: $('[name="emailCreator;' + name_id + '"]').val(),
+            telephone: $('[name="telephoneCreator;' + name_id + '"]').val(),
+            cellphone: $('[name="cellphoneCreator;' + name_id + '"]').val(),
+          }
+        }
+        console.log(jsonData)
+        var jsonData2 = JSON.stringify(jsonData)
+        console.log(jsonData2)
+        $.ajax({
+          type: 'PATCH',
+          url: '/creator/' + name_id,
+          headers: {
+            'Authorization': window.location.pathname.split('/')[3]
+          },
+          data: jsonData2,
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (json) {
+            alert(json.message)
+          },
+          error: function (json) {
+            alert(json.responseJSON.message)
+          }
+        })
+      })
+      $('.reiniciarCreator').on('click', function (e) {
+        //Reset creator values
+        e.preventDefault()
+        var name_id = $(this).attr('name')
+        $('[name="idCreator;' + name_id + '"]').attr('value', $('[name="idCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="idCreator;' + name_id + '"]').val($('[name="idCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="nameCreator;' + name_id + '"]').attr('value', $('[name="nameCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="nameCreator;' + name_id + '"]').val($('[name="nameCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="emailCreator;' + name_id + '"]').attr('value', $('[name="emailCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="emailCreator;' + name_id + '"]').val($('[name="emailCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="telephoneCreator;' + name_id + '"]').attr('value', $('[name="telephoneCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="telephoneCreator;' + name_id + '"]').val($('[name="telephoneCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="cellphoneCreator;' + name_id + '"]').attr('value', $('[name="cellphoneCreator;' + name_id + '"]').attr('id').split(';')[1])
+        $('[name="cellphoneCreator;' + name_id + '"]').val($('[name="cellphoneCreator;' + name_id + '"]').attr('id').split(';')[1])
+      })
+    },
+    error: function (json) {
+      //console.log('get all users error')
+      //console.log(json)
+    }
+  })
+}
+
+function CrearCreador() {
+  var jsonData = {
+    identification: $('#crearCreadorID').val(),
+    name: $('#crearCreadorName').val(),
+    email: $('#crearCreadorEmail').val(),
+    telephone: $('#crearCreadorTel').val(),
+    cellphone: $('#crearCreadorCel').val(),
+  }
+  var jsonData2 = JSON.stringify(jsonData)
+  $.ajax({
+    type: 'POST',
+    url: '/users/createCreator',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    data: jsonData2,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (json) {
+      alert(json.message)
+      creatorListShow()
+      $('#crearCreadorID').val('')
+      $('#crearCreadorID').val('')
+      $('#crearCreadorEmail').val('')
+      $('#crearCreadorTel').val('')
+      $('#crearCreadorCel').val('')
+    },
+    error: function (json) {
+      alert(json.responseJSON.message)
+    }
+  })
+}
+
+$('#CrearCreador').on('click', function (e) {
+  CrearCreador()
+})
+
+$(document).ready(function () {
 
   var experimentsAll = document.getElementById('experimentsAll')
   if (experimentsAll) {
@@ -446,13 +717,27 @@ $(document).ready(function () {
   if (reservaHistAll) {
     reservaHistoryAll()
   }
+  var creatorList = document.getElementById('creadoresList')
+  if (creatorList) {
+    creatorListShow()
+  }
 
   var text_max = 250
   $('#textarea_feedback').html(text_max + ' characters remaining')
 
-  $('#crearExpDesc').keyup(function() {
+  $('#crearExpDesc').keyup(function () {
     var text_length = $('#crearExpDesc').val().length
     var text_remaining = text_max - text_length
     $('#textarea_feedback').html(text_remaining + ' characters remaining')
+  })
+
+  document.getElementById('crearExp').disabled = true
+  $('#crearExpIDCreador').keyup(function () {
+    document.getElementById('crearExp').disabled = true
+    $('#crearExpNombreCreador').val('')
+    $('#crearExpNombreCreador').attr('value', '')
+    $('#crearExpNombreCreador').attr('name', '')
+    $('#crearExpemailCreador').val('')
+    $('#crearExpemailCreador').attr('value', '')
   })
 })
