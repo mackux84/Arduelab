@@ -293,8 +293,8 @@ function crearExp() {
     days: '[' + crearExpDays + ']',
     schedule: '[' + crearExpScheduleMin + ',' + crearExpScheduleMax + ']',
     duration: '[' + crearExpDuration + ']',
-
-    enabled: $('#crearExpEnabled').is(':checked')
+    enabled: $('#crearExpEnabled').is(':checked'),
+    pdffile: $('#pdffile').val()
   }
   var jsonData2 = JSON.stringify(jsonData)
   $.ajax({
@@ -322,6 +322,7 @@ function crearExp() {
       $('#crearExpDesc').val('')
       $('#crearExpImgUrl').val('')
       $('#crearExpUrl').val('')
+      $('#pdffile').val('')
     },
     error: function (json) {
       alert(json.responseJSON.message)
@@ -433,7 +434,7 @@ function experimentsGetAll() {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-          '<td><button class="editarExp" name="' + element._id + '" id="editarExp;'+element._id+'">Guardar</button></td>'
+          '<td><button class="editarExp" name="' + element._id + '" id="editarExp;' + element._id + '">Guardar</button></td>'
           + '<td><button class="reiniciarExp" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
       }
@@ -516,7 +517,7 @@ function experimentsGetAll() {
         } else {
           $('[name="enabledExp;' + name_id + '"]').prop('checked', false)
         }
-        document.getElementById('editarExp;'+ name_id ).disabled = true
+        document.getElementById('editarExp;' + name_id).disabled = true
         $('[name="idCreatorExp;' + name_id + '"]').val('')
       })
       $('.verificarCreador').on('click', function (e) {
@@ -537,7 +538,7 @@ function experimentsGetAll() {
           contentType: 'application/json',
           success: function (json) {
             $('#idCreatorExp').val(json[0]._id)
-            document.getElementById('editarExp;'+name_id).disabled = false
+            document.getElementById('editarExp;' + name_id).disabled = false
           },
           error: function (json) {
             alert('Id de Donador no encontrado')
@@ -545,11 +546,11 @@ function experimentsGetAll() {
           }
         })
       })
-      $('.docCreatorExp').keyup( function (e) {
+      $('.docCreatorExp').keyup(function (e) {
         var name_id = $(this).attr('name').split(';')[1]
-        document.getElementById('editarExp;'+name_id).disabled = true
+        document.getElementById('editarExp;' + name_id).disabled = true
         $('[name="idCreatorExp;' + name_id + '"]').val('')
-      }) 
+      })
     },
     error: function (json) {
       alert(json.responseJSON.message)
@@ -701,6 +702,73 @@ function CrearCreador() {
 
 $('#CrearCreador').on('click', function (e) {
   CrearCreador()
+})
+
+$('#file-form').on('submit', function (e) {
+  e.preventDefault()
+})
+
+$('#file-select').change(function () {
+  var file = this.files[0]
+  /*var name = file.name
+  var size = file.size
+  var type = file.type*/
+  document.getElementById('upload-button').disabled = true
+
+  if (file.name.length < 1) {
+    console.log('file.name.length < 1')
+  }
+  else if (file.size > 3000000) {
+    alert('The file is too big')
+  }
+  /*else if (file.type ! = 'image/png' && file.type ! = 'image/jpg' && file.type ! = 'image/gif' && file.type ! = 'image/jpeg') {
+    alert('The file does not match png, jpg or gif')
+  }*/
+  else {
+    document.getElementById('upload-button').disabled = false
+  }
+})
+$('#upload-button').click(function () {
+  var formData = new FormData($('#file-form')[0])
+  $.ajax({
+    url: '/users/Upload',
+    type: 'POST',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    data: formData,
+    // Options to tell jQuery not to process data or worry about the content-type
+    cache: false,
+    contentType: false,
+    processData: false,
+    xhr: function () {  // custom xhr
+      var myXhr = $.ajaxSettings.xhr()
+      if (myXhr.upload) { // if upload property exists
+        // myXhr.upload.addEventListener('progress', progressHandlingFunction, false) // progressbar
+      }
+      return myXhr
+    },
+    success: function (data) {
+      if (typeof data.error === 'undefined') {
+        // console.log('success')
+        var jsondata = JSON.parse(data)
+        // console.log(jsondata.filename)
+        alert('PDF Preparado')
+        $('#pdffile').val(jsondata.filename)
+        $('#pdffile').attr('value', jsondata.filename)
+      }
+      else {
+        // console.log('ERRORS:')
+        // console.log(data.error)
+        alert('Something went wrong!')
+      }
+    },
+    error: function (error) {
+      // console.log('ERRORS:')
+      // console.log(error)
+      alert('Something went wrong!')
+    }
+  })
 })
 
 $(document).ready(function () {
