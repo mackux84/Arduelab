@@ -385,6 +385,9 @@ span.psw {
     text-overflow: ellipsis;
     font-size: calc(7px + 0.5vw);
 }
+.myTable2 *{
+    max-width: initial;
+}
 #crearExpSchedule, #crearExpSchedule *{
     overflow: initial !important;
 }
