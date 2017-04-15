@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="accountcont2" id="crearE">
-        <table class="myTable" style="width: 100%">
+        <table class="myTable myTable2" style="width: 100%">
           <tr>
             <td>ID Donador: </td>
             <td>
@@ -152,6 +152,16 @@
           <tr>
             <td>URL Imagen: </td>
             <td><input type="url" id="crearExpImgUrl"></td>
+          </tr>
+          <tr>
+            <td>Subir PDF:</td>
+            <td>
+              <form id="file-form" method="POST">
+                <input type="file" id="file-select" name="pdf"/>
+                 <input type="hidden" name="pdffile" value="" id="pdffile"> 
+                <button type="submit" id="upload-button" disabled>Upload</button>
+              </form>
+            </td>
           </tr>
           <tr>
             <td>Dias validos: </td>
@@ -259,7 +269,7 @@
       <div id="creadoresList" align="center" class="info">
       </div>
     </div>
-    
+
     <div class="accountcont" id="CONTRASEÑA">
       <div align="center">
         <table>
@@ -317,7 +327,7 @@
       </form>
     </div>
 
-<script type="text/javascript" src="/js/main.min.js"></script>
+    <script type="text/javascript" src="/js/main.min.js"></script>
     <!--W3 is the filter-->
     <script src="http://www.w3schools.com/lib/w3.js"></script>
     <script src='/js/tablesort.js'></script>
@@ -327,7 +337,7 @@
     <script src='/js/tablesort.dotsep.js'></script>
 
     <script src="/js/nouislider.min.js"></script>
-    
+
     <script>
       function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
@@ -369,16 +379,13 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
 
-         new Tablesort(document.getElementById('experimentsTable'), {
+        new Tablesort(document.getElementById('experimentsTable'), {
           ascending: true,
           descending: true
         });
       }
-
-      
-     
     </script>
-    
+
     <script>
       var slider = document.getElementById('crearExpSchedule');
 
@@ -398,7 +405,7 @@
 
       slider.noUiSlider.on('update', function (values, handle) {
         if (handle) {
-          paddingMax.innerHTML = values[handle] ;
+          paddingMax.innerHTML = values[handle];
         } else {
           paddingMin.innerHTML = values[handle];
         }
