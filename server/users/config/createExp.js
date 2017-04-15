@@ -39,7 +39,8 @@ module.exports = {
       schedule: Joi.array().length(2).items(Joi.number().min(0).max(24)).required().description('Las horas activas del experimento (inicio,fin) formato 24h').example('[8,18]'),
       duration: Joi.array().items(Joi.number().multiple(30)).required().description('Duraciones permitidas en el experimento en minutos, multiplos de 30').example('[30,60,90,120]'),
       enabled: Joi.boolean().required().description('Si el experimento esta disponible a los usuarios o no').example(true),
-      description: Joi.string().max(250).required().description('Descripcion del experimento').example('Programacion de sensores en placa Arduino NANO, ejercicios basicos')
+      description: Joi.string().max(250).required().description('Descripcion del experimento').example('Programacion de sensores en placa Arduino NANO, ejercicios basicos'),
+      pdffile: Joi.string().required().description('Nombre del Archivo PDF (subido con anterioridad)').example('Programacion de sensores en placa Arduino NANO, ejercicios basicos.pdf')
     })
   },
   description: 'Create Experiment',

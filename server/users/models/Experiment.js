@@ -40,6 +40,10 @@ const experimentsModel = new Schema({
     type: String,
     required: true
   },
+  pdf: {
+    type: String,
+    required: true
+  },
   days: {
     type: [Number],
     required: true
