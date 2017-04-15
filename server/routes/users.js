@@ -8,7 +8,7 @@ const forgotPasswordHandler          = require('../users/handlers/forgotPassword
 const verifyEmailHandler             = require('../users/handlers/verifyEmail')
 const patchUserHandler               = require('../users/handlers/patchUser')
 const getAllUsersHandler             = require('../users/handlers/getAllUsers')
-//const workbenchHandler               = require('../users/handlers/workbench')
+//const workbenchHandler             = require('../users/handlers/workbench')
 const accountHandler                 = require('../users/handlers/account')
 const reserveHandler                 = require('../users/handlers/reserve')
 const checkTimeHandler               = require('../users/handlers/checkTime')
@@ -21,9 +21,10 @@ const patchExperimentHandler         = require('../users/handlers/patchExperimen
 const workbenchCheckHandler          = require('../users/handlers/workbenchCheck')
 const experimentReservesHandler      = require('../users/handlers/experimentReserves')
 const passwordChangeHandler          = require('../users/handlers/passwordChange')
-const createCreatorHandler          = require('../users/handlers/createCreator')
+const createCreatorHandler           = require('../users/handlers/createCreator')
 const getAllCreatorsHandler          = require('../users/handlers/getAllCreators')
-const patchCreatorHandler          = require('../users/handlers/patchCreator')
+const patchCreatorHandler            = require('../users/handlers/patchCreator')
+const uploadPDFHandler               = require('../users/handlers/uploadPDF')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -34,7 +35,7 @@ const verifyEmailConfig              = require('../users/config/verifyEmail')
 const patchUserConfig                = require('../users/config/patchUser')
 const getAllUsersConfig              = require('../users/config/getAllUsers')
 const checkUserConfig                = require('../users/config/checkUser')
-//const workbenchConfig                = require('../users/config/workbench')
+//const workbenchConfig              = require('../users/config/workbench')
 const accountConfig                  = require('../users/config/account')
 const reserveConfig                  = require('../users/config/reserve')
 const checkTimeConfig                = require('../users/config/checkTime')
@@ -47,9 +48,10 @@ const patchExperimentConfig          = require('../users/config/patchExperiment'
 const workbenchCheckConfig           = require('../users/config/workbenchCheck')
 const experimentReservesConfig       = require('../users/config/experimentReserves')
 const passwordChangeConfig           = require('../users/config/passwordChange')
-const createCreatorConfig           = require('../users/config/createCreator')
+const createCreatorConfig            = require('../users/config/createCreator')
 const getAllCreatorsConfig           = require('../users/config/getAllCreators')
-const patchCreatorConfig           = require('../users/config/patchCreator')
+const patchCreatorConfig             = require('../users/config/patchCreator')
+const uploadPDFConfig                = require('../users/config/uploadPDF')
 
 
 module.exports = [
@@ -198,5 +200,11 @@ module.exports = [
     path:    '/creator/{id}',
     config:  patchCreatorConfig,
     handler: patchCreatorHandler
+  },
+  {
+    method: 'POST',
+    path: '/users/Upload',
+    config: uploadPDFConfig,
+    handler: uploadPDFHandler
   },
 ]
