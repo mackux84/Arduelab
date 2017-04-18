@@ -26,8 +26,8 @@ module.exports = {
       identification: Joi.string().required().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
       name: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).required().description('El nombre de usuario debe de ser unico').example('andresvega'),
       email: Joi.string().email().required().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
-      telephone: Joi.string().regex(/^((\(?\+?[0-9]{1,3}\)?)?( |-)?([0-9]{1,3}?)( |-)?)?( |-)?([0-9]{2,3})( |-)?([0-9]{2,5})( |-)?([0-9]{2,5}) ?(\w{1,10}\s?\d{1,6})?$/).required().description('Telefono del creador de experimento').example('800 555 1212'),
-      cellphone: Joi.string().regex(/^((\(?\+?[0-9]{1,3}\)?)?( |-)?([0-9]{1,3}?)( |-)?)?( |-)?([0-9]{2,3})( |-)?([0-9]{2,5})( |-)?([0-9]{2,5}) ?(\w{1,10}\s?\d{1,6})?$/).required().description('Celular del creador de experimento').example('(311) 555-1212'),
+      telephone: Joi.string().regex(/^((\(?\+?[0-9]{1,3}\)?)?( |-)?([0-9]{1,3}?)( |-)?)?( |-)?([0-9]{2,3})( |-)?([0-9]{2,5})( |-)?([0-9]{2,5}) ?([a-zA-Z]{1,10}\s?\d{1,6})?$/).required().description('Telefono del creador de experimento').example('800 555 1212'),
+      cellphone: Joi.string().regex(/^((\(?\+?[0-9]{1,3}\)?)?( |-)?([0-9]{1,3}?)( |-)?)?( |-)?([0-9]{2,3})( |-)?([0-9]{2,5})( |-)?([0-9]{2,5}) ?([a-zA-Z]{1,10}\s?\d{1,6})?$/).required().description('Celular del creador de experimento').example('(311) 555-1212'),
     })
   },
   description: 'Create a new Creator',
