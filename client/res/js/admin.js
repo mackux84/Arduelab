@@ -695,7 +695,33 @@ function CrearCreador() {
       $('#crearCreadorCel').val('')
     },
     error: function (json) {
-      alert(json.responseJSON.message)
+      // console.log(json)
+      if (json.status == 400) {
+        var mess = json.responseJSON.message.toString()
+        if (mess.indexOf('child "') !== -1) {
+          var arr = mess.split('"')
+          switch (arr[1]) {
+            case 'identification':
+              alert('Error en el campo ID')
+              break
+            case 'name':
+              alert('Error en el campo Nombre')
+              break
+            case 'email':
+              alert('Error en el campo Email')
+              break
+            case 'telephone':
+              alert('Error en el campo Telefono')
+              break
+            case 'cellphone':
+              alert('Error en el campo Celular')
+              break
+            default:
+              alert('Something went wrong!')
+              break
+          }
+        }
+      }
     }
   })
 }
