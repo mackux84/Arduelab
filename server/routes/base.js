@@ -49,5 +49,14 @@ module.exports = [
       handler: { file: './node_modules/nes/lib/client.js' },
       description: 'Server the websocket client library'
     }
+  },
+  {
+    method: 'GET',
+    path: '/pdf/{param*}',
+    handler: {
+      directory: {
+        path: 'uploads/'
+      }
+    }
   }
 ]
