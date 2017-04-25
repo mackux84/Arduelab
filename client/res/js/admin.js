@@ -401,6 +401,7 @@ function experimentsGetAll() {
         + '<th>Horas validas: </th>'
         + '<th>Duraciones permitidas: </th>'
         + '<th>Disponible: </th>'
+        + '<th>PDF: </th>'
         + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
         + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
         + '</tr>'
@@ -434,7 +435,8 @@ function experimentsGetAll() {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-          '<td><button class="editarExp" name="' + element._id + '" id="editarExp;' + element._id + '">Guardar</button></td>'
+          '<td><a href="/pdf/'+element._id+'">Descarga</a></td>'
+          + '<td><button class="editarExp" name="' + element._id + '" id="editarExp;' + element._id + '">Guardar</button></td>'
           + '<td><button class="reiniciarExp" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
       }
@@ -744,7 +746,7 @@ $('#file-select').change(function () {
   if (file.name.length < 1) {
     console.log('file.name.length < 1')
   }
-  else if (file.size > 3000000) {
+  else if (file.size > 30000000) {
     alert('The file is too big')
   }
   /*else if (file.type ! = 'image/png' && file.type ! = 'image/jpg' && file.type ! = 'image/gif' && file.type ! = 'image/jpeg') {
