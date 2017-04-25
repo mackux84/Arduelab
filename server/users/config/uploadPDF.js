@@ -13,7 +13,7 @@ module.exports = {
     uploads: 'up_files',
     timeout: 30034,
     failAction: 'log',
-    maxBytes: 3000000
+    maxBytes: 30000000
     // maxBytes - limits the size of incoming payloads to the specified byte count. Allowing very large payloads may cause the server to run out of memory. Defaults to 1048576 (1MB).
     // uploads - the directory used for writing file uploads. Defaults to os.tmpDir().
   },
