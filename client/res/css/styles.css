@@ -44,15 +44,15 @@ h1, h2, h3, h4, h5{
 
 #timebox{
     background-color: aliceblue;
-    border-style: inset;
-    border-color: #000;
+    border-left: 12px solid #096c74;
+    padding: 12px;
+    margin-top: 10px;
     margin-left: 10%;
+    margin-bottom: 30px;
     margin-right: 10%;
     width :25%;
-    border-radius: 5px;
     /*float: left;*/
 }
-
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -395,18 +395,19 @@ span.psw {
     /*border: 0px;*/
     width: 100%;
     height: 100%;
-    background: transparent;
+    background: #eef5f7;
     padding: 0px;
     margin: 0px;
 }
 .myTable button {
-    width: 100%;
+    width: 70%;
     margin: 0px;
     padding: 0px;
     border: 0px;
     background: #8ab8b9;
     cursor: pointer;
 }
+
 .myTable button:hover {
     background-color: cadetblue;
 }
