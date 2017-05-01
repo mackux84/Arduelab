@@ -55,7 +55,16 @@ module.exports = [
     path: '/pdf/{param*}',
     handler: {
       directory: {
-        path: 'uploads/'
+        path: 'uploads/pdf/'
+      }
+    }
+  },
+  {
+    method: 'GET',
+    path: '/img/{param*}',
+    handler: {
+      directory: {
+        path: 'uploads/image/'
       }
     }
   }
