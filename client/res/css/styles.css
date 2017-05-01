@@ -35,6 +35,10 @@ img{
     height: auto;
     width: 100%;
 }
+.downImg{
+    height: auto;
+    width: 45%;
+}
 h1, h2, h3, h4, h5{
     margin: 10px 0px;
     /*float: left;*/
@@ -138,7 +142,10 @@ input[type=submit] {
     height: 10%;
     width: 100%;
 }
-
+.info{
+    overflow-x:auto;
+    padding: 0px 0px 20px 0px;
+}
 .forms{
     margin-left: 5%;
     margin-right: 5%;
@@ -343,11 +350,6 @@ span.psw {
     padding-top: 1px;
 }
 
-.info{
-    overflow-x:auto;
-    padding: 0px 0px 20px 0px;
-}
-
 .Filter {
     background-image: url('/images/searchicon.png')!important; /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
@@ -464,6 +466,16 @@ th[role=columnheader]:not(.no-sort):hover:after {
 .crearExp:hover{
     background: cadetblue;
 }
+
+
+
+
+
+.wrapper1, .wrapper2 { width: 100%; overflow-x: scroll; overflow-y: hidden; }
+.wrapper1 { height: 20px; }
+.div1 { height: 20px; }
+#experimentsAll { overflow: none; }
+
 
 /* Change styles for span and cancel button on extra small screens */
     @media screen and (max-width: 300px) {
