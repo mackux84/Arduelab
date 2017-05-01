@@ -263,6 +263,23 @@ function reservaHistoryAll() {
   })
 }
 
+$('input[name=crearExpDays]').change(function () {
+  var crearExpDays = $('input[name=crearExpDays]:checked').map(
+    function () {
+      return this.value
+    }).get().join(',')
+  $('#daysFormat').val('[' + crearExpDays + ']')
+  $('#daysFormat').attr('value', '[' + crearExpDays + ']')
+})
+$('input[name=crearExpDuration]').change(function () {
+  var crearExpDuration = $('input[name=crearExpDuration]:checked').map(
+    function () {
+      return this.value
+    }).get().join(',')
+  $('#durationFormat').val('[' + crearExpDuration + ']')
+  $('#durationFormat').attr('value', '[' + crearExpDuration + ']')
+})
+
 function crearExp() {
   var crearExpDays = $('input[name=crearExpDays]:checked').map(
     function () {
@@ -355,6 +372,10 @@ function LookupCreador() {
       $('#crearExpNombreCreador').attr('name', json[0]._id)
       $('#crearExpemailCreador').val(json[0].email)
       $('#crearExpemailCreador').attr('value', json[0].email)
+
+      $('#idCreator').val(json[0]._id)
+      $('#idCreator').attr('value', json[0]._id)
+
       document.getElementById('crearExp').disabled = false
     },
     error: function (json) {
@@ -435,7 +456,7 @@ function experimentsGetAll() {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-          '<td><a href="/pdf/'+element._id+'">Descarga</a></td>'
+          '<td><a href="/pdf/' + element._id + '.pdf" download="' + element.name + '.pdf"><img class="downImg" src="/images/DL.png" alt="Download"></a></td>'
           + '<td><button class="editarExp" name="' + element._id + '" id="editarExp;' + element._id + '">Guardar</button></td>'
           + '<td><button class="reiniciarExp" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
@@ -443,6 +464,7 @@ function experimentsGetAll() {
       table += '</table >'
       $('#experimentsAll').html('')
       $('#experimentsAll').html(table)
+      $('#div1').html(table) //esto no deberia ser asi, pero no toma el ancho
       $('.editarExp').on('click', function (e) {
         //patch Experiment
         e.preventDefault()
@@ -553,6 +575,7 @@ function experimentsGetAll() {
         document.getElementById('editarExp;' + name_id).disabled = true
         $('[name="idCreatorExp;' + name_id + '"]').val('')
       })
+      console.log('table w3:' + $('#experimentsTable').width())
     },
     error: function (json) {
       alert(json.responseJSON.message)
@@ -731,6 +754,9 @@ function CrearCreador() {
 $('#CrearCreador').on('click', function (e) {
   CrearCreador()
 })
+$('#experimentsTable').on('change', function (e) {
+  console.log('table w4:' + $('#experimentsTable').width())
+})
 
 $('#file-form').on('submit', function (e) {
   e.preventDefault()
@@ -746,7 +772,7 @@ $('#file-select').change(function () {
   if (file.name.length < 1) {
     console.log('file.name.length < 1')
   }
-  else if (file.size > 30000000) {
+  else if (file.size > 30 * Math.pow(1024, 2)) {
     alert('The file is too big')
   }
   /*else if (file.type ! = 'image/png' && file.type ! = 'image/jpg' && file.type ! = 'image/gif' && file.type ! = 'image/jpeg') {
@@ -756,10 +782,38 @@ $('#file-select').change(function () {
     document.getElementById('upload-button').disabled = false
   }
 })
+$('#file-select2').change(function () {
+  var file = this.files[0]
+  /*var name = file.name
+  var size = file.size
+  var type = file.type*/
+  document.getElementById('upload-button').disabled = true
+
+  if (file.name.length < 1) {
+    console.log('file.name.length < 1')
+  }
+  else if (file.size > 3 * Math.pow(1024, 2)) {
+    alert('The file is too big')
+  }
+  else {
+    document.getElementById('upload-button').disabled = false
+  }
+})
 $('#upload-button').click(function () {
-  var formData = new FormData($('#file-form')[0])
+  var crearExpScheduleMin = $('#crearExpScheduleMin').text()
+  crearExpScheduleMin = parseInt(crearExpScheduleMin.toString())
+  var crearExpScheduleMax = $('#crearExpScheduleMax').text()
+  if (crearExpScheduleMax == '23.59') {
+    crearExpScheduleMax = '24'
+  }
+  crearExpScheduleMax = parseInt(crearExpScheduleMax.toString())
+  $('#scheduleFormat').val('[' + crearExpScheduleMin + ',' + crearExpScheduleMax + ']')
+  $('#scheduleFormat').attr('value', '[' + crearExpScheduleMin + ',' + crearExpScheduleMax + ']')
+
+  var form = $('#file-form').get(0)
+  var formData = new FormData(form)
   $.ajax({
-    url: '/users/Upload',
+    url: '/users/CreateExpUpload',
     type: 'POST',
     headers: {
       'Authorization': window.location.pathname.split('/')[3]
@@ -779,11 +833,12 @@ $('#upload-button').click(function () {
     success: function (data) {
       if (typeof data.error === 'undefined') {
         // console.log('success')
-        var jsondata = JSON.parse(data)
+        alert(data.message)
+        // var jsondata = JSON.parse(data)
         // console.log(jsondata.filename)
-        alert('PDF Preparado')
-        $('#pdffile').val(jsondata.filename)
-        $('#pdffile').attr('value', jsondata.filename)
+        // alert('PDF Preparado')
+        // $('#pdffile').val(jsondata.filename)
+        // $('#pdffile').attr('value', jsondata.filename)
       }
       else {
         // console.log('ERRORS:')
@@ -836,4 +891,18 @@ $(document).ready(function () {
     $('#crearExpemailCreador').val('')
     $('#crearExpemailCreador').attr('value', '')
   })
+
+
+  $('.wrapper1').on('scroll', function (e) {
+    $('.wrapper2').scrollLeft($('.wrapper1').scrollLeft())
+  })
+  $('.wrapper2').on('scroll', function (e) {
+    $('.wrapper1').scrollLeft($('.wrapper2').scrollLeft())
+  })
+  //el ancho no lo toma, toco con un hack, se crean 2 tablas, asi si toma el ancho
+  // $('.div1').width($('#experimentsTable').width())
+  // $('#experimentsAll').width($('#experimentsTable').width())
+  // $('.div1').width($('#experimentsTable').scrollWidth)
+  // $('.div1').width(150)
+  // console.log('table w0:' + $('#experimentsTable').width())
 })

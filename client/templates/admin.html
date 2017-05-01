@@ -70,133 +70,142 @@
       </ul>
       <div class="accountcont2" id="ListaE">
         <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filtrar Experimentos..">
-        <div id="experimentsAll" align="center" class="info">
+        <div class="wrapper1">
+          <div class="div1" id="div1"></div>
+        </div>
+        <div class="wrapper2">
+          <div id="experimentsAll" align="center" >
+          </div>
         </div>
       </div>
       <div class="accountcont2" id="crearE">
-        <table class="myTable myTable2" style="width: 100%">
-          <tr>
-            <td>ID Donador: </td>
-            <td>
-              <input type="text" id="crearExpIDCreador">
-              <button id="LookupCreador">BUSCAR</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Nombre el Donador (Auto): </td>
-            <td>
-              <input type="text" id="crearExpNombreCreador" disabled>
-            </td>
-          </tr>
-          <tr>
-            <td>Correo el Donador (Auto): </td>
-            <td>
-              <input type="text" id="crearExpemailCreador" disabled>
-            </td>
-          </tr>
-          <tr>
-            <td>Nombre del Experimento: </td>
-            <td><input type="text" id="crearExpNombre"></td>
-          </tr>
-          <tr>
-            <td>Universidad: </td>
-            <td><input type="text" id="crearExpUniversidad"></td>
-          </tr>
-          <tr>
-            <td>País: </td>
-            <td><input type="text" id="crearExpPais"></td>
-          </tr>
-          <tr>
-            <td>Ciudad: </td>
-            <td><input type="text" id="crearExpCiudad"></td>
-          </tr>
-          <tr>
-            <td>Arduino: </td>
-            <td><input type="text" id="crearExpArduino"></td>
-          </tr>
-          <tr>
-            <td>Descripción: </td>
-            <td>
-              <textarea id="crearExpDesc" rows="6" maxlength="250"></textarea>
-              <div id="textarea_feedback"></div>
-            </td>
-          </tr>
-          <tr>
-            <td>URL Experimento: </td>
-            <td><input type="url" id="crearExpUrl"></td>
-          </tr>
-          <tr>
-            <td>URL Imagen: </td>
-            <td><input type="url" id="crearExpImgUrl"></td>
-          </tr>
-          <tr>
-            <td>Subir PDF:</td>
-            <td>
-              <form id="file-form" method="POST">
-                <input type="file" id="file-select" name="pdf"/>
-                 <input type="hidden" name="pdffile" value="" id="pdffile"> 
-                <button type="submit" id="upload-button" disabled>Upload</button>
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>Dias validos: </td>
-            <td>
-              <div class="checkList">
-                <label><input name="crearExpDays" value="0" type="checkbox">Domingo</label>
+        <form id="file-form" method="POST">
+          <table class="myTable myTable2" style="width: 100%">
+            <tr>
+              <td>ID Donador: </td>
+              <td>
+                <input type="text" id="crearExpIDCreador" name="docCreator">
+                <button id="LookupCreador">BUSCAR</button>
+                <input type="hidden" name="idCreator" value="" id="idCreator">
+              </td>
+            </tr>
+            <tr>
+              <td>Nombre el Donador (Auto): </td>
+              <td>
+                <input type="text" id="crearExpNombreCreador" disabled>
+              </td>
+            </tr>
+            <tr>
+              <td>Correo el Donador (Auto): </td>
+              <td>
+                <input type="text" id="crearExpemailCreador" disabled>
+              </td>
+            </tr>
+            <tr>
+              <td>Nombre del Experimento: </td>
+              <td><input type="text" id="crearExpNombre" name="name"></td>
+            </tr>
+            <tr>
+              <td>Universidad: </td>
+              <td><input type="text" id="crearExpUniversidad" name="university"></td>
+            </tr>
+            <tr>
+              <td>País: </td>
+              <td><input type="text" id="crearExpPais" name="country"></td>
+            </tr>
+            <tr>
+              <td>Ciudad: </td>
+              <td><input type="text" id="crearExpCiudad" name="city"></td>
+            </tr>
+            <tr>
+              <td>Arduino: </td>
+              <td><input type="text" id="crearExpArduino" name="arduino"></td>
+            </tr>
+            <tr>
+              <td>Descripción: </td>
+              <td>
+                <textarea id="crearExpDesc" rows="6" maxlength="250" name="description"></textarea>
+                <div id="textarea_feedback"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>URL Experimento: </td>
+              <td><input type="url" id="crearExpUrl" name="url"></td>
+            </tr>
+            <tr>
+              <td>URL Imagen: </td>
+              <td><input type="file" id="file-select2" name="image" /></td>
+            </tr>
+            <tr>
+              <td>Subir PDF:</td>
+              <td>
+                <input type="file" id="file-select" name="pdf" />
+                <input type="hidden" name="pdffile" value="" id="pdffile">
+              </td>
+            </tr>
+            <tr>
+              <td>Dias validos: </td>
+              <td>
+                <div class="checkList">
+                  <label><input name="crearExpDays" value="0" type="checkbox">Domingo</label>
+                  <br>
+                  <label><input name="crearExpDays" value="1" type="checkbox">Lunes</label>
+                  <br>
+                  <label><input name="crearExpDays" value="2" type="checkbox">Martes</label>
+                  <br>
+                  <label><input name="crearExpDays" value="3" type="checkbox">Miercoles</label>
+                  <br>
+                  <label><input name="crearExpDays" value="4" type="checkbox">Jueves</label>
+                  <br>
+                  <label><input name="crearExpDays" value="5" type="checkbox">Viernes</label>
+                  <br>
+                  <label><input name="crearExpDays" value="6" type="checkbox">Sabado</label>
+                </div>
+                <input type="hidden" name="days" value="" id="daysFormat">
+              </td>
+            </tr>
+            <tr>
+              <td>Horas validas: </td>
+              <td>
                 <br>
-                <label><input name="crearExpDays" value="1" type="checkbox">Lunes</label>
+                <div id="crearExpSchedule"></div>
                 <br>
-                <label><input name="crearExpDays" value="2" type="checkbox">Martes</label>
+                <span id="crearExpScheduleMin"></span>-<span id="crearExpScheduleMax"></span>
+                <input type="hidden" name="schedule" value="" id="scheduleFormat">
                 <br>
-                <label><input name="crearExpDays" value="3" type="checkbox">Miercoles</label>
-                <br>
-                <label><input name="crearExpDays" value="4" type="checkbox">Jueves</label>
-                <br>
-                <label><input name="crearExpDays" value="5" type="checkbox">Viernes</label>
-                <br>
-                <label><input name="crearExpDays" value="6" type="checkbox">Sabado</label>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Horas validas: </td>
-            <td>
-              <br>
-              <div id="crearExpSchedule"></div>
-              <br>
-              <span id="crearExpScheduleMin"></span>-<span id="crearExpScheduleMax"></span>
-              <br>
-            </td>
-          </tr>
-          <tr>
-            <td>Duraciones permitidas: </td>
-            <td>
-              <div class="checkList">
-                <label><input name="crearExpDuration" value="30" type="checkbox">0:30:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="60" type="checkbox">1:00:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="90" type="checkbox">1:30:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="120" type="checkbox">2:00:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="150" type="checkbox">2:30:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="180" type="checkbox">3:00:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="210" type="checkbox">3:30:00</label>
-                <br>
-                <label><input name="crearExpDuration" value="240" type="checkbox">4:00:00</label>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Activo</td>
-            <td><input type="checkbox" id="crearExpEnabled" checked></td>
-          </tr>
-        </table>
-        <br>
+              </td>
+            </tr>
+            <tr>
+              <td>Duraciones permitidas: </td>
+              <td>
+                <div class="checkList">
+                  <label><input name="crearExpDuration" value="30" type="checkbox">0:30:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="60" type="checkbox">1:00:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="90" type="checkbox">1:30:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="120" type="checkbox">2:00:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="150" type="checkbox">2:30:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="180" type="checkbox">3:00:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="210" type="checkbox">3:30:00</label>
+                  <br>
+                  <label><input name="crearExpDuration" value="240" type="checkbox">4:00:00</label>
+                </div>
+                <input type="hidden" name="duration" value="" id="durationFormat">
+              </td>
+            </tr>
+            <tr>
+              <td>Activo</td>
+              <td><input type="checkbox" id="crearExpEnabled" checked name="enabled"></td>
+            </tr>
+          </table>
+          <br>
+          <button type="submit" id="upload-button" disabled>Upload</button>
+        </form>
         <button class="crearExp" id="crearExp" disabled>Crear Nuevo Experimento</button>
         <br>
         <br>

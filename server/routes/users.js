@@ -25,6 +25,7 @@ const createCreatorHandler           = require('../users/handlers/createCreator'
 const getAllCreatorsHandler          = require('../users/handlers/getAllCreators')
 const patchCreatorHandler            = require('../users/handlers/patchCreator')
 const uploadPDFHandler               = require('../users/handlers/uploadPDF')
+const CreateExpUploadHandler         = require('../users/handlers/CreateExpUpload')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -52,6 +53,7 @@ const createCreatorConfig            = require('../users/config/createCreator')
 const getAllCreatorsConfig           = require('../users/config/getAllCreators')
 const patchCreatorConfig             = require('../users/config/patchCreator')
 const uploadPDFConfig                = require('../users/config/uploadPDF')
+const CreateExpUploadConfig          = require('../users/config/CreateExpUpload')
 
 
 module.exports = [
@@ -206,5 +208,11 @@ module.exports = [
     path: '/users/Upload',
     config: uploadPDFConfig,
     handler: uploadPDFHandler
+  },
+  {
+    method: 'POST',
+    path: '/users/CreateExpUpload',
+    config: CreateExpUploadConfig,
+    handler: CreateExpUploadHandler
   },
 ]
