@@ -6,6 +6,7 @@ static
 client/static
 client/static/
 client/static/**
+uploads/**
 jsconfig.json
 ### Node ###
 # Logs
