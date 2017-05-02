@@ -10,7 +10,7 @@ function userListShow() {
     },
     success: function (json) {
       var table =
-        '<table class="myTable" id="usersTable">'
+        '<table class="myTable pure-table" id="usersTable">'
         + '<thead>'
         + '<tr class="Theader" >'
         //+ '<th  >User Id </th>'
@@ -55,9 +55,9 @@ function userListShow() {
         }
         table +=
           // '<td><button class="reservasUser" name="' + element._id + '">Ver</button></td>'
-          '<td><button class="resetPWD" name="' + element._id + '">Reset</button></td>'
-          + '<td><button class="editarUser" name="' + element._id + '">Editar</button></td>'
-          + '<td><button class="reiniciarUser" name="' + element._id + '">Cancelar</button></td>'
+          '<td><button class="resetPWD pure-button" name="' + element._id + '">Reset</button></td>'
+          + '<td><button class="editarUser pure-button" name="' + element._id + '">Editar</button></td>'
+          + '<td><button class="reiniciarUser pure-button" name="' + element._id + '">Cancelar</button></td>'
           + '</tr>'
       }
       table += '</table >'
@@ -185,7 +185,7 @@ function reservaHistoryAll() {
     contentType: 'application/json',
     success: function (json) {
       var table =
-        '<table class="myTable" id="reservesTable">'
+        '<table class="myTable pure-table" id="reservesTable">'
         + '<thead>'
         + '<tr class="Theader" >'
         + '<th># </th>'
@@ -225,7 +225,7 @@ function reservaHistoryAll() {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledReserva;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" /></td>'
         }
         table +=
-          '<td><button class="guardarReserva" name="' + element._id + '">Guardar</button></td>'
+          '<td><button class="guardarReserva pure-button" name="' + element._id + '">Guardar</button></td>'
           + '</tr>'
       }
       table += '</table >'
@@ -404,7 +404,7 @@ function experimentsGetAll() {
     },
     success: function (json) {
       var table =
-        '<table class="myTable" id="experimentsTable">'
+        '<table class="myTable pure-table" id="experimentsTable">'
         + '<thead>'
         + '<tr class="Theader" >'
         + '<th>ID: </td>'
@@ -457,14 +457,14 @@ function experimentsGetAll() {
         }
         table +=
           '<td><a href="/pdf/' + element._id + '.pdf" download="' + element.name + '.pdf"><img class="downImg" src="/images/DL.png" alt="Download"></a></td>'
-          + '<td><button class="editarExp" name="' + element._id + '" id="editarExp;' + element._id + '">Guardar</button></td>'
-          + '<td><button class="reiniciarExp" name="' + element._id + '">Reiniciar</button></td>'
+          + '<td><button class="editarExp pure-button" name="' + element._id + '" id="editarExp;' + element._id + '">Guardar</button></td>'
+          + '<td><button class="reiniciarExp pure-button" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
       }
       table += '</table >'
       $('#experimentsAll').html('')
       $('#experimentsAll').html(table)
-      $('#div1').html(table) //esto no deberia ser asi, pero no toma el ancho
+
       $('.editarExp').on('click', function (e) {
         //patch Experiment
         e.preventDefault()
@@ -600,7 +600,7 @@ function creatorListShow() {
     contentType: 'application/json',
     success: function (json) {
       var table =
-        '<table class="myTable" id="creatorsTable">'
+        '<table class="myTable pure-table" id="creatorsTable">'
         + '<thead>'
         + '<tr class="Theader" >'
         + '<th>Identificacion</th>'
@@ -621,8 +621,8 @@ function creatorListShow() {
           + '<td data-sort=' + element.email + '><input type="email" name="emailCreator;' + element._id + '" Value="' + element.email + '" id="' + element._id + ';' + element.email + '"/></td>'
           + '<td data-sort=' + element.telephone + '><input type="text" name="telephoneCreator;' + element._id + '" Value="' + element.telephone + '" id="' + element._id + ';' + element.telephone + '"/></td>'
           + '<td data-sort=' + element.cellphone + '><input type="text" name="cellphoneCreator;' + element._id + '" Value="' + element.cellphone + '" id="' + element._id + ';' + element.cellphone + '"/></td>'
-          + '<td><button class="editarCreator" name="' + element._id + '">Editar</button></td>'
-          + '<td><button class="reiniciarCreator" name="' + element._id + '">Cancelar</button></td>'
+          + '<td><button class="editarCreator pure-button" name="' + element._id + '">Editar</button></td>'
+          + '<td><button class="reiniciarCreator pure-button" name="' + element._id + '">Cancelar</button></td>'
           + '</tr>'
       }
       table += '</table >'

@@ -299,11 +299,22 @@ form {
 
 /* Full-width inputs */
 input[type=text], input[type=password], input[type=email], input[type=url] {
+    /*
     width: 100%;
-    padding: 12px 20px;
+    
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
+    box-sizing: border-box;
+    */
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
     box-sizing: border-box;
 }
 /* Set a style for all buttons */
@@ -381,7 +392,7 @@ span.psw {
     align-self: center;
     text-align: center;
     /*vertical-align: middle;*/
-    max-width: 200px;
+    max-width: 260px;
     overflow: hidden;
     /*white-space: nowrap;*/
     text-overflow: ellipsis;
@@ -415,12 +426,15 @@ span.psw {
 }
 .myTable textarea {
     overflow: auto;
-    resize: both;
+    resize: none;
     border: 1px solid #ccc;
     background: transparent;
     /*margin-right: -5px*/
     text-align: justify;
     width: 100%;
+    background-color: #eee; /* menu hover bg color */
+    color: black; /* menu text color */
+    border-color: #ccc;
 }
 
 th[role=columnheader]:not(.no-sort) {
@@ -471,10 +485,10 @@ th[role=columnheader]:not(.no-sort):hover:after {
 
 
 
-.wrapper1, .wrapper2 { width: 100%; overflow-x: scroll; overflow-y: hidden; }
+.wrapper1, .wrapper2 { width: 100%; overflow-x: scroll; overflow-y: scroll; height: 600px; }
 .wrapper1 { height: 20px; }
 .div1 { height: 20px; }
-#experimentsAll { overflow: none; }
+#experimentsAll { overflow: none; width: 100%; overflow-x: scroll; overflow-y: scroll; height: 600px; }
 
 
 /* Change styles for span and cancel button on extra small screens */

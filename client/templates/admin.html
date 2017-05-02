@@ -55,8 +55,32 @@
       <p class="notas">
         Notas:
         <br> El contenido de la tabla es editable para la facilidad en la edición.
-        <br>
+        <br> Los dias válidos inician en domingo con indice 0:
       </p>
+      <div style="margin:5px; overflow: auto;">
+                <table class="myTable pure-table">
+                <thead>
+                    <tr class="Theader" >
+                    <td>Domingo</td>
+                    <td>Lunes</td>
+                    <td>Martes</td>
+                    <td>Miercoles</td>
+                    <td>Jueves</td>
+                    <td>Viernes</td>
+                    <td>Sabado</td>
+                    </tr>
+                    </thead>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                </table>
+            </div>
       <p class="notas">
         Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H., la hora final es excluyente
         <br> Las Duraciones permitidas en minutos deben ser multiplos de 30.
@@ -73,13 +97,10 @@
       </ul>
       <div class="accountcont2" id="ListaE">
         <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filtrar Experimentos..">
-        <div class="wrapper1">
-          <div class="div1" id="div1"></div>
-        </div>
-        <div class="wrapper2">
+      <!-- <div class="wrapper2"> -->
           <div id="experimentsAll" align="center" >
           </div>
-        </div>
+        <!--</div> -->
       </div>
       <div class="accountcont2" id="crearE">
         <form id="file-form" class="pure-form" method="POST">
