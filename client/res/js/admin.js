@@ -768,6 +768,8 @@ $('#file-select').change(function () {
   var size = file.size
   var type = file.type*/
   document.getElementById('upload-button').disabled = true
+  document.getElementById('upload-button').className = "pure-button-disabled crearExp"
+
 
   if (file.name.length < 1) {
     console.log('file.name.length < 1')
@@ -779,7 +781,19 @@ $('#file-select').change(function () {
     alert('The file does not match png, jpg or gif')
   }*/
   else {
-    document.getElementById('upload-button').disabled = false
+      if(document.getElementById('file-select').innerHTML == "2")
+      {
+        document.getElementById('file-select').innerHTML = "21";
+      }else if(document.getElementById('file-select').innerHTML == "")
+        {
+          document.getElementById('file-select').innerHTML = "1";
+        }
+
+      if(document.getElementById('file-select').innerHTML == "21")
+      {
+         document.getElementById('upload-button').disabled = false
+         document.getElementById('upload-button').className = "pure-button-primary crearExp"
+      }
   }
 })
 $('#file-select2').change(function () {
@@ -788,6 +802,7 @@ $('#file-select2').change(function () {
   var size = file.size
   var type = file.type*/
   document.getElementById('upload-button').disabled = true
+    document.getElementById('upload-button').className = "pure-button-disabled crearExp"
 
   if (file.name.length < 1) {
     console.log('file.name.length < 1')
@@ -796,7 +811,19 @@ $('#file-select2').change(function () {
     alert('The file is too big')
   }
   else {
-    document.getElementById('upload-button').disabled = false
+         if(document.getElementById('file-select').innerHTML == "1")
+      {
+        document.getElementById('file-select').innerHTML = "12";
+      }else if(document.getElementById('file-select').innerHTML == "")
+        {
+          document.getElementById('file-select').innerHTML = "2";
+        }
+
+      if(document.getElementById('file-select').innerHTML == "12")
+      {
+         document.getElementById('upload-button').disabled = false
+         document.getElementById('upload-button').className = "pure-button-primary crearExp"
+      }
   }
 })
 $('#upload-button').click(function () {

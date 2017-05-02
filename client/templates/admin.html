@@ -4,8 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
+    
     <link rel="stylesheet" href="/css/styles.css">
-    <link href="/css/nouislider.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+   <link href="/css/nouislider.min.css" rel="stylesheet"> 
+    
   </head>
   <body>
     <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
@@ -79,13 +82,13 @@
         </div>
       </div>
       <div class="accountcont2" id="crearE">
-        <form id="file-form" method="POST">
-          <table class="myTable myTable2" style="width: 100%">
+        <form id="file-form" class="pure-form" method="POST">
+          <table class="pure-table myTable myTable2"  style="width: 100%">
             <tr>
               <td>ID Donador: </td>
               <td>
                 <input type="text" id="crearExpIDCreador" name="docCreator">
-                <button id="LookupCreador">BUSCAR</button>
+                <button id="LookupCreador" class="pure-button" style="background:#68c4ab; width:20%;">BUSCAR</button>
                 <input type="hidden" name="idCreator" value="" id="idCreator">
               </td>
             </tr>
@@ -204,9 +207,8 @@
             </tr>
           </table>
           <br>
-          <button type="submit" id="upload-button" disabled>Upload</button>
+          <button type="submit" id="upload-button" class="crearExp pure-button-disabled" style="background:#68c4ab;" disabled>Crear Nuevo Experimento</button>
         </form>
-        <button class="crearExp" id="crearExp" disabled>Crear Nuevo Experimento</button>
         <br>
         <br>
       </div>
