@@ -7,12 +7,15 @@
         <link rel = "stylesheet" href = "/css/styles.css">
         <link rel="stylesheet" type="text/css" href="/css/skin1.min.css">
         <link rel="stylesheet" href="/css/fullcalendar.css">
+        <link rel="stylesheet" href="/css/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
     </head>
     <body>
-        <div id="Timer">
-            <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
-        </div>
-        <h1>Reservar</h1>
+ <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
+      <div id="Timer">
+        <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+      </div>
+    </div>
+        <h1>Reservas</h1>
         <ul class="tab">
             <li>
                 <a href="/" class="tablinks" >SALIR</a>
@@ -37,7 +40,7 @@
                 Los dias válidos inician en domingo con indice 0:
             </p>
             <div style="margin:5px; overflow: auto;">
-                <table class="myTable">
+                <table class="myTable pure-table">
                 <thead>
                     <tr class="Theader" >
                     <td>Domingo</td>
@@ -75,7 +78,7 @@
         </div>
         <div class="accountcont" id="CONTRASEÑA">
             <div align="center" >
-                <table>
+                <table class="pure-table">
                     <tr>
                         <td>CONTRASEÑA ANTIGUA: </td>
                         <td><input type="password" id="oldpassword"/></td>

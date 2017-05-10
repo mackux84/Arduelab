@@ -70,7 +70,7 @@ function reservaHistory() {
     },
     success: function (json) {
       var table =
-        '<table class="myTable">'
+        '<table class="myTable pure-table">'
         +'<thead>'
         + '<tr class="Theader" >'
           + '<th>Token No: </th>'
@@ -152,7 +152,7 @@ function getExperimentos() {
     },
     success: function (json) {
       var table =
-        '<table class="myTable">'
+        '<table class="myTable pure-table">'
         +'<thead>'
         + '<tr class="Theader" >'
           + '<th>Nombre: </th>'
@@ -170,13 +170,13 @@ function getExperimentos() {
         table +=
         '<tr>'
         + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
-        + '<td><img src="/img/'+element._id+'.jpg"  height="50" width="50"></td>'
+        + '<td><img src="/img/'+element._id+'.jpg" style="height: 90px; width: 90px;" height="50" width="50"></td>'
         + '<td>' + element.description + '</td>'
         + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
         + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
         + '<td id="durationExp;' + element._id + '">[' + element.duration + ']</td>'
         + '<td id="daysExp;' + element._id + '" >[' + element.days + ']</td>'
-        + '<td><button class="reservarExp" name="' + element._id + '">Reservar</button></td>'
+        + '<td><input type="image" class="reservarExp" name="' + element._id + '" src="/images/calendar.png" /></td>'
         + '</tr>'
       }
       table+= '</table >'
