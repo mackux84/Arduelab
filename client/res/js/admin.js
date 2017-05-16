@@ -773,6 +773,7 @@ $('#file-select').change(function () {
 
   if (file.name.length < 1) {
     console.log('file.name.length < 1')
+    document.getElementById('temporalUp').value = ""
   }
   else if (file.size > 30 * Math.pow(1024, 2)) {
     alert('The file is too big')
@@ -781,16 +782,17 @@ $('#file-select').change(function () {
     alert('The file does not match png, jpg or gif')
   }*/
   else {
-      if(document.getElementById('file-select').innerHTML == "2")
+      if(document.getElementById('temporalUp').value == "")
       {
-        document.getElementById('file-select').innerHTML = "21";
-      }else if(document.getElementById('file-select').innerHTML == "")
+        document.getElementById('temporalUp').value = "2";
+      }else if(document.getElementById('temporalUp').value == "1")
         {
-          document.getElementById('file-select').innerHTML = "1";
+          document.getElementById('temporalUp').value = "12";
         }
 
-      if(document.getElementById('file-select').innerHTML == "21")
+      if((document.getElementById('temporalUp').value == "12"))
       {
+        console.log("asd2");
          document.getElementById('upload-button').disabled = false
          document.getElementById('upload-button').className = "pure-button-primary crearExp"
       }
@@ -806,21 +808,23 @@ $('#file-select2').change(function () {
 
   if (file.name.length < 1) {
     console.log('file.name.length < 1')
+    document.getElementById('file-select2').value = ""
   }
   else if (file.size > 3 * Math.pow(1024, 2)) {
     alert('The file is too big')
   }
   else {
-         if(document.getElementById('file-select').innerHTML == "1")
+       if(document.getElementById('temporalUp').value == "")
       {
-        document.getElementById('file-select').innerHTML = "12";
-      }else if(document.getElementById('file-select').innerHTML == "")
+        document.getElementById('temporalUp').value = "1";
+      }else if(document.getElementById('temporalUp').value == "2")
         {
-          document.getElementById('file-select').innerHTML = "2";
+          document.getElementById('temporalUp').value = "21";
         }
 
-      if(document.getElementById('file-select').innerHTML == "12")
+      if((document.getElementById('temporalUp').value == "21"))
       {
+        console.log("asd2");
          document.getElementById('upload-button').disabled = false
          document.getElementById('upload-button').className = "pure-button-primary crearExp"
       }
