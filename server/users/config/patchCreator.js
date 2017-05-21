@@ -20,7 +20,7 @@ module.exports = {
     params: updateUserSchema.paramsSchema,
     headers: updateUserSchema.headerSchema,
     payload: Joi.object({
-      identification: Joi.string().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
+      identification: Joi.string().description('Identificador de creador').example('235325425513125312353463'),
       name: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).description('El nombre de usuario debe de ser unico').example('andresvega'),
       email: Joi.string().email().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
       telephone: Joi.string().regex(/^(\(?\+[0-9]{1,3}\)?)? ?-?\(?[0-9]{1,3}\)? ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?/).description('Telefono del creador de experimento').example('800 555 1212'),

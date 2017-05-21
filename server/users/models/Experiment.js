@@ -60,6 +60,10 @@ const experimentsModel = new Schema({
     type: Boolean,
     required: true
   },
+  adminEnabled: {
+    type: Boolean,
+    required: true
+  },
   description: {
     type: String
   }

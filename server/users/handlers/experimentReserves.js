@@ -26,7 +26,7 @@ module.exports = function (request, reply) {
     var expID = request.payload.expID
     if (expID != null) {
       Reserve
-        .find().and([{ idExp: expID }, {enabled:true}])
+        .find().and([{ idExp: expID }, {enabled: true}, { adminEnabled: true }])
         // Deselect fields
         .select(' -__v -updated_At -scope -email -token -used -enabled')
         .exec((error, reserve) => {

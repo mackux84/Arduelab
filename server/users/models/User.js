@@ -11,6 +11,9 @@ const userModel = new Schema({
       unique: true
     }
   },
+  identification: {
+    type: String,
+  },
   username: {
     type: String,
     required: true,
@@ -22,9 +25,15 @@ const userModel = new Schema({
   university: {
     type: String,
   },
+  telephone: {
+    type: String,
+  },
+  cellphone: {
+    type: String,
+  },
   scope: {
     type: String,
-    enum: ['User', 'Premium', 'Admin'],
+    enum: ['User', 'Premium','Creator', 'Admin'],
     required: true
   },
   isVerified: {

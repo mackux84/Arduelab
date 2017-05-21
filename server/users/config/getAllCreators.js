@@ -14,7 +14,7 @@ module.exports = {
   validate: {
     headers: updateUserSchema.headerSchema,
     payload:Joi.object({
-      identification: Joi.string().required().allow('').description('The Id of the creator').example('7168253795')
+      email: Joi.string().required().allow('').description('The Id of the creator').example('7168253795')
     })
   },
   description: 'Get all users information',

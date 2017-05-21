@@ -81,8 +81,9 @@ h1, h2, h3, h4, h5{
 }
 
 .modal-content2 {
-    margin: auto; /* 5% from the top, 15% from the bottom and centered */
-    width: 50%; 
+    /*margin: auto;  5% from the top, 15% from the bottom and centered */
+    width: 80%; 
+    max-width: none;
 }
 #crearExpDesc{
     padding: 12px 20px;
@@ -359,6 +360,7 @@ img.avatar {
 span.psw {
     float: right;
     padding-top: 1px;
+    font-size: 10px;
 }
 
 .Filter {
@@ -481,15 +483,24 @@ th[role=columnheader]:not(.no-sort):hover:after {
     background: cadetblue;
 }
 
-
-
-
-
-.wrapper1, .wrapper2 { width: 100%; overflow-x: scroll; overflow-y: scroll; height: 600px; }
-.wrapper1 { height: 20px; }
-.div1 { height: 20px; }
-#experimentsAll { overflow: none; width: 100%; overflow-x: scroll; overflow-y: scroll; height: 600px; }
-
+#EULA{
+    overflow: auto;
+    resize: none;
+    border: 1px solid #ccc;
+    background: transparent;
+    /* margin-right: -5px; */
+    text-align: justify;
+    width: 100%;
+    background-color: #eee;
+    color: black;
+    border-color: #ccc;
+}
+#experimentsAll, #experimentsCreator{ 
+    overflow: none;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: auto;
+    max-height: 600px; }
 
 /* Change styles for span and cancel button on extra small screens */
     @media screen and (max-width: 300px) {

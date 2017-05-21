@@ -52,7 +52,15 @@ module.exports = function (request, reply) {
           reply.view('admin.html')
           return
         }
-        reply.view('account.html',{UserName:decoded.username})
+        if (user.scope ==='Creator') {
+          reply.view('creator.html',{
+            UserName:user.username,
+            UserEmail:user.email,
+            UserID:user._id.toString()
+          })
+          return
+        }
+        reply.view('account.html',{UserName:user.username})
         return
       }
     })

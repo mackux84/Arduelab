@@ -31,9 +31,6 @@
         <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'RESERVAS')">RESERVAS</a>
       </li>
       <li>
-        <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'DONADORES')">DONADORES</a>
-      </li>
-      <li>
         <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'CONTRASEÑA')">CAMBIO DE CONTRASEÑA</a>
       </li>
       <li>
@@ -106,9 +103,9 @@
         <form id="file-form" class="pure-form" method="POST">
           <table class="pure-table myTable myTable2"  style="width: 100%">
             <tr>
-              <td>ID Donador: </td>
+              <td>Email Donador: </td>
               <td>
-                <input type="text" id="crearExpIDCreador" name="docCreator">
+                <input type="text" id="crearExpEmailCreador" name="docCreator">
                 <button id="LookupCreador" class="pure-button" style="background:#68c4ab; width:20%;">BUSCAR</button>
                 <input type="hidden" name="idCreator" value="" id="idCreator">
               </td>
@@ -120,9 +117,9 @@
               </td>
             </tr>
             <tr>
-              <td>Correo el Donador (Auto): </td>
+              <td>Id el Donador (Auto): </td>
               <td>
-                <input type="text" id="crearExpemailCreador" disabled>
+                <input type="text" id="crearExpIDCreador" disabled>
               </td>
             </tr>
             <tr>
@@ -157,7 +154,7 @@
               <td><input type="url" id="crearExpUrl" name="url"></td>
             </tr>
             <tr>
-              <td>URL Imagen: </td>
+              <td>Subir Imagen: </td>
               <td><input type="file" id="file-select2" name="image" /></td>
             </tr>
             <tr>
@@ -229,7 +226,7 @@
             </tr>
           </table>
           <br>
-          <button type="submit" id="upload-button" class="crearExp pure-button-disabled" style="background:#68c4ab;" disabled>Crear Nuevo Experimento</button>
+          <button type="submit" id="crearExp" class="crearExp pure-button-disabled" style="background:#68c4ab;" disabled>Crear Nuevo Experimento</button>
         </form>
        <input type="hidden" name="var" value="" id="temporalUp">
         <br>
@@ -247,39 +244,6 @@
       <div id="reservaHistAll" align="center" class="info">
       </div>
     </div>
-    <!--div.accountcont#DONADORES>br+(table.myTable>thead>tr.Theader>td*6^tr>td*6)+br+(table.myTable>thead>tr.Theader>td*7^tr>td*7)-->
-    <div class="accountcont" id="DONADORES">
-      <h3>Crear Donador:</h3>
-      <br>
-      <div align="center" class="info">
-        <table class="myTable pure-table">
-          <thead>
-            <tr class="Theader">
-              <td>Identificacion</td>
-              <td>Nombre</td>
-              <td>Email</td>
-              <td>Telefono</td>
-              <td>Celular</td>
-              <td>Crear Donador</td>
-            </tr>
-            <tr>
-              <td><input type="text" id="crearCreadorID"></td>
-              <td><input type="text" id="crearCreadorName"></td>
-              <td><input type="email" id="crearCreadorEmail"></td>
-              <td><input type="text" id="crearCreadorTel"></td>
-              <td><input type="text" id="crearCreadorCel"></td>
-              <td><button id="CrearCreador" class="pure-button">Crear</button></td>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <br>
-      <h3>Lista de Donadores:</h3>
-      <input type="text" class="Filter" onkeyup="w3.filterHTML('#creatorsTable', '.searchItem', this.value)" placeholder="Filtrar Donadores..">
-      <div id="creadoresList" align="center" class="info">
-      </div>
-    </div>
-
     <div class="accountcont" id="CONTRASEÑA">
       <div align="center">
         <table>
@@ -299,6 +263,7 @@
             <td colspan="2" align="center"><button class="crearExp" id="passwordChange">Cambiar Contraseña</button></td>
           </tr>
         </table>
+        <br>
       </div>
     </div>
     <div class="accountcont" id="BROADCAST">
@@ -322,17 +287,6 @@
 
           <div id="calendarDiv">
           </div>
-        </div>
-      </form>
-    </div>
-    <div id="id02" class="modal">
-      <form class="modal-content modal-content2 animate" id="createExpForm">
-        <div class="container">
-          <div class="createExpTopMenu">
-            <span class="popupTopText">Crear Experimento</span>
-            <span class="close closeX" title="Close      Modal">&times;</span>
-          </div>
-
         </div>
       </form>
     </div>
@@ -367,10 +321,6 @@
           descending: true
         });
         new Tablesort(document.getElementById('usersTable'), {
-          ascending: true,
-          descending: true
-        });
-        new Tablesort(document.getElementById('creatorsTable'), {
           ascending: true,
           descending: true
         });

@@ -64,6 +64,7 @@ module.exports = function (request, reply) {
                 experiment.schedule = request.payload.schedule
                 experiment.duration = request.payload.duration
                 experiment.enabled = request.payload.enabled
+                experiment.adminEnabled = false
                 experiment.description = request.payload.description
                 experiment.image = data.image.hapi.filename
                 experiment.pdf = data.pdf.hapi.filename
@@ -72,14 +73,14 @@ module.exports = function (request, reply) {
                   if (!error) {
                     reply({ message: 'EXPERIMENTO CREADO CORRECTAMENTE' })
                     var path1 = __dirname + '/../../../uploads/pdf/' + experiment.pdf
-                    var path2 = __dirname + '/../../../uploads/pdf/' + experiment._id+'.pdf'
+                    var path2 = __dirname + '/../../../uploads/pdf/' + experiment._id + '.pdf'
                     fs.rename(path1, path2, function (err) {
                       if (err) {
                         console.log(err)
                       } else {
                         console.log('Renamed ' + path1 + ' to ' + path2)
                         var path3 = __dirname + '/../../../uploads/image/' + experiment.image
-                        var path4 = __dirname + '/../../../uploads/image/' + experiment._id+'.jpg'
+                        var path4 = __dirname + '/../../../uploads/image/' + experiment._id + '.jpg'
                         fs.rename(path3, path4, function (err) {
                           if (err) {
                             console.log(err)

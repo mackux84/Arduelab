@@ -16,11 +16,19 @@ const createToken = require('../util/userFunctions').createToken
 // }
 
 module.exports = function (request, reply) {
-  let user = new User()
-  user.email = request.payload.email
-  user.username = request.payload.username
-  user.university = request.payload.university
-  user.scope = 'User'
+  let user            = new User()
+  user.identification = request.payload.identification
+  user.email          = request.payload.email
+  user.username       = request.payload.username
+  user.university     = request.payload.university
+  user.telephone      = request.payload.telephone
+  user.cellphone      = request.payload.cellphone
+  if (request.payload.identification) {
+    user.scope = 'Creator'
+  }else{
+    user.scope = 'User'
+  }
+
   user.password = Common.encrypt(request.payload.password),
   // hashPassword(req.payload.password, (error, hash) => {
   // if (error){
@@ -41,7 +49,7 @@ module.exports = function (request, reply) {
           reply(Boom.serverUnavailable('INTENTE DE NUEVO MAS TARDE'))
           return
         }
-        reply({message: 'POR FAVOR VERIFICA TU CUENTA CON EL LINK QUE LLEGARA A TU CORREO ELECTRONICO, CUALQUIER INQUIETUD CONTACTE AL ADMINISTRADOR'})
+        reply({message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO'})
       })
     }else {
       if (11000 === error.code || 11001 === error.code) {

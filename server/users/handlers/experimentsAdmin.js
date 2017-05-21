@@ -24,7 +24,7 @@ module.exports = function (request, reply) {
       reply(Boom.forbidden('NO ES UN TOKEN DE USUARIO'))
       return
     }
-    
+
     decoded = decyptToken(decoded)
 
     var diff = Moment().diff(Moment(decoded.iat * 1000))
@@ -50,21 +50,40 @@ module.exports = function (request, reply) {
             reply(experiments)
           })
       } else {
-        Experiment
-          .find({enabled:'true'})
-          // Deselect fields
-          .select('-updated_At -__v -created_At -enabled -url')
-          .exec((error, experiments) => {
-            if (error) {
-              reply(Boom.badRequest(error))
-              return
-            }
-            if (!experiments.length) {
-              reply(Boom.notFound('No Experiments found!'))
-              return
-            }
-            reply(experiments)
-          })
+        if (decoded.scope === 'Creator') {
+          Experiment
+            .find({ docCreator: request.payload.email })
+            // Deselect fields
+            .select('-updated_At -__v ')
+            .exec((error, experiments) => {
+              if (error) {
+                reply(Boom.badRequest(error))
+                return
+              }
+              if (!experiments.length) {
+                reply(Boom.notFound('No Experiments found!'))
+                return
+              }
+              reply(experiments)
+            })
+        }
+        else {
+          Experiment
+            .find({ $and: [ {enabled: true}, { adminEnabled: true } ] })
+            // Deselect fields
+            .select('-updated_At -__v -created_At -enabled -url')
+            .exec((error, experiments) => {
+              if (error) {
+                reply(Boom.badRequest(error))
+                return
+              }
+              if (!experiments.length) {
+                reply(Boom.notFound('No Experiments found!'))
+                return
+              }
+              reply(experiments)
+            })
+        }
       }
     }
   })

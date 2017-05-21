@@ -29,18 +29,18 @@ module.exports = {
       idCreator: Joi.objectId().description('Identificador de creador').example('235325425513125312353463'),
       docCreator: Joi.string().required().description('Documento de identidad del creador').example('8859236584'),
       arduino: Joi.string().description('Arduino usado en el experimento').example('Arduino Mega 2560'),
-      image: Joi.string().min(3).description('Link de la Imagen').example('http://i.imgur.com/mG1n223.gif'),
       url: Joi.string().min(3).description('The Experiment Url').example('http://google.com'),
       days: Joi.array().items(Joi.number().min(0).max(6)).description('The experiment Allowed Days in UTC format, Sunday is 0, Monday is 1, and so on.').example('[1,2,3,4]'),
       schedule: Joi.array().length(2).items(Joi.number().min(0).max(24)).required().description('The experiment active hours (initial,, final)').example('[8,18]'),
       duration: Joi.array().items(Joi.number().multiple(30)).description('The experiment Allowed durations in Minutes (must be multiples of 30)').example('[30,60,90,120]'),
       enabled: Joi.boolean().description('Wheter the Experiment is enabled to registration').example(true),
+      adminEnabled: Joi.boolean().description('Wheter the Experiment is enabled to registration').example(true),
       description: Joi.string().description('Experiment Description').example('Program an RGB LED with Arduino!!')
     })
   },
   auth: {
     strategy: 'jwt',
-    scope: 'Admin'
+    scope: ['Creator','Admin']
   },
   description: 'Patch experiment',
   notes: 'Edit experiment, Require \'Admin\' scope',

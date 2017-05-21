@@ -9,7 +9,7 @@ module.exports = {
     // Add authentication to this route
     // The user must have a scope of `admin`
     strategy: 'jwt',
-    scope: ['User','Admin']
+    scope: ['User','Creator','Admin']
   },
   validate: {
     headers: updateUserSchema.headerSchema

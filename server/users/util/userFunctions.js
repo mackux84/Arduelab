@@ -3,7 +3,7 @@
 const Boom = require('boom')
 const User = require('../models/User')
 const Reserve = require('../models/Reserve')
-const Creator = require('../models/Creator')
+const Creator = require('../models/User')
 // const Jwt    = require('jsonwebtoken')
 const Common = require('./common')
 // const bcrypt = require('bcrypt')
@@ -27,12 +27,12 @@ function verifyUniqueUser(request, reply) {
 function verifyUniqueCreator(request, reply) {
   // Find an entry from the database that matches the email
   Creator.findOne({
-    identification: request.payload.identification
+    email: request.payload.email
   }, (err, user) => {
     // Check whether the email is already taken and error out if so
     if (user) {
-      if (user.identification === request.payload.identification) {
-        reply(Boom.badRequest('ESTA IDENTIFICACION YA SE ENCUENTRA EN USO'))
+      if (user.email === request.payload.email) {
+        reply(Boom.badRequest('ESTA EMAIL YA SE ENCUENTRA EN USO'))
         return
       }
     }
@@ -43,11 +43,11 @@ function verifyUniqueCreator(request, reply) {
 function verifyCreatorExists(request, reply) {
   // Find an entry from the database that matches the email
   Creator.findOne({
-    identification: request.payload.idCreator
+    _id: request.payload.idCreator
   }, (err, user) => {
     // Check whether the email is already taken and error out if so
     if (user) {
-      if (user.identification === request.payload.idCreator) {
+      if (user._id.toString() === request.payload.idCreator) {
         reply(request.payload)
         return
       }

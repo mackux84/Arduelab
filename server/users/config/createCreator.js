@@ -23,7 +23,7 @@ module.exports = {
   validate: {
     // Validate the payload against the Joi schema
     payload: Joi.object({
-      identification: Joi.string().required().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
+      identification: Joi.string().required().description('Identificador de creador').example('235325425513125312353463'),
       name: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).required().description('El nombre de usuario debe de ser unico').example('andresvega'),
       email: Joi.string().email().required().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
       telephone: Joi.string().regex(/^((\(?\+?[0-9]{1,3}\)?)?( |-)?([0-9]{1,3}?)( |-)?)?( |-)?([0-9]{2,3})( |-)?([0-9]{2,5})( |-)?([0-9]{2,5}) ?([a-zA-Z]{1,10}\s?\d{1,6})?$/).required().description('Telefono del creador de experimento').example('800 555 1212'),

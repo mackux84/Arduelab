@@ -16,7 +16,7 @@ module.exports = function (request, reply) {
       reply({ message: 'CREADOR CREADO CORRECTAMENTE' }) 
     }else {
       if (11000 === error.code || 11001 === error.code) {
-        reply(Boom.forbidden('POR FAVOR INGRESE OTRa IDENTIFICACION, ESTA YA SE ENCUENTRA EN USO'))
+        reply(Boom.forbidden('POR FAVOR INGRESE OTRA IDENTIFICACION, ESTA YA SE ENCUENTRA EN USO'))
       } else {
         console.log(error)
         reply(Boom.forbidden(error)) // HTTP 403 //why?

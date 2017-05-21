@@ -1,12 +1,13 @@
 'use strict'
 
 const Boom = require('boom')
-const Creator = require('../models/Creator')
+const Creator = require('../models/User')
 
 module.exports = function (request, reply) {
-  if (request.payload.identification !== '') {
+  if (request.payload.email !== '') {
     Creator
-      .find({identification: request.payload.identification})
+      .find({ $and: [ {email: request.payload.email}, { scope: 'Creator' } ] })
+      // .find({email: request.payload.email})
       // Deselect the password and version fields
       .select('-__v')
       .exec((error, creators) => {
@@ -22,7 +23,7 @@ module.exports = function (request, reply) {
       })
   } else {
     Creator
-      .find()
+      .find( { scope: 'Creator' })
       // Deselect the password and version fields
       .select('-__v')
       .exec((error, creators) => {

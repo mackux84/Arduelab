@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
+    crossorigin="anonymous">
+  <link href="/css/nouislider.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
+    <div id="Timer">
+      <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span>
+    </div>
+  </div>
+  <h1>ADMINISTRACION</h1>
+  <ul class="tab">
+    <li>
+      <a href="/" class="tablinks">SALIR</a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'LISTA')">LISTA</a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'CREAR')">CREAR</a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'CONTRASEÑA')">CAMBIO DE CONTRASEÑA</a>
+    </li>
+    <li class="usuario">{UserName}</li>
+  </ul>
+  <div class="accountcont" id="LISTA">
+    <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTableCreator', '.searchItem', this.value)" placeholder="Filtrar Experimentos..">
+    <div id="experimentsCreator" align="center">
+    </div>
+  </div>
+  <div class="accountcont" id="CREAR">
+    <p class="notas">
+      Notas:
+      <br> El contenido de la tabla es editable para la facilidad en la edición.
+      <br> Los dias válidos inician en domingo con indice 0:
+    </p>
+    <div style="margin:5px; overflow: auto;">
+      <table class="myTable pure-table">
+        <thead>
+          <tr class="Theader">
+            <td>Domingo</td>
+            <td>Lunes</td>
+            <td>Martes</td>
+            <td>Miercoles</td>
+            <td>Jueves</td>
+            <td>Viernes</td>
+            <td>Sabado</td>
+          </tr>
+        </thead>
+        <tr>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+      </table>
+    </div>
+    <p class="notas">
+      Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H., la hora final es excluyente
+      <br> Las Duraciones permitidas en minutos deben ser multiplos de 30.
+      <br> El servidor maneja un horario GMT-5.
+      <br> Recuerde guardar los cambios.
+    </p>
+    <form id="file-form" class="pure-form" method="POST">
+      <input type="hidden" id="crearExpEmailCreador" name="docCreator" value="{UserEmail}">
+      <input type="hidden" name="idCreator" value="{UserID}" id="idCreator">
+      <input type="hidden" id="crearExpNombreCreador" value="{UserName}">
+      <table class="pure-table myTable myTable2" style="width: 100%">
+        <tr>
+          <td>Nombre del Experimento: </td>
+          <td><input type="text" id="crearExpNombre" name="name"></td>
+        </tr>
+        <tr>
+          <td>Universidad: </td>
+          <td><input type="text" id="crearExpUniversidad" name="university"></td>
+        </tr>
+        <tr>
+          <td>País: </td>
+          <td><input type="text" id="crearExpPais" name="country"></td>
+        </tr>
+        <tr>
+          <td>Ciudad: </td>
+          <td><input type="text" id="crearExpCiudad" name="city"></td>
+        </tr>
+        <tr>
+          <td>Arduino: </td>
+          <td><input type="text" id="crearExpArduino" name="arduino"></td>
+        </tr>
+        <tr>
+          <td>Descripción: </td>
+          <td>
+            <textarea id="crearExpDesc" rows="6" maxlength="250" name="description"></textarea>
+            <div id="textarea_feedback"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>URL Experimento: </td>
+          <td><input type="url" id="crearExpUrl" name="url"></td>
+        </tr>
+        <tr>
+          <td>Subir Imagen: </td>
+          <td><input type="file" id="file-select2" name="image" /></td>
+        </tr>
+        <tr>
+          <td>Subir PDF:</td>
+          <td>
+            <input type="file" id="file-select" name="pdf" />
+            <input type="hidden" name="pdffile" value="" id="pdffile">
+          </td>
+        </tr>
+        <tr>
+          <td>Dias validos: </td>
+          <td>
+            <div class="checkList">
+              <label><input name="crearExpDays" value="0" type="checkbox">Domingo</label>
+              <br>
+              <label><input name="crearExpDays" value="1" type="checkbox">Lunes</label>
+              <br>
+              <label><input name="crearExpDays" value="2" type="checkbox">Martes</label>
+              <br>
+              <label><input name="crearExpDays" value="3" type="checkbox">Miercoles</label>
+              <br>
+              <label><input name="crearExpDays" value="4" type="checkbox">Jueves</label>
+              <br>
+              <label><input name="crearExpDays" value="5" type="checkbox">Viernes</label>
+              <br>
+              <label><input name="crearExpDays" value="6" type="checkbox">Sabado</label>
+            </div>
+            <input type="hidden" name="days" value="" id="daysFormat">
+          </td>
+        </tr>
+        <tr>
+          <td>Horas validas: </td>
+          <td>
+            <br>
+            <div id="crearExpSchedule"></div>
+            <br>
+            <span id="crearExpScheduleMin"></span>-<span id="crearExpScheduleMax"></span>
+            <input type="hidden" name="schedule" value="" id="scheduleFormat">
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td>Duraciones permitidas: </td>
+          <td>
+            <div class="checkList">
+              <label><input name="crearExpDuration" value="30" type="checkbox">0:30:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="60" type="checkbox">1:00:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="90" type="checkbox">1:30:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="120" type="checkbox">2:00:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="150" type="checkbox">2:30:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="180" type="checkbox">3:00:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="210" type="checkbox">3:30:00</label>
+              <br>
+              <label><input name="crearExpDuration" value="240" type="checkbox">4:00:00</label>
+            </div>
+            <input type="hidden" name="duration" value="" id="durationFormat">
+
+          </td>
+        </tr>
+        <tr>
+          <td>Activo</td>
+          <td><input type="checkbox" id="crearExpEnabled" checked name="enabled"></td>
+        </tr>
+      </table>
+      <br>
+      <button type="submit" id="crearExp" class="crearExp pure-button-disabled" style="background:#68c4ab;" disabled>Crear Nuevo Experimento</button>
+    </form>
+    <input type="hidden" name="var" value="" id="temporalUp">
+    <br>
+    <br>
+  </div>
+  <div class="accountcont" id="CONTRASEÑA">
+    <div align="center">
+      <table>
+        <tr>
+          <td>CONTRASEÑA ANTIGUA: </td>
+          <td><input type="password" id="oldpassword" /></td>
+        </tr>
+        <tr>
+          <td>CONTRASEÑA NUEVA: </td>
+          <td><input type="password" id="newpassword" /></td>
+        </tr>
+        <tr>
+          <td>CONFIRME CONTRASEÑA NUEVA: </td>
+          <td><input type="password" id="cnewpassword" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><button class="crearExp" id="passwordChange">Cambiar Contraseña</button></td>
+        </tr>
+      </table>
+      <br>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/main.min.js"></script>
+  <!--W3 is the filter-->
+  <script src="http://www.w3schools.com/lib/w3.js"></script>
+  <script src='/js/tablesort.js'></script>
+  <!-- Include sort types you need -->
+  <script src='/js/tablesort.number.js'></script>
+  <script src='/js/tablesort.date.js'></script>
+  <script src='/js/tablesort.dotsep.js'></script>
+
+  <script src="/js/nouislider.min.js"></script>
+
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("accountcont");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+
+      new Tablesort(document.getElementById('reservesTable'), {
+        ascending: true,
+        descending: true
+      });
+    }
+  </script>
+
+  <script>
+    var slider = document.getElementById('crearExpSchedule');
+
+    noUiSlider.create(slider, {
+      start: [0, 23.59],
+      connect: true,
+      step: 1,
+      range: {
+        'min': 0,
+        'max': 23.59
+      },
+      margin: 1,
+    });
+
+    var paddingMin = document.getElementById('crearExpScheduleMin'),
+      paddingMax = document.getElementById('crearExpScheduleMax');
+
+    slider.noUiSlider.on('update', function (values, handle) {
+      if (handle) {
+        paddingMax.innerHTML = values[handle];
+      } else {
+        paddingMin.innerHTML = values[handle];
+      }
+    });
+  </script>
+</body>
+
+</html>
