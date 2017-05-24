@@ -38,19 +38,24 @@ module.exports = function (request, reply) {
   // user.password = hash
   user.save((error, user) => {
     if (!error) {
-      var tokenData = {
+
+      /*var tokenData = {
         email: user.email,
         university: user.university,
         scope: [user.scope],
         id: user._id
-      }
-      Common.sentMailVerificationLink(user, createToken(tokenData), (error) => {
+      }*/
+
+       reply({message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO'})
+
+      /*Common.sentMailVerificationLink(user, createToken(tokenData), (error) => {
         if (error) {
           reply(Boom.serverUnavailable('INTENTE DE NUEVO MAS TARDE'))
           return
         }
-        reply({message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO'})
-      })
+       
+      })*/
+      
     }else {
       if (11000 === error.code || 11001 === error.code) {
         reply(Boom.forbidden('POR FAVOR INGRESE OTRO CORREO ELECTRONICO, ESTE YA SE ENCUENTRA EN USO'))

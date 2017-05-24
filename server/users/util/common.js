@@ -23,10 +23,10 @@ exports.encrypt = function (password) {
   return encrypt(password)
 }
 
-exports.sentMailVerificationLink = function (user, token) {
+exports.sentMailVerificationLink = function (user, token, callback) {
   const from = auth.email.accountName + ' Team<' + auth.email.username + '>'
   const mailbody = '<p>Thanks for Registering on ' + auth.email.accountName + ' </p><p>Please verify your email by clicking on the verification link below.<br/><a href="http://' + auth.server.external + ':' + auth.server.port + '/' + auth.email.verifyEmailUrl + '/' + token + '">Verification Link</a></p>'
-  mail(from, user.email , 'Account Verification', mailbody)
+  mail(from, user.email , 'Account Verification', mailbody, callback)
 }
 
 exports.sentMailForgotPassword = function (user) {
@@ -51,7 +51,7 @@ function encrypt (password) {
   return crypted
 }
 
-function mail (from, email, subject, mailbody) {
+function mail (from, email, subject, mailbody, callback) {
   const mailOptions = {
     from: from, // sender address
     to: email, // list of receivers
@@ -66,6 +66,6 @@ function mail (from, email, subject, mailbody) {
     } else {
       nodemailerMailgun.close() // shut down the connection pool, no more messages
     }  
-    // callback(error)
+     callback(error)
   })
 }
