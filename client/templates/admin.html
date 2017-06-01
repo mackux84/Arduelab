@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    
+
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
-   <link href="/css/nouislider.min.css" rel="stylesheet"> 
-    
+    <link rel="stylesheet" href="/css/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
+      crossorigin="anonymous">
+    <link href="/css/nouislider.min.css" rel="stylesheet">
+
   </head>
   <body>
     <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
@@ -55,29 +56,29 @@
         <br> Los dias válidos inician en domingo con indice 0:
       </p>
       <div style="margin:5px; overflow: auto;">
-                <table class="myTable pure-table">
-                <thead>
-                    <tr class="Theader" >
-                    <td>Domingo</td>
-                    <td>Lunes</td>
-                    <td>Martes</td>
-                    <td>Miercoles</td>
-                    <td>Jueves</td>
-                    <td>Viernes</td>
-                    <td>Sabado</td>
-                    </tr>
-                    </thead>
-                <tr>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
-                </table>
-            </div>
+        <table class="myTable pure-table">
+          <thead>
+            <tr class="Theader">
+              <td>Domingo</td>
+              <td>Lunes</td>
+              <td>Martes</td>
+              <td>Miercoles</td>
+              <td>Jueves</td>
+              <td>Viernes</td>
+              <td>Sabado</td>
+            </tr>
+          </thead>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+          </tr>
+        </table>
+      </div>
       <p class="notas">
         Las horas validas son las hora inicial y final permitidas para realizar reservas, formato 24H., la hora final es excluyente
         <br> Las Duraciones permitidas en minutos deben ser multiplos de 30.
@@ -94,14 +95,14 @@
       </ul>
       <div class="accountcont2" id="ListaE">
         <input type="text" class="Filter" onkeyup="w3.filterHTML('#experimentsTable', '.searchItem', this.value)" placeholder="Filtrar Experimentos..">
-      <!-- <div class="wrapper2"> -->
-          <div id="experimentsAll" align="center" >
-          </div>
+        <!-- <div class="wrapper2"> -->
+        <div id="experimentsAll" align="center">
+        </div>
         <!--</div> -->
       </div>
       <div class="accountcont2" id="crearE">
         <form id="file-form" class="pure-form" method="POST">
-          <table class="pure-table myTable myTable2"  style="width: 100%">
+          <table class="pure-table myTable myTable2" style="width: 100%">
             <tr>
               <td>Email Donador: </td>
               <td>
@@ -197,6 +198,18 @@
               </td>
             </tr>
             <tr>
+              <td>Horas validas2: </td>
+              <td>
+                <br>
+                <div id="crearExpSchedule2"></div>
+                <br>
+                <span id="crearExpScheduleMin2"></span>-<span id="crearExpScheduleMax2"></span>
+                <input type="hidden" name="schedule2" value="" id="scheduleFormat2">
+                <br>
+              </td>
+            </tr>
+
+            <tr>
               <td>Duraciones permitidas: </td>
               <td>
                 <div class="checkList">
@@ -228,7 +241,7 @@
           <br>
           <button type="submit" id="crearExp" class="crearExp pure-button-disabled" style="background:#68c4ab;" disabled>Crear Nuevo Experimento</button>
         </form>
-       <input type="hidden" name="var" value="" id="temporalUp">
+        <input type="hidden" name="var" value="" id="temporalUp">
         <br>
         <br>
       </div>
@@ -348,7 +361,6 @@
 
     <script>
       var slider = document.getElementById('crearExpSchedule');
-
       noUiSlider.create(slider, {
         start: [0, 23.59],
         connect: true,
@@ -359,15 +371,33 @@
         },
         margin: 1,
       });
-
       var paddingMin = document.getElementById('crearExpScheduleMin'),
         paddingMax = document.getElementById('crearExpScheduleMax');
-
       slider.noUiSlider.on('update', function (values, handle) {
         if (handle) {
           paddingMax.innerHTML = values[handle];
         } else {
           paddingMin.innerHTML = values[handle];
+        }
+      });
+      var slider2 = document.getElementById('crearExpSchedule2');
+      noUiSlider.create(slider2, {
+        start: [0, 23.59],
+        connect: true,
+        step: 1,
+        range: {
+          'min': 0,
+          'max': 23.59
+        },
+        margin: 1,
+      });
+      var paddingMin2 = document.getElementById('crearExpScheduleMin2'),
+        paddingMax2 = document.getElementById('crearExpScheduleMax2');
+      slider2.noUiSlider.on('update', function (values, handle) {
+        if (handle) {
+          paddingMax2.innerHTML = values[handle];
+        } else {
+          paddingMin2.innerHTML = values[handle];
         }
       });
     </script>
