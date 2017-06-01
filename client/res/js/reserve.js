@@ -11,7 +11,7 @@ function cambiarPass() {
   var oldPass = $('#oldpassword').val()
   var newPass = $('#newpassword').val()
   var newPassCheck = $('#cnewpassword').val()
-  
+
   if (!oldPass || !newPass || !newPassCheck) {
     alert('password fields can\'t be empty')
     return
@@ -30,7 +30,7 @@ function cambiarPass() {
   jsonData = {
     old_password: oldPass,
     new_password: newPass,
-    new_password_check:newPassCheck,
+    new_password_check: newPassCheck,
   }
   var jsonData2 = JSON.stringify(jsonData)
 
@@ -71,17 +71,17 @@ function reservaHistory() {
     success: function (json) {
       var table =
         '<table class="myTable pure-table">'
-        +'<thead>'
+        + '<thead>'
         + '<tr class="Theader" >'
-          + '<th>Token No: </th>'
-          + '<th>Fecha de creación: </th>'
-          + '<th>Fecha Reservada: </th>'
-          + '<th>Experimento: </th>'
-          + '<th>Duración: </th>'
-          + '<th>Usado: </th>'
-          + '<th>Ir al Experimento:</th>'
+        + '<th>Token No: </th>'
+        + '<th>Fecha de creación: </th>'
+        + '<th>Fecha Reservada: </th>'
+        + '<th>Experimento: </th>'
+        + '<th>Duración: </th>'
+        + '<th>Usado: </th>'
+        + '<th>Ir al Experimento:</th>'
         + '</tr>'
-        +'</thead>'
+        + '</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         var ini = (new Date(element.created_At)).toLocaleString()
@@ -89,7 +89,7 @@ function reservaHistory() {
         table +=
           '<tr>'
           + '<td>' + Number(index + 1) + '</td>'
-          + '<td>' +  ini + '</td>'
+          + '<td>' + ini + '</td>'
           + '<td>' + fin.substring(0, fin.length - 3) + '</td>'
           + '<td>' + element.expName + '</td>'
           + '<td>' + element.duration + ' Minutos</td>'
@@ -102,8 +102,8 @@ function reservaHistory() {
           '<td><a href="http://' + element.url + '/' + element.token + '">Ir al Experimento</a></td>'
           + '</tr>'
       }
-      table+='</table >'
-      
+      table += '</table >'
+
       $('#reservaHist').html(table)
     },
     error: function (json) {
@@ -129,9 +129,9 @@ $(document).ready(function () {
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if ((event.target == modal) || (event.target == modal2)) {
+      $('#calendarDiv').fullCalendar('destroy')
       modal.style.display = 'none'
       modal2.style.display = 'none'
-      $('#calendarDiv').fullCalendar('destroy')
     }
   }
 })
@@ -153,33 +153,33 @@ function getExperimentos() {
     success: function (json) {
       var table =
         '<table class="myTable pure-table">'
-        +'<thead>'
+        + '<thead>'
         + '<tr class="Theader" >'
-          + '<th>Nombre: </th>'
-          + '<th>Imagen: </th>'
-          + '<th>Descripción: </th>'
-          + '<th>Universidad: </th>'
-          + '<th>Horas validas: </th>'
-          + '<th>Duraciones permitidas: </th>'
-          + '<th>Dias permitidos: </th>'
-          + '<th>Reservar: </th>'
-        +'<tr>'
-        +'</thead>'
+        + '<th>Nombre: </th>'
+        + '<th>Imagen: </th>'
+        + '<th>Descripción: </th>'
+        + '<th>Universidad: </th>'
+        + '<th>Horas validas: </th>'
+        + '<th>Duraciones permitidas: </th>'
+        + '<th>Dias permitidos: </th>'
+        + '<th>Reservar: </th>'
+        + '<tr>'
+        + '</thead>'
       for (var index = 0; index < json.length; index++) {
         var element = json[index]
         table +=
-        '<tr>'
-        + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
-        + '<td><img src="/img/'+element._id+'.jpg" style="height: 90px; width: 90px;" height="50" width="50"></td>'
-        + '<td>' + element.description + '</td>'
-        + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
-        + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
-        + '<td id="durationExp;' + element._id + '">[' + element.duration + ']</td>'
-        + '<td id="daysExp;' + element._id + '" >[' + element.days + ']</td>'
-        + '<td><input type="image" class="reservarExp" name="' + element._id + '" src="/images/calendar.png" /></td>'
-        + '</tr>'
+          '<tr>'
+          + '<td id="nameExp;' + element._id + '">' + element.name + '</td>'
+          + '<td><img src="/img/' + element._id + '.jpg" style="height: 90px; width: 90px;" height="50" width="50"></td>'
+          + '<td>' + element.description + '</td>'
+          + '<td id="universityExp;' + element._id + '" >' + element.university + '</td>'
+          + '<td id="scheduleExp;' + element._id + '">[' + element.schedule + ']</td>'
+          + '<td id="durationExp;' + element._id + '">[' + element.duration + ']</td>'
+          + '<td id="daysExp;' + element._id + '" >[' + element.days + ']</td>'
+          + '<td><input type="image" class="reservarExp" name="' + element._id + '" src="/images/calendar.png" /></td>'
+          + '</tr>'
       }
-      table+= '</table >'
+      table += '</table >'
       $('#experimentsAllUser').html(table)
       $('.reservarExp').on('click', function (e) {
         //patch Experiment
@@ -234,21 +234,23 @@ function getExperimentos() {
                 maxResTime: 7200000,
                 experimentID: name_id,
                 events: eventsA,
-                selectConstraint: {
-                  start: businessH[0] + ':00',
-                  end: businessH[1] + ':00',
-                  dow: JSON.parse($('[id="daysExp;' + name_id + '"]').text())
-                },
-                businessHours:
-                {
-                  start: businessH[0] + ':00',
-                  end: businessH[1] + ':00',
-                  dow: JSON.parse($('[id="daysExp;' + name_id + '"]').text())
-                }
+                selectConstraint: 'businessHours',
+                businessHours: [
+                  {
+                    start: businessH[0] + ':00',
+                    end: businessH[1] + ':00',
+                    dow: JSON.parse($('[id="daysExp;' + name_id + '"]').text())
+                  },
+                  {
+                    start: businessH[2] + ':00',
+                    end: businessH[3] + ':00',
+                    dow: JSON.parse($('[id="daysExp;' + name_id + '"]').text())
+                  }
+                ]
 
               }
-              //console.log('jsonCal:')
-              //console.log(jsonCal)
+              // console.log('jsonCal:')
+              // console.log(jsonCal)
               //TODO (not): timeout and callback function are temporal fixes,
               //when the server query (json) is added they should no longer be necessary
               //false, it is still necessary
@@ -356,11 +358,11 @@ function calendarDivF(json) {
           contentType: 'application/json',
           success: function (json) {
             var ini = new Date(json.date).toUTCString()
-            var fin = new Date(Date.parse(json.date) + json.duration*60000).toUTCString()
+            var fin = new Date(Date.parse(json.date) + json.duration * 60000).toUTCString()
             alert(
               'Reserva realizada para:'
-              + '\nHora Inicial: ' + ini.substring(0,ini.length-3)
-              + '\nHora Final: ' + fin.substring(0,fin.length-3)
+              + '\nHora Inicial: ' + ini.substring(0, ini.length - 3)
+              + '\nHora Final: ' + fin.substring(0, fin.length - 3)
             )
             var eventData = {
               title: 'Reservado',
