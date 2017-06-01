@@ -1,7 +1,7 @@
 'use strict'
 
 const Joi = require('joi')
-const updateUserSchema = require('../schemas/updateUser')
+// const updateUserSchema = require('../schemas/updateUser')
 const errors = require('../../config/errors')
 
 module.exports = {
