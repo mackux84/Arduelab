@@ -355,8 +355,8 @@ function LookupCreador() {
     dataType: 'json',
     contentType: 'application/json',
     success: function (json) {
-      $('#crearExpNombreCreador').val(json[0].name)
-      $('#crearExpNombreCreador').attr('value', json[0].name)
+      $('#crearExpNombreCreador').val(json[0].username)
+      $('#crearExpNombreCreador').attr('value', json[0].username)
       $('#crearExpNombreCreador').attr('name', json[0]._id)
       $('#crearExpIDCreador').val(json[0].identification)
       $('#crearExpIDCreador').attr('value', json[0].identification)
@@ -552,7 +552,7 @@ function experimentsGetAll() {
           contentType: 'application/json',
           success: function (json) {
             $('[name="idCreatorExp;' + name_id + '"]').val(json[0]._id)
-            $('[name="idCreatorExp;' + name_id + '"]').attr('value',json[0]._id)
+            $('[name="idCreatorExp;' + name_id + '"]').attr('value', json[0]._id)
             document.getElementById('editarExp;' + name_id).disabled = false
             alert('Id de Donador correcto')
           },
@@ -652,6 +652,15 @@ $('#crearExp').click(function () {
   crearExpScheduleMax = parseInt(crearExpScheduleMax.toString())
   $('#scheduleFormat').val('[' + crearExpScheduleMin + ',' + crearExpScheduleMax + ']')
   $('#scheduleFormat').attr('value', '[' + crearExpScheduleMin + ',' + crearExpScheduleMax + ']')
+  var crearExpScheduleMin2 = $('#crearExpScheduleMin2').text()
+  crearExpScheduleMin2 = parseInt(crearExpScheduleMin2.toString())
+  var crearExpScheduleMax2 = $('#crearExpScheduleMax2').text()
+  if (crearExpScheduleMax2 == '23.59') {
+    crearExpScheduleMax2 = '24'
+  }
+  crearExpScheduleMax2 = parseInt(crearExpScheduleMax2.toString())
+  $('#scheduleFormat2').val('[' + crearExpScheduleMin2 + ',' + crearExpScheduleMax2 + ']')
+  $('#scheduleFormat2').attr('value', '[' + crearExpScheduleMin2 + ',' + crearExpScheduleMax2 + ']')
 
   var form = $('#file-form').get(0)
   var formData = new FormData(form)
@@ -814,7 +823,7 @@ function experimentsGetCreator() {
           table += '<td data-sort="true"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '" checked/></td>'
         } else {
           table += '<td data-sort="false"><input type="checkbox" name="isEnabledExp;' + element._id + '" Value="' + element.enabled + '" id="' + element._id + ';' + element.enabled + '"/></td>'
-        }        
+        }
         if (element.adminEnabled) {
           table += '<td data-sort="true"><input type="checkbox" name="isAdminEnabledExp;' + element._id + '" Value="' + element.adminEnabled + '" id="' + element._id + ';' + element.adminEnabled + '" checked disabled/></td>'
         } else {
