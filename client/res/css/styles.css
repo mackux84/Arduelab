@@ -403,7 +403,7 @@ span.psw {
 .myTable2 *{
     max-width: initial;
 }
-#crearExpSchedule, #crearExpSchedule *{
+#crearExpSchedule, #crearExpSchedule *, #crearExpSchedule2, #crearExpSchedule2 *{
     overflow: initial !important;
 }
 .myTable input[type=text], .myTable input[type=url], .myTable input[type=email]{
