@@ -1,9 +1,9 @@
 'use strict'
 
-const Boom        = require('boom')
-const User        = require('../models/User')
-const Common      = require('../util/common')
-const createToken = require('../util/userFunctions').createToken
+const Boom   = require('boom')
+const User   = require('../models/User')
+const Common = require('../util/common')
+// const createToken = require('../util/userFunctions').createToken
 
 // had some errors with bcrypt on windows
 // function hashPassword(password, cb){
@@ -25,45 +25,45 @@ module.exports = function (request, reply) {
   user.cellphone      = request.payload.cellphone
   if (request.payload.identification) {
     user.scope = 'Creator'
-  }else{
+  } else {
     user.scope = 'User'
   }
 
   user.password = Common.encrypt(request.payload.password),
-  // hashPassword(req.payload.password, (error, hash) => {
-  // if (error){
-  //     reply( Boom.badRequest(error))
-  //     return
-  // }
-  // user.password = hash
-  user.save((error, user) => {
-    if (!error) {
+    // hashPassword(req.payload.password, (error, hash) => {
+    // if (error){
+    //     reply( Boom.badRequest(error))
+    //     return
+    // }
+    // user.password = hash
+    user.save((error, user) => {
+      if (!error) {
 
-      /*var tokenData = {
-        email: user.email,
-        university: user.university,
-        scope: [user.scope],
-        id: user._id
-      }*/
+        /*var tokenData = {
+          email: user.email,
+          university: user.university,
+          scope: [user.scope],
+          id: user._id
+        }*/
 
-       reply({message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO'})
+        reply({ message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO' })
 
-      /*Common.sentMailVerificationLink(user, createToken(tokenData), (error) => {
-        if (error) {
-          reply(Boom.serverUnavailable('INTENTE DE NUEVO MAS TARDE'))
-          return
-        }
-       
-      })*/
-      
-    }else {
-      if (11000 === error.code || 11001 === error.code) {
-        reply(Boom.forbidden('POR FAVOR INGRESE OTRO CORREO ELECTRONICO, ESTE YA SE ENCUENTRA EN USO'))
+        /*Common.sentMailVerificationLink(user, createToken(tokenData), (error) => {
+          if (error) {
+            reply(Boom.serverUnavailable('INTENTE DE NUEVO MAS TARDE'))
+            return
+          }
+         
+        })*/
+
       } else {
-        console.log(error)
-        reply(Boom.forbidden(error)) // HTTP 403 //why?
+        if (11000 === error.code || 11001 === error.code) {
+          reply(Boom.forbidden('POR FAVOR INGRESE OTRO CORREO ELECTRONICO, ESTE YA SE ENCUENTRA EN USO'))
+        } else {
+          console.log(error)
+          reply(Boom.forbidden(error)) // HTTP 403 //why?
+        }
       }
-    }
-  })
+    })
   // })
 }

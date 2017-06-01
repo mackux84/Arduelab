@@ -26,17 +26,17 @@ exports.encrypt = function (password) {
 exports.sentMailVerificationLink = function (user, token, callback) {
   const from = auth.email.accountName + ' Team<' + auth.email.username + '>'
   const mailbody = '<p>Thanks for Registering on ' + auth.email.accountName + ' </p><p>Please verify your email by clicking on the verification link below.<br/><a href="http://' + auth.server.external + ':' + auth.server.port + '/' + auth.email.verifyEmailUrl + '/' + token + '">Verification Link</a></p>'
-  mail(from, user.email , 'Account Verification', mailbody, callback)
+  mail(from, user.email, 'Account Verification', mailbody, callback)
 }
 
 exports.sentMailForgotPassword = function (user) {
   const from = auth.email.accountName + ' Team<' + auth.email.username + '>'
   const mailbody = '<p>Your ' + auth.email.accountName + '  Account Credential</p><p>username : ' + user.email + ' , password : ' + decrypt(user.password) + '</p>'
-  mail(from, user.email , 'Account password', mailbody)
+  mail(from, user.email, 'Account password', mailbody)
 }
 
 // method to decrypt data(password) 
-function decrypt (password) {
+function decrypt(password) {
   const decipher = crypto.createDecipher(algorithm, privateKey)
   let dec = decipher.update(password, 'hex', 'utf8')
   dec += decipher.final('utf8')
@@ -44,14 +44,14 @@ function decrypt (password) {
 }
 
 // method to encrypt data(password)
-function encrypt (password) {
+function encrypt(password) {
   const cipher = crypto.createCipher(algorithm, privateKey)
   let crypted = cipher.update(password, 'utf8', 'hex')
   crypted += cipher.final('hex')
   return crypted
 }
 
-function mail (from, email, subject, mailbody, callback) {
+function mail(from, email, subject, mailbody, callback) {
   const mailOptions = {
     from: from, // sender address
     to: email, // list of receivers
@@ -65,7 +65,7 @@ function mail (from, email, subject, mailbody, callback) {
       // throw error
     } else {
       nodemailerMailgun.close() // shut down the connection pool, no more messages
-    }  
-     callback(error)
+    }
+    callback(error)
   })
 }

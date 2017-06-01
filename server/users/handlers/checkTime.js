@@ -3,7 +3,7 @@
 const Boom   = require('boom')
 const Jwt    = require('jsonwebtoken')
 const Moment = require('moment')
-const decyptToken = require('../util/userFunctions').decyptToken
+// const decyptToken = require('../util/userFunctions').decyptToken
 const decyptToken2 = require('../util/userFunctions').decyptToken2
 const key    = require('../../config/auth').key
 

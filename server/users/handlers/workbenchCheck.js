@@ -5,7 +5,7 @@ const Reserve     = require('../models/Reserve')
 const Jwt         = require('jsonwebtoken')
 const decyptToken2 = require('../util/userFunctions').decyptToken2
 const Moment      = require('moment')
-const key         = require('../../config/auth').key
+// const key         = require('../../config/auth').key
 
 module.exports = function (request, reply) {
   var token1 = request.params.id

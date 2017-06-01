@@ -1,7 +1,7 @@
 'use strict'
 
 const Boom        = require('boom')
-const Experiment = require('../models/Experiment')
+const Experiment  = require('../models/Experiment')
 const Jwt         = require('jsonwebtoken')
 const decyptToken = require('../util/userFunctions').decyptToken
 const Moment      = require('moment')
@@ -33,10 +33,10 @@ module.exports = function (request, reply) {
     if (diff > key.tokenExpiry) {
       reply(Boom.forbidden('TOKEN EXPIRO'))
       return
-    } 
-      const id = request.params.id
-    if(decoded.scope==='Admin'){
-      request.payload.adminEnabled=request.payload.enabled
+    }
+    const id = request.params.id
+    if (decoded.scope === 'Admin') {
+      request.payload.adminEnabled = request.payload.enabled
       Experiment
         .findOneAndUpdate({ _id: id }, request.payload, (error, experiment) => {
           if (error) {
@@ -47,40 +47,40 @@ module.exports = function (request, reply) {
             reply(Boom.notFound('Experiment id=(' + request.params.id + ') not found!'))
             return
           }
-          reply({message: 'Experiment updated!'})
+          reply({ message: 'Experiment updated!' })
         })
-    }else{
+    } else {
       Experiment
-          .findOne({ _id: id })
-          // Deselect fields
-          .select()
-          .exec((error, experiment) => {
-            if (error) {
-              reply(Boom.badRequest(error))
-              return
-            }
-            if (!experiment) {
+        .findOne({ _id: id })
+        // Deselect fields
+        .select()
+        .exec((error, experiment) => {
+          if (error) {
+            reply(Boom.badRequest(error))
+            return
+          }
+          if (!experiment) {
             reply(Boom.notFound('Experiment id=(' + request.params.id + ') not found!'))
             return
           }
-            if(!experiment.adminEnabled){
-              reply(Boom.forbidden('EXPERIMENTO DESHABILITADO POR ADMINISTRADOR'))
-              return
-            }
-            const id = request.params.id
-            Experiment
-              .findOneAndUpdate({ _id: id }, request.payload, (error, experiment) => {
-                if (error) {
-                  reply(Boom.badRequest(error))
-                  return
-                }
-                if (!experiment) {
-                  reply(Boom.notFound('Experiment id=(' + request.params.id + ') not found!'))
-                  return
-                }
-                reply({message: 'Experiment updated!'})
-              })
-          })
+          if (!experiment.adminEnabled) {
+            reply(Boom.forbidden('EXPERIMENTO DESHABILITADO POR ADMINISTRADOR'))
+            return
+          }
+          const id = request.params.id
+          Experiment
+            .findOneAndUpdate({ _id: id }, request.payload, (error, experiment) => {
+              if (error) {
+                reply(Boom.badRequest(error))
+                return
+              }
+              if (!experiment) {
+                reply(Boom.notFound('Experiment id=(' + request.params.id + ') not found!'))
+                return
+              }
+              reply({ message: 'Experiment updated!' })
+            })
+        })
     }
   })
 }
