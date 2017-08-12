@@ -723,10 +723,10 @@ $(document).ready(function () {
   if (reservaHistAll) {
     reservaHistoryAll()
   }
-  var creatorList = document.getElementById('creadoresList')
+  /*var creatorList = document.getElementById('creadoresList')
   if (creatorList) {
     creatorListShow()
-  }
+  }*/
 
   var text_max = 250
   $('#textarea_feedback').html(text_max + ' characters remaining')
