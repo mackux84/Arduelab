@@ -124,6 +124,7 @@ function userListShow() {
           contentType: 'application/json',
           success: function (json) {
             alert(json.message)
+            userListShow()
           },
           error: function (json) {
             if (json.status == 400) {
@@ -311,6 +312,7 @@ function reservaHistoryAll() {
           contentType: 'application/json',
           success: function (json) {
             alert(json.message)
+            reservaHistoryAll()
           },
           error: function (json) {
             alert(json.responseJSON.message)
@@ -691,6 +693,7 @@ $('#crearExp').click(function () {
         // alert('PDF Preparado')
         // $('#pdffile').val(jsondata.filename)
         // $('#pdffile').attr('value', jsondata.filename)
+        experimentsGetAll()
       }
       else {
         // console.log('ERRORS:')
