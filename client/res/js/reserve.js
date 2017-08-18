@@ -99,12 +99,21 @@ function reservaHistory() {
           table += '<td> No </td>'
         }
         table +=
-          '<td><a href="http://' + element.url + '/' + element.token + '">Ir al Experimento</a></td>'
+          '<td><Button class="gotoLink" name="http://' + element.url + '/' + element.token + '" >Ir al Experimento</Button></td>'
           + '</tr>'
       }
       table += '</table >'
 
       $('#reservaHist').html(table)
+      $('.gotoLink').on('click', function (e) {
+        //patch user
+        e.preventDefault()
+        var link_addr = $(this).attr('name')
+        var r = confirm('Estas a punto de salir de la plataforma de reservas hacia un servidor de experimentos externo')
+        if (r == true) {
+          window.location.href = link_addr
+        }
+      })
     },
     error: function (json) {
       //alert(json)
