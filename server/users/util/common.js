@@ -29,13 +29,13 @@ exports.sentMailVerificationLink = function (user, token, callback) {
   mail(from, user.email, 'Account Verification', mailbody, callback)
 }
 
-exports.sentMailForgotPassword = function (user) {
+exports.sentMailForgotPassword = function (user, callback) {
   const from = auth.email.accountName + ' Team<' + auth.email.username + '>'
   const mailbody = '<p>Your ' + auth.email.accountName + '  Account Credential</p><p>username : ' + user.email + ' , password : ' + decrypt(user.password) + '</p>'
-  mail(from, user.email, 'Account password', mailbody)
+  mail(from, user.email, 'Account password', mailbody, callback)
 }
 
-// method to decrypt data(password) 
+// method to decrypt data(password)
 function decrypt(password) {
   const decipher = crypto.createDecipher(algorithm, privateKey)
   let dec = decipher.update(password, 'hex', 'utf8')

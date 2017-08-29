@@ -31,3 +31,28 @@ $('#loginForm').on('submit', function (e) {
     }
   })
 })
+
+$('#forgotForm').on('submit', function (e) {
+  e.preventDefault()
+  var jsonData = {}
+  jsonData = {
+    email: $('#forgotEmail').val(),
+  }
+  var jsonData2 = JSON.stringify(jsonData)
+  $.ajax({
+    type: 'POST',
+    url: '/users/forgotPassword',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    data: jsonData2,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (json) {
+      alert(json.message)
+    },
+    error: function (json) {
+      alert(json.responseJSON.message)
+    }
+  })
+})

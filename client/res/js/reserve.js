@@ -135,12 +135,14 @@ $(document).ready(function () {
 
   var modal = document.getElementById('id01')
   var modal2 = document.getElementById('id02')
+  var modal3 = document.getElementById('id03')
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
-    if ((event.target == modal) || (event.target == modal2)) {
+    if ((event.target == modal) || (event.target == modal2) || (event.target == modal3)) {
       $('#calendarDiv').fullCalendar('destroy')
       modal.style.display = 'none'
       modal2.style.display = 'none'
+      modal3.style.display = 'none'
     }
   }
 })
@@ -148,6 +150,7 @@ $(document).ready(function () {
 $('.closeX').on('click', function (e) {
   $('#id01').css('display', 'none')
   $('#id02').css('display', 'none')
+  $('#id03').css('display', 'none')
   $('#calendarDiv').fullCalendar('destroy')
 })
 function getExperimentos() {

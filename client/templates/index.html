@@ -14,7 +14,7 @@
             <img src="/images/logo.png" alt="Logo">
         </div>
         <a id="botonindex" onclick="document.getElementById('id01').style.display='block'">INICIAR SESION</a>
-        <button type="reset" class="cancelbtn">¿OLVIDASTE TU CONTRASEÑA?</button>
+        <button type="reset" class="cancelbtn" onclick="document.getElementById('id03').style.display='block'">¿OLVIDASTE TU CONTRASEÑA?</button>
     </div>
     <h2>
         ¡Aprende a programar en ARDUINO donde quieras!.
@@ -91,16 +91,19 @@
             </div>
         </form>
     </div>
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <div id="id03" class="modal">
+        <form class="modal-content modal-content2 animate" id="forgotForm">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close      Modal">&times;</span>
+                <!--<img src="/images/avatar2.png" alt="Avatar" class="avatar">-->
+            </div>
+            <div class="container">
+                <label><b>E-Mail</b></label>
+                <input type="email" placeholder="Correo Electronico" name="email" id='forgotEmail' required>
+                <button type="submit">Recuperar Contraseña</button>
+            </div>
+        </form>
+    </div>
     <script type="text/javascript" src="/js/main.min.js"></script>
 </body>
 
