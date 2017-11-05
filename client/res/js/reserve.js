@@ -109,10 +109,35 @@ function reservaHistory() {
         //patch user
         e.preventDefault()
         var link_addr = $(this).attr('name')
-        var r = confirm('Estas a punto de salir de la plataforma de reservas hacia un servidor de experimentos externo')
+        $('#labNameSpan').text(element.expName)
+        $('#id05').show()
+
+        window.setTimeout(function () {
+          $('#goodbyeCont').text('5')
+        }, 2000)
+        window.setTimeout(function () {
+          $('#goodbyeCont').text('4')
+        }, 3000)
+        window.setTimeout(function () {
+          $('#goodbyeCont').text('3')
+        }, 4000)
+        window.setTimeout(function () {
+          $('#goodbyeCont').text('2')
+        }, 5000)
+        window.setTimeout(function () {
+          $('#goodbyeCont').text('1')
+        }, 6000)
+        window.setTimeout(function () {
+          $('#goodbyeCont').text('0')
+        }, 7000)
+
+        window.setTimeout(function () {
+          window.location.href = link_addr
+        }, 8000)
+        /*var r = confirm('Estas a punto de salir de la plataforma de reservas hacia un servidor de experimentos externo')
         if (r == true) {
           window.location.href = link_addr
-        }
+        }*/
       })
     },
     error: function (json) {
