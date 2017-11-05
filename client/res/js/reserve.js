@@ -80,6 +80,7 @@ function reservaHistory() {
         + '<th>Duración: </th>'
         + '<th>Usado: </th>'
         + '<th>Ir al Experimento:</th>'
+        + '<th>Reportar Experimento:</th>'
         + '</tr>'
         + '</thead>'
       for (var index = 0; index < json.length; index++) {
@@ -100,11 +101,15 @@ function reservaHistory() {
         }
         table +=
           '<td><Button class="gotoLink" name="http://' + element.url + '/' + element.token + '" >Ir al Experimento</Button></td>'
+        + '<td><Button class="reportLink" name="' + element.idExp + '" >Reportar Experimento</Button></td>'
           + '</tr>'
       }
       table += '</table >'
 
       $('#reservaHist').html(table)
+      $('.reportLink').on('click', function (e) {
+        $('#id02').show()
+      })
       $('.gotoLink').on('click', function (e) {
         //patch user
         e.preventDefault()
@@ -315,7 +320,62 @@ if (experimentsSelector) {
   getExperimentos()
 }
 
-
+$('#reportForm').on('submit', function (e) {
+  e.preventDefault()
+  var formData = $('#reportForm').serializeArray()
+  var jsonData = {}
+  $.each(formData, function () {
+    if (jsonData[this.name]) {
+      if (!jsonData[this.name].push) {
+        jsonData[this.name] = [jsonData[this.name]]
+      }
+      jsonData[this.name].push(this.value || '')
+    } else {
+      jsonData[this.name] = this.value || ''
+    }
+  })
+  var jsonData2 = JSON.stringify(jsonData)
+  $.ajax({
+    url: '/users/reportExp',
+    cache: false,
+    type: 'POST',
+    data: jsonData2,
+    dataType: 'json',
+    contentType: 'application/json',
+    headers: {
+      'Authorization': window.location.pathname.split('/')[3]
+    },
+    success: function (json) {
+      alert(json.message)
+    },
+    error: function (json) {
+      if (json.status == 400) {
+        var mess = json.responseJSON.message.toString()
+        if (mess.indexOf('child "') !== -1) {
+          var arr = mess.split('"')
+          switch (arr[1]) {
+            case 'identification':
+              alert('Error en el campo ID')
+              break
+            case 'name':
+              alert('Error en el campo Nombre')
+              break
+            case 'email':
+              alert('Error en el campo Email')
+              break
+            default:
+              alert('Something went wrong!')
+              break
+          }
+        } else {
+          alert(json.responseJSON.message)
+        }
+      } else {
+        alert(json.responseJSON.message)
+      }
+    }
+  })
+})
 
 
 

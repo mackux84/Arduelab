@@ -122,6 +122,34 @@
                 </div>
             </form>
         </div>
+
+        <div id="id02" class="modal">
+            <form class="modal-content modal-content2 animate" id="reportForm">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close      Modal">&times;</span>
+                    <!--<img src="/images/avatar2.png" alt="Avatar" class="avatar">-->
+                </div>
+                <div class="container">
+                    <label>
+                        <b>Nombre</b>
+                    </label>
+                    <input type="text" placeholder="Nombre" name="username" required value="{UserName}" readonly enabled="false">
+                    <label>
+                        <b>Identificacion</b>
+                    </label>
+                    <input type="text" placeholder="Identificacion" name="identification" required value="{UserID}" readonly enabled="false">
+                    <label>
+                        <b>E-Mail</b>
+                    </label>
+                    <input type="email" placeholder="Correo Electronico" name="email" required value="{UserEmail}" readonly enabled="false">
+                    <label>
+                        <b>Razon del reporte</b>
+                    </label>
+                    <input type="text" placeholder="Motivo del reporte" name="report" required>
+                    <button type="submit">Reportar Experimento</button>
+                </div>
+            </form>
+        </div>
         <script>
             function openCity(evt, cityName) {
                 var i, tabcontent, tablinks;

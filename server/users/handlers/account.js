@@ -33,7 +33,7 @@ module.exports = function (request, reply) {
     if (diff > key.tokenExpiry) {
       reply(Boom.forbidden('TOKEN EXPIRO'))
       return
-    } 
+    }
     User.findOne({
       email: decoded.email,
       _id: decoded.id
@@ -60,7 +60,11 @@ module.exports = function (request, reply) {
           })
           return
         }
-        reply.view('account.html',{UserName:user.username})
+        reply.view('account.html', {
+          UserName: user.username,
+          UserEmail:user.email,
+          UserID:user._id.toString()
+        })
         return
       }
     })

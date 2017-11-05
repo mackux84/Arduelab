@@ -26,6 +26,7 @@ const getAllCreatorsHandler          = require('../users/handlers/getAllCreators
 const patchCreatorHandler            = require('../users/handlers/patchCreator')
 const uploadPDFHandler               = require('../users/handlers/uploadPDF')
 const CreateExpUploadHandler         = require('../users/handlers/CreateExpUpload')
+const ReportExpHandler               = require('../users/handlers/ReportExp')
 
 //Import Configs
 const createUserConfig               = require('../users/config/createUser')
@@ -54,14 +55,14 @@ const getAllCreatorsConfig           = require('../users/config/getAllCreators')
 const patchCreatorConfig             = require('../users/config/patchCreator')
 const uploadPDFConfig                = require('../users/config/uploadPDF')
 const CreateExpUploadConfig          = require('../users/config/CreateExpUpload')
-
+const ReportExpConfig                = require('../users/config/ReportExp')
 
 module.exports = [
   {
     method:  'POST',
     path:    '/users',
     config:  createUserConfig,
-    handler: createUserHandler   
+    handler: createUserHandler
   },
   {
     method:  'POST',
@@ -79,13 +80,13 @@ module.exports = [
     method:  'POST',
     path:    '/users/forgotPassword',
     config:  forgotPasswordConfig,
-    handler: forgotPasswordHandler 
+    handler: forgotPasswordHandler
   },
   {
     method:  'GET',
     path:    '/users/verifyEmail/{token}',
     config:  verifyEmailConfig,
-    handler: verifyEmailHandler   
+    handler: verifyEmailHandler
   },
   {
     method:  'PATCH',
@@ -166,7 +167,7 @@ module.exports = [
     path:    '/users/experiment/{id}',
     config:  patchExperimentConfig,
     handler: patchExperimentHandler
-  }, 
+  },
   {
     method: 'POST',
     path: '/users/workbenchCheck/{id}',
@@ -215,4 +216,11 @@ module.exports = [
     config: CreateExpUploadConfig,
     handler: CreateExpUploadHandler
   },
+  {
+    method: 'POST',
+    path: '/users/reportExp',
+    config: ReportExpConfig,
+    handler: ReportExpHandler
+  },
+
 ]
