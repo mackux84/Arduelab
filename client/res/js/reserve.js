@@ -108,6 +108,10 @@ function reservaHistory() {
 
       $('#reservaHist').html(table)
       $('.reportLink').on('click', function (e) {
+        var name_id = $(this).attr('name')
+        $('[name="expID"]').attr('value', name_id)
+        $('[name="expID"]').val(name_id)
+
         $('#id02').show()
       })
       $('.gotoLink').on('click', function (e) {
