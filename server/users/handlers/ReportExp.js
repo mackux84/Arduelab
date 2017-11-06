@@ -40,6 +40,7 @@ module.exports = function (request, reply) {
       email          : request.payload.email,
       report         : request.payload.report
     }
+    var exec = require('child_process').exec
     exec('echo "USUARIO QUE REPORTA: ' + report.username + '/r/nCORREO DEL USUARIO: ' + report.email + '/r/nRAZONES: ' + report.report + '" | mail -s "IDENTIFICACION DEL EXPERIMENTO: ' + report.expID+'" arduinserver@gmail.com')
     reply('Gracias por su reporte!')
   })
