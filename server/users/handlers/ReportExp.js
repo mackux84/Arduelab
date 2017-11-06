@@ -39,7 +39,7 @@ module.exports = function (request, reply) {
       email          : request.payload.email,
       report         : request.payload.report
     }
-
-    reply(Boom.forbidden('Error al reportar'))
+    exec('echo "USUARIO QUE REPORTA: '+report.username+'/r/nCORREO DEL USUARIO: '+report.email+'/r/nRAZONES: '+report.report+'" | mail -s "IDENTIFICACION DEL EXPERIMENTO: '+report.identification+'" arduinserver@gmail.com')
+    reply("Gracias por su reporte!")
   })
 }
