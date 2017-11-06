@@ -35,11 +35,12 @@ module.exports = function (request, reply) {
     ///////////////////////////////////////////////////////
     let report = {
       username       : request.payload.username,
-      identification : request.payload.identification,
+      userID         : request.payload.userID,
+      expID          : request.payload.expID,
       email          : request.payload.email,
       report         : request.payload.report
     }
-    exec('echo "USUARIO QUE REPORTA: '+report.username+'/r/nCORREO DEL USUARIO: '+report.email+'/r/nRAZONES: '+report.report+'" | mail -s "IDENTIFICACION DEL EXPERIMENTO: '+report.identification+'" arduinserver@gmail.com')
-    reply("Gracias por su reporte!")
+    exec('echo "USUARIO QUE REPORTA: ' + report.username + '/r/nCORREO DEL USUARIO: ' + report.email + '/r/nRAZONES: ' + report.report + '" | mail -s "IDENTIFICACION DEL EXPERIMENTO: ' + report.expID+'" arduinserver@gmail.com')
+    reply('Gracias por su reporte!')
   })
 }

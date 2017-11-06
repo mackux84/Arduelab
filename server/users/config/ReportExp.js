@@ -20,7 +20,8 @@ module.exports = {
     headers: updateUserSchema.headerSchema,
     // Validate the payload against the Joi schema
     payload: Joi.object({
-      identification: Joi.string().required().description('Identificador de creador').example('235325425513125312353463'),
+      userID: Joi.string().required().description('Identificador del usuario que reporta').example('235325425513125312353463'),
+      expID: Joi.string().required().description('Identificador del experimento reportado').example('235325425513125312353463'),
       username: Joi.string().regex(/^[a-zA-Z0-9 ]{3,30}$/).min(3).max(30).required().description('El nombre de usuario debe de ser unico').example('andresvega'),
       email: Joi.string().email().required().description('Un correo valido (La confirmacion sera enviada por correo electronico)').example('andresvega@email.com'),
       report: Joi.string().required().description('Motivo del reporte de errores').example('Servidor caido'),
