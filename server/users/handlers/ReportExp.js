@@ -42,6 +42,6 @@ module.exports = function (request, reply) {
     }
     var exec = require('child_process').exec
     exec('echo "USUARIO QUE REPORTA: ' + report.username + '\nCORREO DEL USUARIO: ' + report.email + '\nRAZONES: ' + report.report + '" | mail -s "IDENTIFICACION DEL EXPERIMENTO: ' + report.expID+'" arduinserver@gmail.com')
-    reply('Gracias por su reporte!')
+    reply({ message: 'CREADOR CREADO CORRECTAMENTE' })
   })
 }

@@ -351,7 +351,6 @@ $('#reportForm').on('submit', function (e) {
     },
     success: function (json) {
       alert(json.message)
-      alert("Gracias por su reporte")
     },
     error: function (json) {
       if (json.status == 400) {
