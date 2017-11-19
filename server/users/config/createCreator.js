@@ -39,7 +39,7 @@ module.exports = {
         '200': {
           'description': 'Cuenta creada, favor verificar el correo o espere que el Administrador active la cuenta',
           'schema': Joi.object({
-            message: Joi.string().required().description('Mensaje de Aprovacion').default('Por favor verifica tu cuenta presionando en el enlace que se encuentra en el correo electronico')
+            message: Joi.string().required().description('Mensaje de Aprobacion').default('Por favor verifica tu cuenta presionando en el enlace que se encuentra en el correo electronico')
           }).label('Correcto')
         },
         '400': errors.e400,

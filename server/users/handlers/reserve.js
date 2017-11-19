@@ -108,7 +108,7 @@ module.exports = function (request, reply) {
               }
               if (experiment.enabled) {
                 if (experiment.days.indexOf(datetest.getUTCDay()) != -1) {
-                  if ((experiment.schedule[0] <= tokenData.hora) && (experiment.schedule[1] >= tokenData.hora)) {
+                  if ((experiment.schedule[0] <= tokenData.hora) && (experiment.schedule[3] >= tokenData.hora)) {
                     if (experiment.duration.indexOf(tokenData.duracion) != -1) {
                       var token = createToken2(tokenData)
                       let reserve = new Reserve()
