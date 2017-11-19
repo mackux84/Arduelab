@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
       crossorigin="anonymous">
     <link href="/css/nouislider.min.css" rel="stylesheet">
-
   </head>
-
   <body>
     <div id="timebox">TIEMPO ANTES DE CULMINAR SESION :
       <div id="Timer">
@@ -151,17 +147,9 @@
               <div id="crearExpSchedule"></div>
               <br>
               <span id="crearExpScheduleMin"></span>-<span id="crearExpScheduleMax"></span>
-              <input type="hidden" name="schedule" value="" id="scheduleFormat">
-              <br>
-            </td>
-          </tr>
-          <tr>
-            <td>Horas validas2: </td>
-            <td>
-              <br>
-              <div id="crearExpSchedule2"></div>
-              <br>
+              <span> / - / </span>
               <span id="crearExpScheduleMin2"></span>-<span id="crearExpScheduleMax2"></span>
+              <input type="hidden" name="schedule" value="" id="scheduleFormat">
               <input type="hidden" name="schedule2" value="" id="scheduleFormat2">
               <br>
             </td>
@@ -259,45 +247,24 @@
 
     <script>
       var slider = document.getElementById('crearExpSchedule');
-      noUiSlider.create(slider, {
-        start: [0, 23.59],
-        connect: true,
-        step: 1,
-        range: {
-          'min': 0,
-          'max': 23.59
-        },
-        margin: 1,
-      });
-      var paddingMin = document.getElementById('crearExpScheduleMin'),
-        paddingMax = document.getElementById('crearExpScheduleMax');
-      slider.noUiSlider.on('update', function (values, handle) {
-        if (handle) {
-          paddingMax.innerHTML = values[handle];
-        } else {
-          paddingMin.innerHTML = values[handle];
-        }
-      });
-      var slider2 = document.getElementById('crearExpSchedule2');
-      noUiSlider.create(slider2, {
-        start: [0, 23.59],
-        connect: true,
-        step: 1,
-        range: {
-          'min': 0,
-          'max': 23.59
-        },
-        margin: 1,
-      });
-      var paddingMin2 = document.getElementById('crearExpScheduleMin2'),
-        paddingMax2 = document.getElementById('crearExpScheduleMax2');
-      slider2.noUiSlider.on('update', function (values, handle) {
-        if (handle) {
-          paddingMax2.innerHTML = values[handle];
-        } else {
-          paddingMin2.innerHTML = values[handle];
-        }
-      });
+        noUiSlider.create(slider, {
+          start: [0, 12, 13, 23.59],
+          connect: [false, true, false, true, false,],
+          step: 1,
+          range: {
+            'min': 0,
+            'max': 23.59
+          }
+        });
+        var snapValues = [
+          document.getElementById('crearExpScheduleMin'),
+          document.getElementById('crearExpScheduleMax'),
+          document.getElementById('crearExpScheduleMin2'),
+          document.getElementById('crearExpScheduleMax2')
+        ];
+        slider.noUiSlider.on('update', function (values, handle) {
+          snapValues[handle].innerHTML = values[handle];
+        });
     </script>
   </body>
 
