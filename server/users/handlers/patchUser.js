@@ -7,6 +7,11 @@ const User        = require('../models/User')
 
 module.exports = function (request, reply) {
   const id = request.params.id
+  //////////////////////////////////
+  
+  
+  
+//////////////////////////////////////////
   User
     .findOneAndUpdate({ _id: id }, request.pre.user, (error, user) => {
       if (error) {
@@ -26,7 +31,9 @@ module.exports = function (request, reply) {
           scope: [user.scope],
           id: user._id
         }
-        Common.sentMailVerificationLink(user, createToken(tokenData))
+        if ( request.pre.user.isVerified != user.isVerified){
+          exec('echo "CUENTA VERIFICADA, EL USUARIO ' + user.email + ' HA SIDO VERIFICADO SATISFACTORIAMENTE \n\n\nUTILICE SUS CREDENCIALES PARA INGRESAR AL SITIO \n\n\n\n ARDUELAB TEAM" | mail -s "CUENTA VERIFICADA "'+user.email)          
+        }
       }
      
     })

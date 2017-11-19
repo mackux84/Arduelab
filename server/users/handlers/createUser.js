@@ -45,9 +45,10 @@ module.exports = function (request, reply) {
           scope: [user.scope],
           id: user._id
         }*/
-
-        reply({ message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO' })
+        
+        
         exec('echo "CREACION DE USUARIO NUEVO ' + user.email + '\nNOMBRE: ' + user.username + '\nFAVOR INGRESAR A LA PLATAFORMA PARA VERIFICAR EL USUARIO" | mail -s "NUEVO USUARIO CREADO TIPO :' + user.scope+'" arduinserver@gmail.com')
+        reply({ message: 'EL ADMINISTRADOR VERIFICARA TU SOLICITUD, DE 48 A 72 HORAS SE TE DARA RESPUESTA VIA CORREO ELECTRONICO' })
         /*Common.sentMailVerificationLink(user, createToken(tokenData), (error) => {
           if (error) {
             reply(Boom.serverUnavailable('INTENTE DE NUEVO MAS TARDE'))
