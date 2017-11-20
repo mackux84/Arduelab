@@ -522,11 +522,11 @@ function experimentsGetAll() {
         $('[name="scheduleExp;' + name_id + '"]').val($('[name="scheduleExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="durationExp;' + name_id + '"]').attr('value', $('[name="durationExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="durationExp;' + name_id + '"]').val($('[name="durationExp;' + name_id + '"]').attr('id').split(';')[1])
-        $('[name="enabledExp;' + name_id + '"]').attr('value', $('[name="enabledExp;' + name_id + '"]').attr('id').split(';')[1])
-        if ($('[name="enabledExp;' + name_id + '"]').attr('value') === 'true') {
-          $('[name="enabledExp;' + name_id + '"]').prop('checked', true)
+        $('[name="isEnabledExp;' + name_id + '"]').attr('value', $('[name="isEnabledExp;' + name_id + '"]').attr('id').split(';')[1])
+        if ($('[name="isEnabledExp;' + name_id + '"]').attr('value') === 'true') {
+          $('[name="isEnabledExp;' + name_id + '"]').prop('checked', true)
         } else {
-          $('[name="enabledExp;' + name_id + '"]').prop('checked', false)
+          $('[name="isEnabledExp;' + name_id + '"]').prop('checked', false)
         }
         if ($('[name="isAdminEnabledExp;' + name_id + '"]').attr('value') === 'true') {
           $('[name="isAdminEnabledExp;' + name_id + '"]').prop('checked', true)
@@ -907,13 +907,12 @@ function experimentsGetCreator() {
         $('[name="scheduleExp;' + name_id + '"]').val($('[name="scheduleExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="durationExp;' + name_id + '"]').attr('value', $('[name="durationExp;' + name_id + '"]').attr('id').split(';')[1])
         $('[name="durationExp;' + name_id + '"]').val($('[name="durationExp;' + name_id + '"]').attr('id').split(';')[1])
-        $('[name="enabledExp;' + name_id + '"]').attr('value', $('[name="enabledExp;' + name_id + '"]').attr('id').split(';')[1])
-        if ($('[name="enabledExp;' + name_id + '"]').attr('value') === 'true') {
-          $('[name="enabledExp;' + name_id + '"]').prop('checked', true)
+        $('[name="isEnabledExp;' + name_id + '"]').attr('value', $('[name="isEnabledExp;' + name_id + '"]').attr('id').split(';')[1])
+        if ($('[name="isEnabledExp;' + name_id + '"]').attr('value') === 'true') {
+          $('[name="isEnabledExp;' + name_id + '"]').prop('checked', true)
         } else {
-          $('[name="enabledExp;' + name_id + '"]').prop('checked', false)
+          $('[name="isEnabledExp;' + name_id + '"]').prop('checked', false)
         }
-        document.getElementById('editarExp;' + name_id).disabled = true
         $('[name="idCreatorExp;' + name_id + '"]').val('')
       })
     },
