@@ -48,9 +48,10 @@ module.exports = function (request, reply) {
             return
           }
           if ( request.payload.adminEnabled && !experiment.adminEnabled){
+
             var exec = require('child_process').exec
             exec('echo "EXPERIMENTO APROBADO, EL EXPERIMENTO ' + 
-            experiment.name + ' HA SIDO APROBADO \n\n\n" | mail -s "EXPERIMENTO APROBADO " '+experiment.name)          
+            experiment.name + ' HA SIDO APROBADO \n\n\n" | mail -s "EXPERIMENTO APROBADO " '+experiment.docCreator)          
             
           }
           if(request.payload.adminEnabled)
