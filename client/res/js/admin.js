@@ -801,7 +801,6 @@ function experimentsGetCreator() {
         + '<th>Habilitado por administrador: </th>'
         + '<th>PDF: </th>'
         + '<th>Imagen: </th>'
-        + '<th data-sort-method="none" class="no-sort">Deshabilitar/Borrar: </th>'
         + '<th data-sort-method="none" class="no-sort">Guardar Cambios</th>'
         + '<th data-sort-method="none" class="no-sort">Reiniciar Cambios</th>'
         + '</tr>'
@@ -835,7 +834,6 @@ function experimentsGetCreator() {
         table +=
           '<td><a href="/pdf/' + element._id + '.pdf" download="' + element.name + '.pdf"><img class="downImg" src="/images/DL.png" alt="Download"></a></td>'
           + '<td><a href="/img/' + element._id + '.jpg" download="' + element.name + '.jpg"/><img src="/img/' + element._id + '.jpg" style="height: 90px; width: 90px;" height="50" width="50"></a></td>'
-          + '<td><button class="deshabilitarExp pure-button" name="' + element._id + '" id="deshabilitarExp;' + element._id + '">Deshabilitar</button></td>'
           + '<td><button class="editarExpCreator pure-button" name="' + element._id + '" id="editarExpCreator;' + element._id + '">Guardar</button></td>'
           + '<td><button class="reiniciarExpCreator pure-button" name="' + element._id + '">Reiniciar</button></td>'
           + '</tr>'
