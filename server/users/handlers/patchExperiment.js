@@ -54,7 +54,6 @@ module.exports = function (request, reply) {
             experiment.name + ' HA SIDO APROBADO \n\n\n" | mail -s "EXPERIMENTO APROBADO " '+experiment.docCreator)          
             
           }
-          if(request.payload.adminEnabled)
           reply({ message: 'Experiment updated!' })
         })
     } else {
