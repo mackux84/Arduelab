@@ -36,7 +36,7 @@ module.exports = function (request, reply) {
     }
     const id = request.params.id
     if (decoded.scope === 'Admin') {
-      request.payload.adminEnabled = request.payload.enabled
+
       Experiment
         .findOneAndUpdate({ _id: id }, request.payload, (error, experiment) => {
           if (error) {
@@ -48,12 +48,11 @@ module.exports = function (request, reply) {
             return
           }
           if ( request.payload.adminEnabled && !experiment.adminEnabled){
-
             var exec = require('child_process').exec
             exec('echo "EXPERIMENTO APROBADO, EL EXPERIMENTO ' + 
             experiment.name + ' HA SIDO APROBADO \n\n\n" | mail -s "EXPERIMENTO APROBADO " '+experiment.docCreator)          
-            
           }
+
           reply({ message: 'Experiment updated!' })
         })
     } else {
