@@ -47,6 +47,13 @@ module.exports = function (request, reply) {
             reply(Boom.notFound('Experiment id=(' + request.params.id + ') not found!'))
             return
           }
+          if ( request.payload.adminEnabled && !experiment.adminEnabled){
+            var exec = require('child_process').exec
+            exec('echo "EXPERIMENTO APROBADO, EL EXPERIMENTO ' + 
+            experiment.name + ' HA SIDO APROBADO \n\n\n" | mail -s "EXPERIMENTO APROBADO " '+experiment.name)          
+            
+          }
+          if(request.payload.adminEnabled)
           reply({ message: 'Experiment updated!' })
         })
     } else {
