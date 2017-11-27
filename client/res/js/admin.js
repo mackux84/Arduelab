@@ -419,7 +419,6 @@ function experimentsGetAll() {
           + '<td>' + new Date(element.created_At).toLocaleString() + '</td>'
           + '<td data-sort="' + element.name + '"><input type="text" name="nameExp;' + element._id + '" Value="' + element.name + '" id="' + element._id + ';' + element.name + '"/></td>'
           + '<td data-sort=' + element.university + '><input type="text" name="universityExp;' + element._id + '" Value="' + element.university + '" id="' + element._id + ';' + element.university + '"/></td>'
-
           + '<td data-sort=' + element.country + '><input type="text" name="countryExp;' + element._id + '" Value="' + element.country + '" id="' + element._id + ';' + element.country + '"/></td>'
           + '<td data-sort=' + element.city + '><input type="text" name="cityExp;' + element._id + '" Value="' + element.city + '" id="' + element._id + ';' + element.city + '"/></td>'
           + '<td data-sort=' + element.docCreator + '>'
@@ -694,6 +693,7 @@ $('#crearExp').click(function () {
         // $('#pdffile').val(jsondata.filename)
         // $('#pdffile').attr('value', jsondata.filename)
         experimentsGetAll()
+        location.reload();
       }
       else {
         // console.log('ERRORS:')
