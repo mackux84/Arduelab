@@ -19,21 +19,21 @@ module.exports = function (request, reply) {
   Jwt.verify(request.auth.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     if (decoded.type != 'user') {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     var diff = Moment().diff(Moment(decoded.iat * 1000))
     if (diff > key.tokenExpiry || diff < 0) {
-      reply(Boom.forbidden('Token not active yet'))
+      reply(Boom.forbidden('RESERVA AUN NO SE ENCUENTRA ACTIVA, INTENTE NUEVAMENTE MAS TARDE'))
       return
     }
     //If header (user) token is valid, create reservation token and add it to reservation DB
@@ -42,7 +42,7 @@ module.exports = function (request, reply) {
     var today = new Date()
     today.setTime( today.getTime() - today.getTimezoneOffset()*60*1000 )
     if (datetest < today) {
-      reply(Boom.badRequest('Can not create a reserve in the past!'))
+      reply(Boom.badRequest('NO SE PUEDE CREAR UNA RESERVA EN EL PASADO'))
       return
     }
     var tokenData = {
@@ -103,7 +103,7 @@ module.exports = function (request, reply) {
                 return
               }
               if (experiment == null) {
-                reply(Boom.notFound('No experiments with that ID found!'))
+                reply(Boom.notFound('NO SE HAN CONTRADO EXPERIMENTOS CON ESA IDENTIFICACION'))
                 return
               }
               if (experiment.enabled) {
@@ -135,7 +135,7 @@ module.exports = function (request, reply) {
                         } else {
                           if (11000 === error.code || 11001 === error.code) {
                             // console.log(error)
-                            reply(Boom.badRequest('Time already reserved'))
+                            reply(Boom.badRequest('ESE TIEMPO YA SE ENCUENTRA RESERVADO'))
                           } else {
                             // console.log(error)
                             reply(Boom.badRequest(error))
@@ -143,20 +143,20 @@ module.exports = function (request, reply) {
                         }
                       })
                     } else {
-                      reply(Boom.badRequest('Requested Duration not Allowed'))
+                      reply(Boom.badRequest('TIEMPO SOLICITADO NO PERMITIDO'))
                     }
                   } else {
-                    reply(Boom.badRequest('Requested Initial Time not Allowed'))
+                    reply(Boom.badRequest('TIEMPO INICIAL SOLICITADO NO PERMITIDO'))
                   }
                 } else {
-                  reply(Boom.badRequest('Requested Day not Allowed'))
+                  reply(Boom.badRequest('RDIA SOLICITADO NO PERMITIDIO'))
                 }
               } else {
-                reply(Boom.badRequest('Requested Experiment not Enabled'))
+                reply(Boom.badRequest('EXPERIMENTO REQUERIDO NO SE ENCUENTRA HABILITADO'))
               }
             })
         } else {
-          reply(Boom.badRequest('You already have an active Reserve for this experiment'))
+          reply(Boom.badRequest('YA CUENTAS CON UNA RESERVA ACTIVA PARA ESTE EXPERIMENTO'))
         }
       })
 

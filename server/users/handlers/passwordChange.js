@@ -11,20 +11,20 @@ module.exports = function (request, reply) {
   Jwt.verify(request.auth.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     if (decoded.type != 'user') {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     if (request.payload.new_password !== request.payload.new_password_check) {
-      reply(Boom.badRequest('Password check failed'))
+      reply(Boom.badRequest('NO SE PUDO VERIFICAR EL PASSWORD'))
       return
     }
     decoded = decyptToken(decoded)
@@ -43,22 +43,22 @@ module.exports = function (request, reply) {
         }
         var newEnc = Common.encrypt(request.payload.new_password)
         if (user.password === newEnc) {
-          reply(Boom.badRequest('new and old passwords are the same'))
+          reply(Boom.badRequest('EL NUEVO Y LA ANTIGUA CONTRASEÑA SON LAS MISMAS'))
           return
         }
         var oldEnc = Common.encrypt(request.payload.old_password)
         if (user.password !== oldEnc) {
-          reply(Boom.badRequest('old password mismatch'))
+          reply(Boom.badRequest('PASWORD ANTIGO NO CONCUERDA'))
           return
         }
         user.password = newEnc
         user.save((error, user) => {
           if (!error) {
-            reply({ message: 'Password Changed' })
+            reply({ message: 'CONTRASEÑA CAMBIADA' })
             return
           } else {
             if (11000 === error.code || 11001 === error.code) {
-              reply(Boom.forbidden('please provide another user email'))
+              reply(Boom.forbidden('POR FAVOR INGRESE UNA NUEVA DIRECCION DE CORREO'))
             } else {
               console.log(error)
               reply(Boom.forbidden(error)) // HTTP 403 //why?

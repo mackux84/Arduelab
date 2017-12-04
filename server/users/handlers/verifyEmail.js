@@ -12,26 +12,26 @@ module.exports = function (request, reply) {
   Jwt.verify(request.params.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('invalid verification link'))
+      reply(Boom.forbidden('LINK DE VERIFICACION INVALIDO'))
       return
     }
     decoded = decyptToken(decoded)
     if (decoded.scope != 'User') {
-      reply(Boom.forbidden('invalid verification link'))
+      reply(Boom.forbidden('LINK DE VERIFICACION INVALIDO'))
       return
     }
     var diff = Moment().diff(Moment(decoded.iat * 1000))
     if (diff < 0) {
-      reply(Boom.forbidden('Token not active yet'))
+      reply(Boom.forbidden('RESERVA AUN NO SE ENCUENTRA ACTIVA, INTENTA NUEVAMENTE MAS TARDE'))
       return
     }
     if (diff > key.tokenExpiry) {
-      reply(Boom.forbidden('Token expired'))
+      reply(Boom.forbidden('TOKEN EXPIRO'))
       return
     } 
     User.findOne({
@@ -44,11 +44,11 @@ module.exports = function (request, reply) {
         return
       }
       if (user === null) {
-        reply(Boom.forbidden('invalid verification link'))
+        reply(Boom.forbidden('LINK DE VERIFICACION INVALIDA'))
         return
       }
       if (user.isVerified === true) {
-        reply(Boom.forbidden('account is already verified'))
+        reply(Boom.forbidden('LA CUENTA YA SE ENCUENTRA VERIFICADA'))
         return
       }
       user.isVerified = true
@@ -64,7 +64,7 @@ module.exports = function (request, reply) {
             return
           }
         }
-        reply({message: 'account sucessfully verified'})
+        reply({message: 'CUENTA VERIFICADA SATISFACTORIAMENTE'})
         return
       })
     })

@@ -12,26 +12,26 @@ module.exports = function (request, reply) {
   Jwt.verify(request.params.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('Invalid workbench token'))
+      reply(Boom.forbidden('TOKEN INVALIDO DE EXPERIMENTO'))
       return
     }
     //decoded = decyptToken2(decoded)
     if (decoded.type != 'workbench') {
-      reply(Boom.forbidden('Not a workbench token'))
+      reply(Boom.forbidden('NO ES UN TOKEN DE EXPERIMENTO'))
       return
     }
     var diff = Moment().diff(Moment(decoded.iat * 1000))
     if (diff < 0) {
-      reply(Boom.forbidden('Token not active yet'))
+      reply(Boom.forbidden('RESERVA NO ACTIVA AUN, INTENTE NUEVAMENTE MAS TARDE'))
       return
     }
     if (diff > key.tokenExpiry) {
-      reply(Boom.forbidden('Token expired'))
+      reply(Boom.forbidden('TOKEN EXPIRO'))
       return
     }
     Reserve
@@ -42,11 +42,11 @@ module.exports = function (request, reply) {
           return
         }
         if (reserve== null) {
-          reply(Boom.forbidden('Token not in database'))
+          reply(Boom.forbidden('TOKEN NO SE ENCUENTRA EN LA BASE DE DATOS'))
           return
         }
         if (reserve.enabled === true) {
-          reply(Boom.forbidden('Token Disabled By an Administrator'))
+          reply(Boom.forbidden('RESERVA DESHABILITADA POR EL ADMINISTRADOR'))
           return
         }
         //reply.view('workbench.html')

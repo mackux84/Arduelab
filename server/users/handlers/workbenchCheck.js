@@ -18,21 +18,21 @@ module.exports = function (request, reply) {
     Jwt.verify(request.params.id, privateKey, function (error, decoded) {
       if (error) {
         if (error.name === 'TokenExpiredError') {
-          reply(Boom.forbidden('Token expired'))
+          reply(Boom.forbidden('TOKEN EXPIRO'))
           return
         }
       }
       if (decoded === undefined) {
-        reply(Boom.forbidden('Invalid token'))
+        reply(Boom.forbidden('TOKEN INVALIDO'))
         return
       }
       if (decoded.type != 'workbench') {
-        reply(Boom.forbidden('This Token is not a work token'))
+        reply(Boom.forbidden('ESTE NO ES UN TOKEN DE LABORATORIO VALIDO'))
         return
       }
       decoded = decyptToken2(decoded)
       if (decoded.experimento !== request.payload.expID) {
-        reply(Boom.forbidden('This Token is not for this experiment')) 
+        reply(Boom.forbidden('ESTE TOKEN NO ES VALIDO PARA ESTE EXPERIMENTO')) 
         return
       }
       //var today = new Date()
@@ -43,11 +43,11 @@ module.exports = function (request, reply) {
       var diff = Moment().diff(Moment(decoded.iat * 1000))
      // var diff2 = Moment().diff(tp)
       if (diff < 0) {
-        reply(Boom.forbidden('Token not active yet'))
+        reply(Boom.forbidden('RESERVA AUN NO SE ENCUENTRA ACTIVA, INTENTE NUEVAMENTE MAS TARDE'))
         return
       }
       if (diff > decoded.duracion*60*1000) {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
       Reserve
@@ -58,11 +58,11 @@ module.exports = function (request, reply) {
             return
           }
           if (reserve == null) {
-            reply(Boom.forbidden('Token not in database'))
+            reply(Boom.forbidden('TOKEN NO SE ENCUENTRA EN LA BASE DE DATOS'))
             return
           }
           if (reserve.enabled === false) {
-            reply(Boom.forbidden('Token Disabled By an Administrator'))
+            reply(Boom.forbidden('RESERVA DESHABILITADO POR EL ADMINISTRADOR'))
             return
           }
           //reply.view('workbench.html')

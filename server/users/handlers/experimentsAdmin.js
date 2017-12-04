@@ -12,7 +12,7 @@ module.exports = function (request, reply) {
   Jwt.verify(request.auth.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
     }
@@ -44,7 +44,7 @@ module.exports = function (request, reply) {
               return
             }
             if (!experiments.length) {
-              reply(Boom.notFound('No Experiments found!'))
+              reply(Boom.notFound('AUN NO EXISTEN EXPERIMENTOS'))
               return
             }
             reply(experiments)
@@ -61,7 +61,7 @@ module.exports = function (request, reply) {
                 return
               }
               if (!experiments.length) {
-                reply(Boom.notFound('No Experiments found!'))
+                reply(Boom.notFound('AUN NO EXISTEN EXPERIMENTOS'))
                 return
               }
               reply(experiments)
@@ -78,7 +78,7 @@ module.exports = function (request, reply) {
                 return
               }
               if (!experiments.length) {
-                reply(Boom.notFound('No Experiments found!'))
+                reply(Boom.notFound('AUN NO EXISTEN EXPERIMENTOS'))
                 return
               }
               reply(experiments)

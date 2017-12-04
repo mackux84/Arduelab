@@ -12,21 +12,21 @@ module.exports = function (request, reply) {
   Jwt.verify(request.auth.token, privateKey, function (error, decoded) {
     if (error) {
       if (error.name === 'TokenExpiredError') {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
     }
     if (decoded === undefined) {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     if (decoded.type != 'user') {
-      reply(Boom.forbidden('Invalid token'))
+      reply(Boom.forbidden('TOKEN INVALIDO'))
       return
     }
     var diff = Moment().diff(Moment(decoded.iat * 1000))
     if (diff > key.tokenExpiry || diff < 0) {
-      reply(Boom.forbidden('Token not active yet'))
+      reply(Boom.forbidden('RESERVA AUN NO ESTA ACTIVA, INTENTE NUEVAMENTE MAS TARDE'))
       return
     }
     decoded = decyptToken(decoded)

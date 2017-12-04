@@ -25,11 +25,11 @@ module.exports = function (request, reply) {
       decoded = decyptToken2(decoded)
       var diff = Moment().diff(Moment(decoded.iat * 1000))
       if (diff < 0) {
-        reply(Boom.forbidden('Token not active yet'))
+        reply(Boom.forbidden('RESERVA AUN NO ACTIVA, INTENTE NUEVAMENTE MAS TARDE'))
         return
       }
       if (diff > decoded.duracion*60*1000) {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
       reply((decoded.duracion * 60 * 1000) - diff)
@@ -38,11 +38,11 @@ module.exports = function (request, reply) {
       // decoded = decyptToken(decoded)
       var diff2 = Moment().diff(Moment(decoded.iat * 1000))
       if (diff < 0) {
-        reply(Boom.forbidden('Token not active yet'))
+        reply(Boom.forbidden('RESERVA AUN NO ACTIVA, INTENTE NUEVAMENTE MAS TARDE'))
         return
       }
       if (diff > key.tokenExpiry) {
-        reply(Boom.forbidden('Token expired'))
+        reply(Boom.forbidden('TOKEN EXPIRO'))
         return
       }
       reply(parseInt(parseInt(key.tokenExpiry) - diff2))
