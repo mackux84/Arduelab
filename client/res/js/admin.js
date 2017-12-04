@@ -692,8 +692,6 @@ $('#crearExp').click(function () {
         // alert('PDF Preparado')
         // $('#pdffile').val(jsondata.filename)
         // $('#pdffile').attr('value', jsondata.filename)
-        var exec = require('child_process').exec
-        exec('echo "CREACION DE EXPERIMENTO"  | mail -s "CREACION DE NUEVO EXPERIMENTO, FAVOR VERIFICAR EN LA PLATAFORMA" arduinserver@gmail.com')
         experimentsGetAll()
         location.reload();
       }
