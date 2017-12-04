@@ -76,7 +76,7 @@ module.exports = function (request, reply) {
                     var exec = require('child_process').exec
                     exec('echo "CREACION DE EXPERIMENTO CON NOMBRE     '+experiment.name+'\n\nFAVOR VERIFICAR EN LA CONSOLA DE ADMINISTRACION EL EXPERIMENTO CREADO" | mail -s "CREACION DE NUEVO EXPERIMENTO, FAVOR VERIFICAR EN LA PLATAFORMA" arduinserver@gmail.com')
                     exec('echo "FELICIDADES POR LA CREACION DE TU PRIMER EXPERIMENTO, ACA ENCONTRARAS EL MANUAL CON LOS PASOS A SEGUIR, COMO LA APLICACION QUE DEBERAS DESCARGAR PARA LLEVAR A CABO EL PROCESO DE VINCULACION.\n\nMANUAL:  https://drive.google.com/file/d/1kYDqplX3FZYUT2J_pJ0yCOejt3H0sgcq/view?usp=sharing\nAPPLIANCE:  https://drive.google.com/file/d/1xQWtJCw6S0JZPj77zqzO5OqQLBu87kZE/view?usp=sharing \n\n\n ARDUELAB TEAM" | mail -s "CREACION DE NUEVO EXPERIMENTO, FAVOR SEGUIR INDICACIONES" '+experiment.docCreator)
-                    reply({ message: 'EXPERIMENTO CREADO CORRECTAMENTE' + experiment.docCreator })
+                    reply({ message: 'EXPERIMENTO CREADO CORRECTAMENTE' })
                     var path1 = __dirname + '/../../../uploads/pdf/' + experiment.pdf
                     var path2 = __dirname + '/../../../uploads/pdf/' + experiment._id + '.pdf'
                     fs.rename(path1, path2, function (err) {
