@@ -74,7 +74,7 @@ module.exports = function (request, reply) {
                 experiment.save((error, experiment) => {
                   if (!error) {
                     var exec = require('child_process').exec
-                    exec('echo "CREACION DE EXPERIMENTO CON NOMBRE'+experiment.name+'\n\nFAVOR VERIFICAR EN LA CONSOLA DE ADMINISTRACION EL EXPERIMENTO CREADO" | mail -s "CREACION DE NUEVO EXPERIMENTO, FAVOR VERIFICAR EN LA PLATAFORMA" arduinserver@gmail.com')
+                    exec('echo "CREACION DE EXPERIMENTO CON NOMBRE     '+experiment.name+'\n\nFAVOR VERIFICAR EN LA CONSOLA DE ADMINISTRACION EL EXPERIMENTO CREADO" | mail -s "CREACION DE NUEVO EXPERIMENTO, FAVOR VERIFICAR EN LA PLATAFORMA" arduinserver@gmail.com')
                     reply({ message: 'EXPERIMENTO CREADO CORRECTAMENTE' })
                     var path1 = __dirname + '/../../../uploads/pdf/' + experiment.pdf
                     var path2 = __dirname + '/../../../uploads/pdf/' + experiment._id + '.pdf'
